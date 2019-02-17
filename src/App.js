@@ -5,6 +5,8 @@ import Dashboard from './components/dashboard/Dashboard'
 import TripDetails from './components/trips/TripDetails';
 import SignIn from './components/authentication/SignIn'
 import SignUp from './components/authentication/SignUp'
+import CreateTrip from './components/trips/CreateTrip';
+
 
 //styles
 import styles from './styles/main.scss';
@@ -19,7 +21,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/'component={Dashboard} />
             <Route path='/trip/:id' component={TripDetails} />
-            <Route path='/signin' component={SignIn} />
+            <Route path='/create' component={CreateTrip}/>
+             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
           </Switch>
          
