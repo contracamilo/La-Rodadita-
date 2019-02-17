@@ -1,16 +1,102 @@
-body {
-  margin: 0; // 1
-  font-family: $font-family-base;
-  font-size: $font-size-base;
-  font-weight: $font-weight-base;
-  line-height: $line-height-base;
-  color: $text-color;
-  text-align: left; // 3
-  background-color: $body-bg; // 2
+*{
+	box-sizing: border-box;
+	&:focus{ outline:0 !important; }
 }
 
-.resizeable-both {
-  @include resizable(both);
-  border: 1px solid $gray-400;
-  display: block;
+body {
+	font-family: $secondary_font;
+    @include fontStyle($color: $txt_color, $size: 16px);
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x:hidden; 
+	background-color: $grey;
+}
+
+/****************************
+ * PLACEHOLDER CLASSES
+ ****************************/
+ .btn {
+	padding: 15px 35px;
+	display: inline-block;
+	letter-spacing: 1px;
+	zoom: 1;
+	text-align: center;
+	text-transform: uppercase;
+	outline: none;
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+	font-size: 12px;
+	background-color:$primary_color;
+	color: $white;
+	position: relative;
+	@include btn-effect;
+	span{
+		z-index: 9;
+		font-size: 16px;
+		@media(max-width:768px){
+			font-size: 14px;
+		}
+	}
+	@media(max-width:768px){
+		font-size: 14px;
+		padding: 14px 11px;
+	}
+	
+}
+
+%hidden {
+	position: absolute;
+	display: block;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+}
+
+%animated {
+	transition: all 0.3s ease-in-out;
+}
+
+%triangle{
+	width: 0;
+	height: 0;
+	border-top:30px solid transparent;
+    border-left:30px solid transparent;
+    border-right:30px solid transparent;
+	border-bottom: 30px solid $primary_color;
+	
+}
+
+
+
+h1,h2,h3, h4, h5{
+    font-family: $primary_font;
+    font-weight: bold;
+    margin:0;
+    padding: 0;
+}
+
+a, input, button {
+    color: $primary_color;
+	transition: all 0.3s ease-in-out;
+	@media (min-width:1200px) {
+		&:hover,
+		&:focus{
+			text-decoration: none;
+		}
+	}
+}
+
+
+a{
+	font-size: 12px ;
+}
+
+.hidden {
+	@extend %hidden;
 }

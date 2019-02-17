@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-babel-sass-boilerplate",
+  "name": "LaRodadita",
   "version": "1.0.0",
-  "description": "Boilerplate React application with Webpack, Babel and Sass.",
+  "description": " React application with Webpack, Babel and Sass. Redux Firebase",
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p --mode production",
@@ -10,20 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marcnuri-demo/react-webpack-babel-sass-boilerplate.git"
+    "url": ""
   },
   "keywords": [],
   "author": {
-    "name": "Marc Nuri",
-    "url": "https://blog.marcnuri.com"
+    "name": "Camilo Rivera Q"
   },
-  "license": "Apache-2.0",
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    }
-  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/marcnuri-demo/react-webpack-babel-sass-boilerplate/issues"
   },
@@ -45,6 +38,8 @@
   },
   "dependencies": {
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.8.2",
+    "react-router-dom": "^4.3.1",
+    "sweetalert2": "^8.0.7"
   }
 }

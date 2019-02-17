@@ -1,4 +1,175 @@
-@mixin resizable($direction) {
-  overflow: auto; // Per CSS3 UI, `resize` only applies when `overflow` isn't `visible`
-  resize: $direction; // Options: horizontal, vertical, both
+
+
+@function em($pixels, $context: $browser-context) {
+	@return ($pixels / $context) * 1em;
 }
+
+$spacing: 100px;
+
+@mixin pseudo($display: block, $pos: absolute, $content: '', $z: false, $top: false, $right: false, $bottom: false, $left: false){
+	content: $content;
+	display: $display;
+	position: $pos;
+	@if $top { top: $top; }
+	@if $right { right: $right; }
+	@if $bottom { bottom: $bottom; }
+	@if $left { left: $left; }
+	@if $z{ z-index: $z; }
+}
+
+@mixin pos($display: block, $pos: absolute, $z: false, $top: false, $right: false, $bottom: false, $left: false){
+	display: $display;
+	position: $pos;
+	@if $top { top: $top; }
+	@if $right { right: $right; }
+	@if $bottom { bottom: $bottom; }
+	@if $left { left: $left; }
+	@if $z{ z-index: $z; }
+}
+
+@mixin fontStyle($size: false, $color: false, $weight: false, $lh: false, $tt: false, $ls: false, $ff: false) {
+	@if $size { font-size: $size; }
+	@if $color { color: $color; }
+	@if $weight { font-weight: $weight; }
+	@if $lh { line-height: $lh; }
+	@if $tt { text-transform: $tt; }
+	@if $ls { letter-spacing: $ls; }
+	@if $ff { font-family: $ff; }
+}
+
+@mixin buttons($bg: $primary_color, $colour: $txt_color, $bghover: $secondary_color, $colorHover: $primary_color, $border: false){
+	@if $bg { background: $bg;}
+	@if $border { border: $border;}
+	position: relative;
+	display: inline-block;
+	padding: 0.6rem 1.5rem;
+	font-size: 16px;
+	text-align: center;
+	text-transform: uppercase;
+	outline: none;
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	color: $colour;
+	z-index: 0;
+	@media(max-width:768px){
+		font-size: 15px;
+		padding: 0.6rem 1.2rem;
+	}
+	&:before{
+		@include pseudo($top:0,$right:0);
+		width: 50px;
+		height: 50px;
+		background-color: $primary_color_light;	
+	}
+	
+}
+
+@mixin psd_spacing($size:16,$spacing:100) {
+	letter-spacing: ($spacing * $size)/1000 * 1px;
+}
+
+@mixin cssgrid($bgcolor:false,$colstart:false,$colend:false,$rowstart:false,$rowend:false){
+	background-color: $bgcolor;
+	grid-column-start: $colstart;
+	grid-column-end: $colend;
+	grid-row-start: $rowstart;
+	grid-row-end: $rowend;
+}
+
+/****************************
+/* CENTER AN ELEMENT
+***************************/
+
+@mixin absolute_center{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin vertical_center{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@mixin horizontal_center{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@mixin btn-effect($bgc:$primary_color_light,$bg:$primary_color,$txt:$white){
+	&:after{
+		@include pseudo($top:0,$left:0);
+		width: 0%;
+		height: 100%;
+		background-color: $bgc;
+		@extend %animated;	
+		z-index: -1;
+	}
+	&:before{
+		@include pseudo($top:0,$left:0);
+		width: 100%;
+		height: 100%;
+		background-color: $bg;
+		z-index: -2;
+	}
+	@media (min-width:1200px) {
+		&:hover {
+			color:$txt;
+			background-color:transparent;
+			&:after{
+				width: 100%;
+			}
+		}
+	}
+}
+
+@mixin btn-effect-img($bgc:$primary_color_light,$bg:$primary_color,$txt:$white, $img:false){
+	&:after{
+		@include pseudo($top:0,$left:0);
+		width: 0%;
+		height: 100%;
+		background: url($img) center no-repeat $bgc;
+		background-size: 11px;
+		@extend %animated;	
+		z-index: -1;
+	}
+	&:before{
+		@include pseudo($top:0,$left:0);
+		width: 100%;
+		height: 100%;
+		background: url($img) center no-repeat $bg;
+		background-size: 11px;
+		z-index: -2;
+	}
+	@media (min-width:1200px) {
+		&:hover{
+			color:$txt;
+			background: url($img) center no-repeat $bg;
+			transition: all 0.3s ease-in-out;
+			&:after{
+				width: 100%;
+				
+			}
+			&:before{
+				background: url('') center no-repeat $bg;
+				background-size: 11px;
+			}
+			
+		}
+	}
+}
+
+/****************************
+ * MEDIA QUERIES
+ ****************************/
+@mixin desktop ( $breakpoint: 1024px){
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+

@@ -8,7 +8,7 @@ const DIST_DIR = __dirname + '/dist';
 
 module.exports = {
   entry: [
-    SRC_DIR + '/index.jsx'
+    SRC_DIR + '/index.js'
   ],
   output: {
     path: DIST_DIR,
@@ -68,6 +68,6 @@ module.exports = {
   devServer: {
     contentBase: DIST_DIR,
     hot: true,
-    port: 9000
+    port: 9001
   }
 };
