@@ -21,7 +21,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options:{
+            presets: ['es2015', 'react', 'stage-2'],
+          }
         }
       },
       {
@@ -68,6 +71,6 @@ module.exports = {
   devServer: {
     contentBase: DIST_DIR,
     hot: true,
-    port: 9002
+    port: 9005
   }
 };

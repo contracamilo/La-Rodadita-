@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
+import TripDetails from './components/trips/TripDetails';
+import SignIn from './components/authentication/SignIn'
+import SignUp from './components/authentication/SignUp'
+
+//styles
 import styles from './styles/main.scss';
 
 
 class App extends Component {
-
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div className="App">
           <Navbar />
-
+          <Switch>
+            <Route exact path='/'component={Dashboard} />
+            <Route path='/trip/:id' component={TripDetails} />
+            <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+          </Switch>
+         
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
