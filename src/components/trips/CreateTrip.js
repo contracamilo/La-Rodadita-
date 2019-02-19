@@ -1,9 +1,18 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createTrip } from '../../store/actions/TripActions'
 
 class CreateTrip extends Component {
   state = {
     title: '',
-    content: ''
+    content: '',
+    arriveDate: '',
+    returnDate: '',
+    arrivePoint: '',
+    returnPoint: '',
+    travelTime: '',
+    carSits: '',
+    termsC: ''
   }
   handleChange = (e) => {
     this.setState({
@@ -12,23 +21,81 @@ class CreateTrip extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createTrip(this.state)
   }
+
+            
   render() {
     return (
       <div className="container">
         <form className="white" onSubmit={this.handleSubmit}>
-          <h5 className="grey-text text-darken-3">Create a New Trip</h5>
+          <h5 className="grey-text text-darken-3">Create un nuevo viaje</h5>
+          
+          
           <div className="input-field">
             <input type="text" id='title' onChange={this.handleChange} />
-            <label htmlFor="title">Trip Title</label>
+            <label htmlFor="title">Titulo</label>
           </div>
+
           <div className="input-field">
-            <textarea id="content" className="materialize-textarea" onChange={this.handleChange}></textarea>
-            <label htmlFor="content">Trip Content</label>
+            <textarea id="content"  onChange={this.handleChange}></textarea>
+            <label htmlFor="content">Descripción</label>
           </div>
+         
           <div className="input-field">
-            <button className="btn pink lighten-1">Create</button>
+            <input id="arriveDate"  type="date" className="datepicker" onChange={this.handleChange}/>
+            <label htmlFor="arrivePoint">Fecha del Viaje</label>
+          </div>
+
+           <div className="input-field">
+            <input id="returnDate"  type="date" className="datepicker" onChange={this.handleChange}/>
+            <label htmlFor="returnPoint">Fecha del Regreso</label>
+          </div>
+          
+          <div className="input-field">
+            <input id="arrivePoint"  type="text" onChange={this.handleChange} />
+            <label htmlFor="arrivePoint">Punto de Recogida</label>
+          </div>
+
+          <div className="input-field">
+            <input id="returnPoint" type="text" onChange={this.handleChange} />
+            <label htmlFor="returnPoint">Punto de Retorno</label>
+          </div>
+
+           <div className="input-field">
+            <input id="travelTime" type="text" onChange={this.handleChange} />
+            <label htmlFor="travelTime">Tiempo Estimado de Viaje</label>
+          </div>
+          
+ 
+          <br/> 
+          <div className="input-field">
+          <label>Lugares Disponibles</label>
+            <select id="carSits"  className="browser-default" onChange={this.handleChange}>
+              <option value="" disabled defaultValue>Escoge el numero de sillas que necesitas</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+
+          <br/> 
+           <div className="input-field" >
+              <label>
+                    <input  id="termsC" type="checkbox" onChange={this.handleChange}/>
+                    <span>He leido y acepto terminos y condiciones link</span>
+              </label>
+               
+          </div>
+ 
+
+
+          <br/> 
+          <div className="input-field">
+            <button className="btn pink lighten-1">Publicar Viaje</button>
           </div>
         </form>
       </div>
@@ -36,4 +103,11 @@ class CreateTrip extends Component {
   }
 }
 
-export default CreateTrip
+const mapDispatchToProps = (dispatch) => {
+   return {
+      createTrip : (trip) => dispatch(createTrip(trip))
+   }
+}
+
+
+export default connect(null ,mapDispatchToProps)(CreateTrip)

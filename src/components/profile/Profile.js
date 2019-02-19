@@ -1,14 +1,31 @@
 import React, { Component } from 'react'
+import { connect  } from 'react-redux'
+import ProfileUi from './profileUi';
 
-export class Profile extends Component {
+
+
+class Profile extends Component {
   render() {
+    console.log(this.props)
+    const { profiles } = this.props
     return (
-      <div>
-        <p>Hello</p>
-        <h2>Camilo</h2>
+      <div className="dashboard container">
+        <div className="row">
+          <div className="col s12 m6">
+              <ProfileUi profiles={profiles}/>
+          </div>
+         
+        </div>
       </div>
     )
   }
 }
 
-export default Profile
+
+const mapStateToProps = (state) => {
+  return {
+    profiles: state.profile.profiles
+  }
+}
+
+export default connect(mapStateToProps)(Profile)
