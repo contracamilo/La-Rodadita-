@@ -2,7 +2,6 @@ const initState = {
     profiles:[
         {
             id:'1',
-            title: 'La rodadita',
             bio: 'Hola soy camilo nacido en mordor...',
             completedTrips: '87',
             rate: '5',
@@ -16,7 +15,6 @@ const initState = {
         },
         {
             id:'2',
-            title: 'DeathTrip',
             bio: 'Hola soy Juan nacido en el aberno...',
             completedTrips: '87',
             rate: '5',
@@ -30,7 +28,6 @@ const initState = {
         },
         {
             id:'3',
-            title: 'Mafia',
             bio: 'Hola soy Legolas nacido en tirandor...',
             completedTrips: '87',
             rate: '5',

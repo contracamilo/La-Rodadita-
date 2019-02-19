@@ -3,7 +3,7 @@ const initState = {
         {
             id:'1',
             title: 'La rodadita',
-            content: 'Hello Darkness my old friend',
+            description: 'Hello Darkness my old friend',
             arriveDate: '02/09/19',
             returnDate: '02/11/19',
             arrivePoint: 'Plaza de Bolivar',
@@ -15,7 +15,7 @@ const initState = {
         {
             id:'2',
             title: 'La Luu',
-            content: 'naked bodies in the park toguether',
+            description: 'naked bodies in the park toguether',
             arriveDate: '02/09/19',
             returnDate: '02/11/19',
             arrivePoint: 'Plaza de Bolivar',
@@ -27,7 +27,7 @@ const initState = {
         {
             id:'3',
             title: 'La Joha',
-            content: 'lorepm ipsum molenia',
+            description: 'lorepm ipsum molenia',
             arriveDate: '02/09/19',
             returnDate: '02/11/19',
             arrivePoint: 'Plaza de Bolivar',
