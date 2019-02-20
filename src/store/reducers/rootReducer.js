@@ -4,6 +4,7 @@ import carReducer  from './carRdcr'
 import profileReducer from './profileRdcr'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
+import { firebaseReducer } from 'react-redux-firebase'
 
 const rootReducer = combineReducers({
    
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     trip: tripReducer,
     profile: profileReducer,
     car: carReducer,
-    firestore: firestoreReducer,  
+    firestore: firestoreReducer, 
+    firebase: firebaseReducer, 
 })
 
 export default rootReducer
