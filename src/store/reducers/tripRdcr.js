@@ -1,3 +1,6 @@
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 const initState = {
     trips: [
         {
@@ -42,10 +45,25 @@ const initState = {
 const tripReducer = (state = initState, action) => {
     switch (action.type) {
         case 'ADD_TRIP' :
-         console.log('create project', action.trip);
+            console.log('created trip', action.trip)
+            Swal.fire(
+                '¡Perfecto!',
+                'Has creado un nuevo viaje!',
+                'success'
+            )
+            return state
+        case 'ADD_TRIP_ERROR' :
+            console.log('created trip erroe', action.err)
+            Swal.fire(
+                '¡Uy!',
+                'algo salio mal, vuelve a intentar en un rato!',
+                'error'
+            )
+            return state
+        default:
+            return state
     }
-    return state 
-}
+   }
 
 
 
