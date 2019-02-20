@@ -5,7 +5,7 @@ import { createTrip } from '../../store/actions/TripActions'
 class CreateTrip extends Component {
   state = {
     title: '',
-    content: '',
+    description: '',
     arriveDate: '',
     returnDate: '',
     arrivePoint: '',
@@ -44,12 +44,12 @@ class CreateTrip extends Component {
          
           <div className="input-field">
             <input id="arriveDate"  type="date" className="datepicker" onChange={this.handleChange}/>
-            <label htmlFor="arrivePoint">Fecha del Viaje</label>
+            <label htmlFor="arriveDate">Fecha del Viaje</label>
           </div>
 
            <div className="input-field">
             <input id="returnDate"  type="date" className="datepicker" onChange={this.handleChange}/>
-            <label htmlFor="returnPoint">Fecha del Regreso</label>
+            <label htmlFor="returnDate">Fecha del Regreso</label>
           </div>
           
           <div className="input-field">
@@ -80,6 +80,11 @@ class CreateTrip extends Component {
               <option value="5">5</option>
               <option value="6">6</option>
             </select>
+          </div>
+
+          <div className="input-field">
+            <textarea id="description" className="materialize-textarea" onChange={this.handleChange}></textarea>
+            <label htmlFor="description">Has una pequeña descripción del viaje</label>
           </div>
 
           <br/> 
