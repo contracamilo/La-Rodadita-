@@ -10,7 +10,7 @@ const initState = {
         console.log('login error');
         Swal.fire(
             '¡Upps!',
-            'algo salio mal, verifica tus datos y vuelve a intentar!',
+            '¡Algo salio mal, verifica tus datos y vuelve a intentar!',
             'error'
         )
         return {
@@ -22,6 +22,14 @@ const initState = {
         return {
           authError: null
         }
+      case 'SIGNOUT_SUCCESS':
+        console.log('signout success');
+        Swal.fire(
+          '¡Adios!',
+          '¡Has salido de la aplicacion!',
+          'info'
+        )
+        return state
       default:
         return state
     }
