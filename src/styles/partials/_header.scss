@@ -1,0 +1,40 @@
+nav{
+	background-color: $secondary_color;
+	color: white;
+	
+	a{
+		color: white;
+		text-decoration: none;
+	}
+	.HeaderCont{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+		 
+
+}
+
+header{
+	background-color: $secondary_color;
+	padding: 30px 0;
+}
+
+.HeaderCont{
+	display: flex;
+	
+	.logo{
+		width: 20%;
+	}
+	.links{
+		width: 70;
+		ul{
+			display: flex;
+			li{
+				padding:  0 15px;
+			}
+		}
+	}
+}
+
+

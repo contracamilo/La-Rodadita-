@@ -18,6 +18,20 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(jpe?g|png|gif)$/,
+        use: [{
+          /* inline if smaller than 10 KB, otherwise load as a file */
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        }]
+      },
+      { 
+        test: /\.(eot|svg|ttf|woff2?|otf)$/,
+        use: 'file-loader'
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -28,21 +42,10 @@ module.exports = {
         }
       },
       {
-        test: /\.(scss|sass|css)$/,
+        test: /\.scss$/,
         exclude: /node_modules/,
-        loaders: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: true,
-              importLoaders: 1,
-              localIdentName: '[local]___[hash:base64:5]'
-            }
-          },
-        'sass-loader',
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
+        
       },
       {
         test: /\.(html)$/,
@@ -55,7 +58,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx','.css']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -71,6 +74,6 @@ module.exports = {
   devServer: {
     contentBase: DIST_DIR,
     hot: true,
-    port: 9001
+    port: 9002
   }
 };

@@ -2,9 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
 
 const TripDetails = (props) => {
-  const { trip } = props;
+  const { trip, auth } = props;
+  if(!auth.uid) return <Redirect to='/signin'/>
 
   if(trip) {
     return(
@@ -31,7 +33,15 @@ const TripDetails = (props) => {
   }
   return (
       <div className="container">
-          <p>loading...</p>
+          <div className="spinner-layer spinner-blue">
+            <div className="circle-clipper left">
+              <div className="circle"></div>
+            </div><div className="gap-patch">
+              <div className="circle"></div>
+            </div><div className="circle-clipper right">
+              <div className="circle"></div>
+            </div>
+          </div>
 
       </div>
   )
@@ -44,7 +54,8 @@ const mapStateToProps = (state, ownProps) => {
     const trips = state.firestore.data.trips
     const trip = trips ? trips[id] : null
     return {
-       trip
+       trip: trip,
+       auth: state.firebase.auth
     }
 }
 

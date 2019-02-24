@@ -9,10 +9,14 @@ const Navbar = (props) => {
   //console.log(auth)
   const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
   return (
-    <nav className="nav-wrapper grey darken-3">
-      <div className="container">
-        <Link to='/' className="brand-logo">LA RODADITA</Link>
-        { links }
+    <nav className="wrapper">
+      <div className="container HeaderCont">
+        <div className="item logo">
+           <Link to='/' className="logo">LA RODADITA</Link>
+        </div>
+        <div className="item links">
+           { links }
+        </div>
       </div>
     </nav>
   )
