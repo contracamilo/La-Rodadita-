@@ -30,6 +30,29 @@ const initState = {
           'info'
         )
         return state
+      case 'SIGNUP_SUCCESS':
+        console.log('signup success')
+        Swal.fire(
+          '¡Bienvenido!',
+          '¡Has creado una cuenta en la rodadita!',
+          'success'
+        )
+        return {
+          ...state,
+          authError: null
+        }
+  
+      case 'SIGNUP_ERROR':
+        console.log('signup error')
+        Swal.fire(
+          '¡Upps!',
+          '¡Algo salio mal, verifica tus datos y vuelve a intentar!',
+          'error'
+        )
+        return {
+          ...state,
+          authError: action.err.message
+        }
       default:
         return state
     }

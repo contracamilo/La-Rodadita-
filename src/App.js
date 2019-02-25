@@ -25,7 +25,7 @@ class App extends Component {
           <header>
              <Navbar />
           </header>
-          <div className="sliderTr">
+           <div className="sliderTr">
              <SliderGAllery />
           </div>
           <div className="content">
