@@ -13,6 +13,7 @@ import Faq from './components/layout/Faq';
 import './styles/main.scss'
 import Footer from './components/layout/Footer';
 import Whoami from './components/layout/Whoami';
+import SliderGAllery from './components/layout/Slider';
 
 
 
@@ -24,17 +25,22 @@ class App extends Component {
           <header>
              <Navbar />
           </header>
-          <Switch>
-             <Route exact path='/'  component={Dashboard} />
-             <Route path='/trip/:id'component={TripDetails} />
-             <Route path='/create'  component={CreateTrip}/>
-             <Route path='/profile' component={Profile}/>
-             <Route path='/signin'  component={SignIn} />
-             <Route path='/signup'  component={SignUp} />
-             <Route path='/terminos'  component={Terms} />
-             <Route path='/faq'  component={Faq} />
-             <Route path='/quienes_somos'  component={Whoami} />
-          </Switch>
+          <div className="sliderTr">
+             <SliderGAllery />
+          </div>
+          <div className="content">
+            <Switch>
+              <Route exact path='/'  component={Dashboard} />
+              <Route path='/trip/:id'component={TripDetails} />
+              <Route path='/create'  component={CreateTrip}/>
+              <Route path='/profile' component={Profile}/>
+              <Route path='/signin'  component={SignIn} />
+              <Route path='/signup'  component={SignUp} />
+              <Route path='/terminos'  component={Terms} />
+              <Route path='/faq'  component={Faq} />
+              <Route path='/quienes_somos'  component={Whoami} />
+            </Switch>
+          </div>
           <Footer />
         </div>
       </HashRouter>
