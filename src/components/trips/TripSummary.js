@@ -1,14 +1,15 @@
 import React from 'react'
+import moment from 'moment'
 
 const TripSummary = ({trip}) => {
   return (
     <div className="card z-depth-0 project-summary">
       <div className="card-content grey-text text-darken-3">
-        <span className="card-title ">{trip.title}</span>
-        <p>Numero de asientos {trip.carSits}</p>
-        <p>Fecha de Salida </p>
-        <p>Posted by Fulero Connor  </p>
-        <p className="grey-text">3rd September, 2am</p>
+        <div className="card-title ">{trip.title}</div>
+        <div>Numero de asientos {trip.carSits}</div>
+        <div>Fecha de Salida </div>
+        <div>Posted by {trip.authorFirstName} {trip.authorLastName} </div>
+        <div> date: {moment(trip.createdAt.toDate().toString()).calendar()} </div>
       </div>
     </div>
   )

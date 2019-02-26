@@ -23,6 +23,7 @@ class CreateTrip extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createTrip(this.state)
+    this.props.history.push('/')
   }
 
             
