@@ -15,7 +15,7 @@ exports.tripCreated = functions.firestore
 
     const trip = doc.data();
     const notification = {
-      content: 'Añanadio un nuevo viaje',
+      content: '- Añadio un nuevo viaje',
       user: `${trip.authorFirstName} ${trip.authorLastName}`,
       time: admin.firestore.FieldValue.serverTimestamp()
     }
@@ -32,7 +32,7 @@ exports.userJoined = functions.auth.user()
 
         const newUser = doc.data();
         const notification = {
-          content: 'Se unio a la rodadita',
+          content: '- Se unio a la rodadita',
           user: `${newUser.firstName} ${newUser.lastName}`,
           time: admin.firestore.FieldValue.serverTimestamp()
         };
