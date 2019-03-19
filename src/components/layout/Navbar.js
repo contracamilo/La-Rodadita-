@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import { connect } from 'react-redux'
+import logo from '../../../images/la_rodadita.png'
 
 const Navbar = (props) => {
   const {auth, profile} = props
@@ -12,7 +13,10 @@ const Navbar = (props) => {
     <nav className="wrapper">
       <div className="container HeaderCont">
         <div className="item logo">
-           <Link to='/' className="logo">LA RODADITA</Link>
+           <Link to='/' className="logo">
+              <span>LA RODADITA</span>
+              <img src={logo} width={250} alt="LA RODADITA"/>
+            </Link>
         </div>
         <div className="item links">
            { links }
@@ -24,7 +28,6 @@ const Navbar = (props) => {
 
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return{
     auth: state.firebase.auth,
     profile: state.firebase.profile

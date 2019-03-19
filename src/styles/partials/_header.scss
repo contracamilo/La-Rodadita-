@@ -27,6 +27,12 @@ header{
 	
 	.logo{
 		width: 20%;
+		span{
+			@extend %hidden;
+		}
+		&:hover{
+			opacity: 0.8;
+		}
 	}
 	.links{
 		width: 70;
@@ -37,6 +43,10 @@ header{
 			}
 		}
 	}
+}
+
+.search{
+	background-color: $primary_color;
 }
 
 

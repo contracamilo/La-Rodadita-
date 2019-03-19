@@ -1,46 +1,7 @@
 import Swal from 'sweetalert2'
 
 
-const initState = {
-    trips: [
-        {
-            id:'1',
-            title: 'La rodadita',
-            description: 'Hello Darkness my old friend',
-            arriveDate: '02/09/19',
-            returnDate: '02/11/19',
-            arrivePoint: 'Plaza de Bolivar',
-            returnPoint: 'Plaza de Op',
-            travelTime: '2 horas',
-            carSits: '2',
-            termsC: 'on'
-        },
-        {
-            id:'2',
-            title: 'La Luu',
-            description: 'naked bodies in the park toguether',
-            arriveDate: '02/09/19',
-            returnDate: '02/11/19',
-            arrivePoint: 'Plaza de Bolivar',
-            returnPoint: 'Plaza de Op',
-            travelTime: '2 horas',
-            carSits: '4',
-            termsC: 'on'
-        },
-        {
-            id:'3',
-            title: 'La Joha',
-            description: 'lorepm ipsum molenia',
-            arriveDate: '02/09/19',
-            returnDate: '02/11/19',
-            arrivePoint: 'Plaza de Bolivar',
-            returnPoint: 'Plaza de Op',
-            travelTime: '2 horas',
-            carSits: '3',
-            termsC: 'on'
-        }
-    ]
-}
+const initState = {}
 
 const tripReducer = (state = initState, action) => {
     switch (action.type) {
@@ -52,8 +13,16 @@ const tripReducer = (state = initState, action) => {
                 'success'
             )
             return state
+        case 'REMOVE_TRIP' :
+            console.log('romoved trip', action.trip)
+            Swal.fire(
+                '¡OH!',
+                'Has eliminado un viaje!',
+                'success'
+            )
+            return state
         case 'ADD_TRIP_ERROR' :
-            console.log('created trip erroe', action.err)
+            console.log('created trip error', action.err)
             Swal.fire(
                 '¡Uy!',
                 'algo salio mal, vuelve a intentar en un rato!',

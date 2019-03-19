@@ -28,7 +28,23 @@
 }
 
 .content{
-    margin-top: 150px;
+    margin-top: 0px;
+    margin-bottom: 40px
+}
+
+.secondary-cont{
+    h2{
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        color: $grey;
+        &:after{
+            @include pseudo($bottom:-25px, $left:calc(50% - 25px));
+            width: 50px;
+            height: 1px;
+            background-color: $grey;
+        }
+    }
 }
 
 .container{

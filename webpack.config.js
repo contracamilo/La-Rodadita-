@@ -18,14 +18,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jpe?g|png|gif)$/,
-        use: [{
-          /* inline if smaller than 10 KB, otherwise load as a file */
+        test: /\.(jpg|png|gif|svg)$/,
+        use: {
           loader: 'url-loader',
           options: {
-            limit: 10000
+            limit: 10000,
+            fallback: 'file-loader',
+            name: 'images/[name].[hash].[ext]',
           }
-        }]
+        }
       },
       { 
         test: /\.(eot|svg|ttf|woff2?|otf)$/,

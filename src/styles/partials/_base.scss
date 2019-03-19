@@ -5,11 +5,11 @@
 
 body {
 	font-family: $secondary_font;
-    @include fontStyle($color: $txt_color, $size: 18px);
+    @include fontStyle($color: $txt_color, $size: 16px);
     -webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x:hidden; 
-	background-color: $grey;
+	background-color: $white;
 	padding: 0;
 	margin: 0;
 	position: relative;
@@ -91,6 +91,23 @@ h1,h2,h3, h4, h5{
     padding: 0;
 }
 
+h2{
+	font-size: 45px;
+}
+
+h4{
+	font-size: 22px;
+	margin: 10px 0 20px;
+	position: relative;
+	color: $grey;
+	&:after{
+		@include pseudo($bottom:-10px);
+		width: 20px;
+		height: 1px;
+		background-color: $grey;
+	}
+}
+
 a, input, button {
     color: $primary_color;
 	transition: all 0.3s ease-in-out;
@@ -118,6 +135,7 @@ a{
 .hidden {
 	@extend %hidden;
 }
+
 
 
 .container{

@@ -1,0 +1,58 @@
+.main-blog{
+	padding: 40px 0;
+	h2{
+		text-align: center;
+		margin-bottom: 30px;
+		color:$grey;
+	}
+	ul{
+		display: flex;
+		li{
+			padding: 0 10px;
+			img{
+				width: 100%;
+				height: auto;
+				position: relative;
+				
+			}
+			.img-container{
+				position: relative;
+				width: 100%;
+				height: auto;
+				&:after{
+					@include pseudo($bottom:6px);
+					width: 40px;
+					height: 40px;
+					background-color: $primary_color;
+				}
+			}
+			
+			
+		}
+	}
+}
+
+.reasons{
+	background-color: $grey;
+	padding: 40px 0 0 0;
+	h2{
+		color: $white;
+		text-align: center;
+	}
+	.reasons-list{
+		display: flex;
+		.img-container{
+			width: 60px;
+			margin: 0 auto;
+			
+		}
+		li{
+			text-align: center;
+			padding: 20px 30px;
+			h4{
+				color: $secondary_color;
+				margin-bottom: 30px;
+			}
+		}
+	}
+}

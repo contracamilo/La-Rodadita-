@@ -7,13 +7,19 @@ import SignIn from './components/authentication/SignIn'
 import SignUp from './components/authentication/SignUp'
 import CreateTrip from './components/trips/CreateTrip';
 import Profile from './components/profile/Profile';
-import Terms from './components/layout/terms';
-import Faq from './components/layout/Faq';
+import Terms from './components/layout/secondary_pages/Terms';
+import Faq from './components/layout/secondary_pages/Faq';
 //styles
 import './styles/main.scss'
 import Footer from './components/layout/Footer';
-import Whoami from './components/layout/Whoami';
+import Whoami from './components/layout/secondary_pages/Whoami';
 import SliderGAllery from './components/layout/Slider';
+import Contact from './components/layout/secondary_pages/Contact';
+import News from './components/layout/secondary_pages/News';
+import PrivacyPolicy from './components/layout/secondary_pages/PrivacyPolicy';
+
+
+
 
 
 
@@ -25,20 +31,24 @@ class App extends Component {
           <header>
              <Navbar />
           </header>
-           <div className="sliderTr">
+           <div className="wrapper sliderTr">
              <SliderGAllery />
           </div>
+
           <div className="content">
             <Switch>
-              <Route exact path='/'  component={Dashboard} />
-              <Route path='/trip/:id'component={TripDetails} />
-              <Route path='/create'  component={CreateTrip}/>
-              <Route path='/profile' component={Profile}/>
-              <Route path='/signin'  component={SignIn} />
-              <Route path='/signup'  component={SignUp} />
+              <Route exact path='/'    component={Dashboard} />
+              <Route path='/trip/:id'  component={TripDetails} />
+              <Route path='/create'    component={CreateTrip}/>
+              <Route path='/profile'   component={Profile}/>
+              <Route path='/signin'    component={SignIn} />
+              <Route path='/signup'    component={SignUp} />
               <Route path='/terminos'  component={Terms} />
-              <Route path='/faq'  component={Faq} />
+              <Route path='/contact'  component={Contact}/>
+              <Route path='/news'     component={News}/>
+              <Route path='/faq'      component={Faq} /> 
               <Route path='/quienes_somos'  component={Whoami} />
+              <Route path='/privacy-policy' component={PrivacyPolicy}/>
             </Switch>
           </div>
           <Footer />
