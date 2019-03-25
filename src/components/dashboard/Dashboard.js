@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
 import QuadComments from '../layout/blogs/QuadComments';
 import ReasonList from '../layout/reasons/reasonList';
+import SearchLayout from '../search/SearchLayout';
 
 
 class Dashboard extends Component {
@@ -16,16 +17,18 @@ class Dashboard extends Component {
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="dashboard wrapper">
-
+        <SearchLayout />
         <div className="container">
-             <TripList trips={trips}/>
+            <div className="main-quad flex-row">
+                <div className="main-quad__trips">
+                    <TripList trips={trips}/>
+                </div>
+                <div className="main-quad__notifications">
+                    <Notifications notifications={notifications}/>
+                </div>
+             </div>
         </div>
 
-       
-          
-          <div className="col s12 m5 offset-m1">
-            <Notifications notifications={notifications}/>
-          </div>
 
 
         <div className="wrapper reasons">

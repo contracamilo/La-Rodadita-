@@ -9,6 +9,12 @@ const createNotification = ((notification) => {
     .then(doc => console.log('notification added', doc));
 });
 
+const createProfile = ((profile) => {
+  return admin.firestore().collection('profiles')
+    .add(profile)
+    .then(doc => console.log('profile added', doc));
+});
+
 
 exports.tripCreated = functions.firestore
   .document('trips/{tripId}')
@@ -39,6 +45,26 @@ exports.userJoined = functions.auth.user()
         };
 
         return createNotification(notification);
+
+      });
+});
+
+
+exports.userProfiled = functions.auth.user()
+  .onCreate(user => {
+    
+    return admin.firestore().collection('profiles')
+      .doc(user.uid).get().then(doc => {
+
+        const newUser = doc.data();
+        const profile = {
+          content: 'Perfil',
+          userName: `${newUser.firstName}`,
+          userLastName: `${newUser.lastName}`,
+          creationDate: admin.firestore.FieldValue.serverTimestamp()
+        };
+
+        return createNotification(profile);
 
       });
 });
