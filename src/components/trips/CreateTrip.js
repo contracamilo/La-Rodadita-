@@ -14,8 +14,12 @@ class CreateTrip extends Component {
     travelTime: '',
     carSits: '',
     termsC: '',
-    tripType: ''
+    tripType: '',
+    activeTrip: true
   }
+
+
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -36,27 +40,25 @@ class CreateTrip extends Component {
   }
 
   handleTerms = (e) => {
-   
     const termsC = document.getElementById('termsC').value
     this.setState({
         termsC: String(termsC)
     })
   }
 
+
             
   render() {
     
-    console.log(this.state.termsC);
-
     const { auth } = this.props
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container ">
          <h5 className="grey-text text-darken-3">Create un nuevo viaje</h5>
         <form className="white flex-row" onSubmit={this.handleSubmit}>
-
+        <input type="hidden" id='activeState' value="true" onSubmit={this.handleChange} />
+        
         <div className="first-half">
-
           <div className="input-field">
             <input type="text" id='title' onChange={this.handleChange} />
             <label htmlFor="title">Titulo</label>
@@ -64,7 +66,7 @@ class CreateTrip extends Component {
 
 
          
-          <div className="select-field">
+          <div className="select-field]">
           <label>Ida y/o Vuelta</label>
             <select id="tripType"  className="browser-default" onChange={this.handleTrip}>
               <option value="" defaultValue>Seleciona Una opción</option>
@@ -154,12 +156,7 @@ class CreateTrip extends Component {
           </div>
         </div>
          
-         
-          
-          
-
-         
-        </form>
+      </form>
      
      
      
@@ -168,6 +165,7 @@ class CreateTrip extends Component {
     )
   }
 }
+
 
 
 const mapStateToProps = (state) => {

@@ -65,13 +65,19 @@ form{
     .first-half, .second-half{
         width: 48%
     }
+    .input-field {
+        label{
+            font-size: 16px !important;
+        }
+    }
+    
     .input-field{
         margin-top: 2rem;
         margin-bottom: 2rem;
     }
     .select-field{
         label{
-            font-size: 13px;
+            font-size: 16px;
         }
     }
 
@@ -83,7 +89,8 @@ form{
         outline: none;
         height: 3rem;
         width: 100%;
-        font-size: 16px;
+        font-size: 14px;
+        font-family: $primary_font;
         margin: 0 0 8px 0;
         padding: 0;
         -webkit-appearance: none;
