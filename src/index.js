@@ -18,6 +18,8 @@ const store = createStore(
     )
 );
 
+console.log(store.getState());
+
 store.firebaseAuthIsReady.then(() => {
     ReactDOM.render( <Provider store={store}><App /></Provider>, document.getElementById('root'));
 })

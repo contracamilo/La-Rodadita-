@@ -1,3 +1,6 @@
+import { database }  from '../../config/fbConfig'
+
+
 export const createTrip = (trip) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         
@@ -17,7 +20,14 @@ export const createTrip = (trip) => {
         }).catch((err) => {
             dispatch( {type: 'ADD_TRIP_ERROR',err})
         })
-        
-        
     }
 }
+
+export function deleteNote(uid){
+    return dispatch => database.child(id).remove()
+}
+
+
+
+
+

@@ -7,16 +7,8 @@ class SliderGAllery extends Component {
  
     const images = [
       {
-        original: 'http://lorempixel.com/1000/420/nature/1/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/1/',
-      },
-      {
-        original: 'http://lorempixel.com/1000/420/nature/2/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/2/'
-      },
-      {
-        original: 'http://lorempixel.com/1000/420/nature/3/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/3/'
+        original: 'https://2486634c787a971a3554-d983ce57e4c84901daded0f67d5a004f.ssl.cf1.rackcdn.com/intercontinental-saint-paul/media/intercontinental-saintpaul-privacy-policy-header-5c7814f3103a1.jpg',
+        thumbnail: 'https://2486634c787a971a3554-d983ce57e4c84901daded0f67d5a004f.ssl.cf1.rackcdn.com/intercontinental-saint-paul/media/intercontinental-saintpaul-privacy-policy-header-5c7814f3103a1.jpg',
       }
     ]
  

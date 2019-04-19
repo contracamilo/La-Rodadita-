@@ -9,8 +9,14 @@ const Footer = () => {
             <div className="row">
               <div className="col l6 s12">
                 <div className="pd">
-                  <h5 className="white-text">La rodadita</h5>
-                  <p className="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                  <div className="logo">
+                     <h5>La rodadita</h5>
+                  </div>
+                  <ul className="social-media">
+                    <li><span>Facebook</span></li>
+                    <li><span>Twitter</span></li>
+                    <li><span>Instagram</span></li>
+                  </ul>
                 </div>
               </div>
               <div className="col l4 offset-l2 s12">

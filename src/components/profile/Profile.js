@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
-import { connect  } from 'react-redux'
 import ProfileUi from './profileUi';
-
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 
 
 class Profile extends Component {
   render() {
-    console.log(this.props)
-    const { profiles } = this.props
+      console.log(this.props);
+    const { trips, auth,  profiles } = this.props;
+    
     return (
       <div className="dashboard container">
         <div className="row">
           <div className="col s12 m6">
+              
+              <p>{auth.email}</p>
               <ProfileUi profiles={profiles}/>
           </div>
          
@@ -23,9 +28,19 @@ class Profile extends Component {
 
 
 const mapStateToProps = (state) => {
+ 
   return {
-    profiles: state.profile.profiles
+    trips: state.firestore.ordered.trips,
+    auth: state.firebase.auth,
+    profiles: state.firestore.ordered.profiles
+    
   }
 }
 
-export default connect(mapStateToProps)(Profile)
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'trips', limit: 4, orderBy:['createdAt', 'desc'] },
+    { collection: 'profiles', limit: 1 }
+  ])
+)(Profile)

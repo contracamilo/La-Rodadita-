@@ -1,15 +1,49 @@
 import React from 'react'
 import moment from 'moment'
+import carIcon from '../../../images/car_icon.png'
 
 const TripSummary = ({trip}) => {
+
+  console.log({trip})
+
   return (
-    <div className="card z-depth-0 project-summary">
-      <div className="card-content grey-text text-darken-3">
-        <div className="card-title ">{trip.title}</div>
-        <div>Numero de asientos {trip.carSits}</div>
-        <div>Fecha de Salida </div>
-        <div>Posted by {trip.authorFirstName} {trip.authorLastName} </div>
-        <div> date: {moment(trip.createdAt.toDate().toString()).calendar()} </div>
+    <div className="trip-card">
+      <div className="flex-row">
+        <div className="item car_icon">
+          <img src={carIcon} alt="Car Icon"/>
+        </div>
+        <div className="item trip_type">
+          {
+            (trip.tripType == 'ida') ?
+              <p>SOlO IDA</p>
+            :
+              <p>IDA Y VUELTA</p> 
+          }
+          
+        </div>
+        <div className="item trip_date">
+          <span>Fecha de Salida: </span>{trip.arriveDate}
+        </div>
+        <div className="item car_sits">
+           <span>Asientos:</span> {trip.carSits}
+        </div>
+        <div className="item trip_time"><span>Tiempo est.:</span> {trip.travelTime}</div>
+       
+       <div className="item trip_active">
+         { (trip.activeTrip == true) ?
+           <div>Activo <span className="green"></span></div>
+          :
+          <div>Inactivo<span className="red"></span></div>
+         }
+       </div>
+        
+      </div>
+      <div className="flex-row trip-signature">
+        <div>
+          <span>Creado por: {trip.authorFirstName} {trip.authorLastName}</span>
+          <span>Fecha: {moment(trip.createdAt.toDate().toString()).calendar()}</span>
+        </div>
+        <div>VER MÁS +</div>
       </div>
     </div>
   )

@@ -16,7 +16,7 @@ nav{
 }
 
 header{
-	background-color: rgba($color: #000000, $alpha: 0.5);
+	background-color: rgba($color: #000000, $alpha: 0.7);
 	padding: 30px 0;
 	width: 100%;
 	@include pos($top:0, $z:9)
@@ -27,6 +27,12 @@ header{
 	
 	.logo{
 		width: 20%;
+		span{
+			@extend %hidden;
+		}
+		&:hover{
+			opacity: 0.8;
+		}
 	}
 	.links{
 		width: 70;
@@ -36,6 +42,84 @@ header{
 				padding:  0 15px;
 			}
 		}
+	}
+}
+
+.search{
+	background-color: $primary_color;
+}
+
+.search-bar{
+	background-color: $primary_color;
+	width: 100%;
+	height: 200px;
+	margin-top: -50px
+}
+
+.main-quad{
+	.flex-row{
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__trips{
+		width: 70%;
+		margin-top: 30px;
+		.car_icon{
+			
+			img{
+				width: 80%;
+				height: auto;
+			}
+		}
+		.trip_type{
+			p{
+				text-transform: uppercase;
+			}
+		}
+		.trip-card{
+			border-bottom: 1px solid rgba($color: $grey, $alpha: 0.3);
+			padding: 10px 0;
+			margin-bottom: 20px;
+		}
+		.item{
+			width: 16%;
+			padding: 0 10px;
+			font-size: 15px;
+			color: $secondary_color;
+			text-transform: lowercase;
+			span{
+				display: block;
+				color: $primary_color;
+				text-transform: capitalize;
+				font-size: 12px;
+			}
+		}
+		.trip_active{
+			text-align: center;
+			text-transform: uppercase;
+			span{
+				width: 8px;
+				height: 8px;
+				border-radius:50%;
+				margin: 0 auto;
+				margin-top: 5px; 
+			}
+		}
+		.trip-signature{
+			margin-top: 8px;
+			width: 100%;
+			background-color: rgba($color: $grey, $alpha: 0.3);
+			color: #727272;
+			border-radius: 3px;
+			padding: 0 10px;
+			text-transform: uppercase;
+			span{
+				padding-right: 15px;
+			}
+		}
+	}
+	&__notifications{
+		width: 30%
 	}
 }
 

@@ -50,7 +50,7 @@ const TripDetails = (props) => {
 
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state)
+   
     const id = ownProps.match.params.id;
     const trips = state.firestore.data.trips
     const trip = trips ? trips[id] : null
