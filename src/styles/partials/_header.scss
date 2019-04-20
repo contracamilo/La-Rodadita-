@@ -57,13 +57,17 @@ header{
 }
 
 .main-quad{
-	.flex-row{
-		justify-content: space-between;
-		align-items: center;
+	display: flex;
+	justify-content: space-between;
+	@media (max-width: 600px) {
+		flex-wrap: wrap;
 	}
 	&__trips{
 		width: 70%;
 		margin-top: 30px;
+		@media (max-width: 600px) {
+			width: 100%;
+		}
 		.car_icon{
 			
 			img{
@@ -119,7 +123,10 @@ header{
 		}
 	}
 	&__notifications{
-		width: 30%
+		width: 30%;
+		@media (max-width: 600px) {
+			display: none;
+		}
 	}
 }
 

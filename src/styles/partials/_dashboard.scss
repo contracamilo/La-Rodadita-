@@ -7,8 +7,13 @@
 	}
 	ul{
 		display: flex;
+		@media (max-width: 600px) {
+			flex-wrap: wrap;
+		}
+		 
 		li{
 			padding: 0 10px;
+			
 			img{
 				width: 100%;
 				height: auto;
@@ -19,6 +24,10 @@
 				position: relative;
 				width: 100%;
 				height: auto;
+				.pin{
+					@include pos($bottom:15px,$left:10px,$z:6);
+					width: 20px;
+				}
 				&:after{
 					@include pseudo($bottom:6px);
 					width: 40px;
@@ -41,6 +50,9 @@
 	}
 	.reasons-list{
 		display: flex;
+		@media (max-width: 600px) {
+			flex-wrap: wrap;
+		}
 		.img-container{
 			width: 60px;
 			margin: 0 auto;

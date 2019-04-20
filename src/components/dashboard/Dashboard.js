@@ -22,7 +22,7 @@ class Dashboard extends Component {
         </div>
         <SearchLayout />
         <div className="container">
-            <div className="main-quad flex-row">
+            <div className="main-quad">
                 <div className="main-quad__trips">
                     <h2 className="card-title">Ultimós Viajes Creados</h2>
                     <TripList trips={trips}/>

@@ -66,7 +66,7 @@ class CreateTrip extends Component {
 
 
          
-          <div className="select-field]">
+          <div className="select-field">
           <label>Ida y/o Vuelta</label>
             <select id="tripType"  className="browser-default" onChange={this.handleTrip}>
               <option value="" defaultValue>Seleciona Una opción</option>
