@@ -14,13 +14,22 @@ const tripReducer = (state = initState, action) => {
             )
             return state
         case 'REMOVE_TRIP' :
-            console.log('romoved trip', action.trip)
+            console.log('removed trip', action.trip)
             Swal.fire(
                 '¡OH!',
                 'Has eliminado un viaje!',
                 'success'
             )
             return state
+        case 'GET_TRIPS':
+            console.log(action.payload)
+            return action.payload
+        case 'TRIP_STATUS':
+            console.log(action.payload)
+            return {
+                ...state, 
+                trips:action.payload
+            }
         case 'ADD_TRIP_ERROR' :
             console.log('created trip error', action.err)
             Swal.fire(

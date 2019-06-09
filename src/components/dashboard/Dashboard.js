@@ -13,8 +13,8 @@ import SliderGAllery from '../layout/Slider';
 class Dashboard extends Component {
   render() {
     const { trips, auth, reasons, blog, notifications } = this.props;
-    
     if(!auth.uid) return <Redirect to='/signin'/>
+    
     return (
       <div className="dashboard wrapper">
         <div className="wrapper sliderTr">

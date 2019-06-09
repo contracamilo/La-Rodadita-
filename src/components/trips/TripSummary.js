@@ -5,7 +5,6 @@ import carIcon from '../../../images/car_icon.png'
 const TripSummary = ({trip}) => {
 
   //console.log({trip})
-
   return (
     <div className="trip-card">
       <div className="flex-row">

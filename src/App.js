@@ -31,8 +31,6 @@ class App extends Component {
           <header>
              <Navbar />
           </header>
-         
-
           <div className="content">
             <Switch>
               <Route exact path='/'    component={Dashboard} />

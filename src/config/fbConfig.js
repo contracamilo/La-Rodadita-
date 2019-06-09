@@ -14,10 +14,11 @@ var config = {
   };
 
 
-
-
   firebase.initializeApp(config);
   firebase.firestore().settings({})
-
   
-  export default firebase
+  export const database = firebase.database().ref('/User/Trips')
+  export const auth = firebase.auth()
+  export const googleProvider = new firebase.auth.GoogleAuthProvider()
+  export const twitterProvider = new firebase.auth.TwitterAuthProvider()
+  export default firebase;

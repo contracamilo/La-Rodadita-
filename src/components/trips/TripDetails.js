@@ -1,52 +1,68 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import { deleteTrip } from '../../store/actions/TripActions'
 import { compose } from 'redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect} from 'react-router-dom'
 import moment from 'moment'
 
-const TripDetails = (props) => {
-  const { trip, auth } = props;
-  if(!auth.uid) return <Redirect to='/signin'/>
 
-  if(trip) {
-    return(
-        <div className="container section project-details">
-          <div className="card z-depth-0">
-            <div className="card-content">
-              <span className="card-title">{trip.title}</span>
-              <p>Fecha del viaje: {trip.arriveDate}</p>
-              <p>Fecha del regreso: {trip.returnDate}</p>
-              <p>Fecha del regreso: {trip.returnDate}</p>
-              <p>Punto de recogida: {trip.arrivePoint}</p>
-              <p>Punto para el retorno: {trip.returnPoint}</p>
-              <p>Tiempo estimado: {trip.travelTime}</p>
-              <p>Asientos Disponibles: {trip.carSits}</p>
-              <p>{trip.description}</p>
-            </div>
-            <div className="card-action grey lighten-4 grey-text">
-              <div>Posted by {trip.authorFirstName} {trip.authorLastName}</div>
-              <div>{moment(trip.createdAt.toDate().toString()).calendar()}</div>
-            </div>
-          </div>
-        </div>
-    )
+
+class TripDetails extends Component {
+  
+  handleDelete = (e) => {
+    e.preventDefault();
+    this.props.deleteTrip(this.props.match.params.id)
+    this.props.history.push('/')
   }
-  return (
-      <div className="container">
-          <div className="spinner-layer spinner-blue">
-            <div className="circle-clipper left">
-              <div className="circle"></div>
-            </div><div className="gap-patch">
-              <div className="circle"></div>
-            </div><div className="circle-clipper right">
-              <div className="circle"></div>
+  
+  render() {
+      const { trip, auth } = this.props;
+      if(!auth.uid) return <Redirect to='/signin'/>
+      console.log(trip)
+      if(trip) {
+        return(
+            <div className="container section">
+              <div className="trip-details">
+                <div className="row">
+                <div className="card z-depth-0 col l6">
+                  <h2>Detalles del Viaje</h2>
+                  <div className="card-content">
+                    <span className="card-title">{trip.title}</span>
+                    <p><b>Fecha del viaje:</b> {trip.arriveDate}</p>
+                    <p><b>Fecha del regreso:</b> {trip.returnDate}</p>
+                    <p><b>Punto de recogida:</b> {trip.arrivePoint}</p>
+                    <p><b>Punto para el retorno:</b> {trip.returnPoint}</p>
+                    <p><b>Tiempo estimado:</b> {trip.travelTime}</p>
+                    <p><b>Asientos Disponibles:</b> {trip.carSits}</p>
+                    <p>{trip.description}</p>
+                    {auth.uid === trip.authorId && (
+                      <div className="card-buttons">
+                        <button className="btn btn-small"  onClick={this.handleDelete}>Eliminar</button>
+                        <button className="btn btn-small"  onClick={this.handleDelete}>Editar</button>  
+                      </div>
+                    )}
+                  </div>
+                  <div className="card-action grey lighten-4 grey-text">
+                    <div>Posted by {trip.authorFirstName} {trip.authorLastName}</div>
+                    <div>{moment(trip.createdAt.toDate().toString()).calendar()}</div>
+                  </div>
+                </div>
+                </div>
+              </div>
             </div>
+        )
+      }
+      return (
+          <div className="container">
+              ...loading
           </div>
-
-      </div>
-  )
+      )
+    
+  }
 }
+
+
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -60,9 +76,15 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteTrip : (uid) => dispatch(deleteTrip(uid))
+  }
+}
+
 
 export default compose(
-   connect(mapStateToProps),
+   connect(mapStateToProps, mapDispatchToProps),
    firestoreConnect([
      {
        collection: 'trips'

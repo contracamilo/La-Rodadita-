@@ -13,6 +13,38 @@
 }
 
 
+.trip-details{
+    margin-top:109px;
+    padding-top:60px;
+}
+
+.adviser{
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px 20px !important;
+}
+
+.trip-details-top{
+    padding-top:170px;
+    h2 {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        color: #98a8bf;
+    }
+    h4{
+        font-size: 18px;
+        line-height: 25px;
+        width: 60%;
+    }
+    .first-half{
+        padding: 0 15px 0 15px;
+    }
+    .second-half{
+        padding: 0 0px 0 0px;
+    }
+}
+
 .img-responsive{
     width: 100%;
     height: auto;
@@ -70,6 +102,20 @@ form{
             font-size: 16px !important;
         }
     }
+
+    .btn-field{
+        padding-top: 20px;
+        .btn{
+            width: 100%;
+        }
+    }
+
+    .check-field{
+        padding-top: 30px;
+        span{
+            font-size: 14px !important;
+        }
+    }
     
     .input-field{
         margin-top: 2rem;
@@ -104,7 +150,7 @@ form{
     }
 
     label{
-        color: $secondary_color !important;
+        color: $grey !important;
         
     }
 
@@ -112,11 +158,12 @@ form{
         border-bottom: 1px solid $primary_color !important;
         margin-top: 5px !important;
         padding-left: 12px !important;
+        color: $light_grey;
         &::placeholder{
             font-size: 14px;
             font-family: $primary_font;
             padding: 0 5px;
-           
+            color: $light_grey;
             
         }
     }
@@ -124,7 +171,7 @@ form{
     .btn{
         padding: 0 35px;
         &:hover{
-            background-color: $secondary_color;
+            background-color: $primary_color_light;
         }
     }
 }
