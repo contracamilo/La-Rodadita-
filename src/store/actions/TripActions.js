@@ -80,6 +80,16 @@ export const deleteTrip = id => {
     }
 }
 
+export const editTrip = (id, trip) => {
+    
+    const firestore = getFirestore()
+    console.log(id, trip);
+    return (dispatch, getState, { getFirebase, getFirestore })  => {
+    
+    }
+}
+
+
 
 
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { deleteTrip } from '../../store/actions/TripActions'
 import { compose } from 'redux'
-import { Redirect} from 'react-router-dom'
+import { Redirect, Link} from 'react-router-dom'
 import moment from 'moment'
 
 
@@ -18,6 +18,7 @@ class TripDetails extends Component {
   
   render() {
       const { trip, auth } = this.props;
+      const key = this.props.match.params.id;
       if(!auth.uid) return <Redirect to='/signin'/>
       console.log(trip)
       if(trip) {
@@ -39,7 +40,7 @@ class TripDetails extends Component {
                     {auth.uid === trip.authorId && (
                       <div className="card-buttons">
                         <button className="btn btn-small"  onClick={this.handleDelete}>Eliminar</button>
-                        <button className="btn btn-small"  onClick={this.handleDelete}>Editar</button>  
+                        <Link className="btn" to={`/${key}/edit`}>Editar</Link> 
                       </div>
                     )}
                   </div>
