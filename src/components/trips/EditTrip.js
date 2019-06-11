@@ -68,8 +68,8 @@ class EditTrip extends Component {
             
   render() {
     
-    const { trip, auth } = this.props;
-    console.log(this.props.trip)
+    const { auth } = this.props;
+    
     
     
     if(!auth.uid) return <Redirect to='/signin'/>
@@ -94,8 +94,8 @@ class EditTrip extends Component {
                     <label>Ida y/o Vuelta</label>
                     <select id="tripType"  className="browser-default" onChange={this.handleTrip} >
                       <option value={this.state.tripType} defaultValue>{this.state.tripType}</option>
-                      <option value="ida_vuelta">Ida y Vuelta</option>
-                      <option value="solo ida">Solo ida</option>
+                      <option value="ida-vuelta">Ida y Vuelta</option>
+                      <option value="ida">Solo ida</option>
                     </select>
                   </div>
 
@@ -146,17 +146,9 @@ class EditTrip extends Component {
 
                 <div className="second-half">
                 
-                <div className="select-field">
-                  <label>Lugares Disponibles</label>
-                    <select id="carSits"  className="browser-default" onChange={this.handleChange}>
-                      <option defaultValue={this.state.carSits} disabled defaultValue>{this.state.carSits}</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
+                  <div className="select-field">
+                    <label>Lugares Disponibles</label>
+                    <input id="carSits" type="number" max="7" onChange={this.handleChange} value={this.state.carSits}/>
                   </div>
 
                   <div className="select-field">
