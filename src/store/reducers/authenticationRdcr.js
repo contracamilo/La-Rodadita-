@@ -6,6 +6,12 @@ const initState = {
   
   const authReducer = (state = initState, action) => {
     switch(action.type){
+      case 'GET_USER':
+        return action.payload
+      case 'TRIP_STATUS':
+        return {...state, trips:action.payload}
+      case 'USER_STATUS':
+        return {...state, user:action.payload}
       case 'LOGIN_ERROR':
         console.log('login error');
         Swal.fire(
@@ -18,10 +24,9 @@ const initState = {
           authError: 'Login failed'
         }
       case 'LOGIN_SUCCESS':
-        console.log('login success');
         return {
           authError: null
-        }
+      }
       case 'SIGNOUT_SUCCESS':
         console.log('signout success');
         Swal.fire(

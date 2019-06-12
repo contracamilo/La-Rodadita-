@@ -1,3 +1,24 @@
+import { auth, googleProvider, twitterProvider  } from '../../config/fbConfig'
+
+export const getUser = () => {
+  return dispatch => {
+      dispatch({
+          type:'USER_STATUS',
+          payload:true
+      });
+      auth.onAuthStateChanged(user => {
+          dispatch({
+              type:'GET_USER',
+              payload:user
+          });
+          dispatch({
+              type:'USER_STATUS',
+              payload:false
+          })
+
+      })
+  }
+}
 
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
@@ -49,26 +70,8 @@ export const signIn = (credentials) => {
     }
   }
 
-  export const createProfile= (newUser) => {
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-      const firebase = getFirebase();
-      const firestore = getFirestore();
   
-      firebase.auth().createUserWithEmailAndPassword(
-        newUser.email, 
-        newUser.password
-      ).then(resp => {
-        return firestore.collection('users').doc(resp.user.uid).set({
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          initials: newUser.firstName[0] + newUser.lastName[0]
-        });
-      }).then(() => {
-        dispatch({ type: 'SIGNUP_SUCCESS' });
-      }).catch((err) => {
-        dispatch({ type: 'SIGNUP_ERROR', err});
-      });
-    }
-  }
+  export const googleLogin = () =>  auth.signInWithPopup(googleProvider)
+  export const twitterLogin = () => auth.signInWithPopup(twitterProvider)
 
 

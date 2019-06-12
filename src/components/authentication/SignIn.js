@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { signIn } from '../../store/actions/authActions'
+import { signIn, googleLogin, twitterLogin } from '../../store/actions/authActions'
 import { Redirect } from 'react-router-dom'
 import bg from '../../../images/roadtrip.jpg'
 import IntroText from '../layout/IntroText';
@@ -14,10 +14,12 @@ var bgStyle = {
 
 
 class SignIn extends Component {
+  
   state = {
     email: '',
     password: ''
   }
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -29,7 +31,9 @@ class SignIn extends Component {
   }
   render() {
     const { authError, auth } = this.props;
+    console.log(this.props);
     if(auth.uid) return <Redirect to='/'/>
+    
     return (
       <div className="sign_box" style={bgStyle}>
         <div className="container flex-row">
@@ -54,6 +58,14 @@ class SignIn extends Component {
                   { authError ? <p>{authError}</p> : null }
                 </div>
               </div>
+              <div className="login__social">
+                <div className="login__left">
+                  <button className="btn" onClick={(e) => this.props.googleLogin(e)}> <span>Google</span></button>
+                </div>
+                <div className="login__left">
+                  <button className="btn" onClick={(e) => this.props.twitterLogin(e)}><span>Twitter</span></button>
+                </div>
+              </div>
             </form>
           </div>
        
@@ -72,8 +84,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signIn: (creds) => dispatch(signIn(creds))
+    signIn: (creds) => dispatch(signIn(creds)),
+    googleLogin,
+    twitterLogin
   }
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
