@@ -13,6 +13,14 @@ const tripReducer = (state = initState, action) => {
                 'success'
             )
             return state
+        case 'EDIT_TRIP' :
+            console.log('edited trip', action.trip)
+            Swal.fire(
+                '¡Perfecto!',
+                'Has editado tu viaje!',
+                'success'
+            )
+            return state
         case 'REMOVE_TRIP' :
             console.log('removed trip', action.trip)
             Swal.fire(

@@ -21,10 +21,6 @@ import PrivacyPolicy from './components/layout/secondary_pages/PrivacyPolicy';
 
 
 
-
-
-
-
 class App extends Component {
   render() {
     return (

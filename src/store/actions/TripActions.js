@@ -70,6 +70,7 @@ export const deleteTrip = id => {
         
         const firestore = getFirestore()
         const docRef = id;
+
         
         firestore.collection('trips').doc(docRef).delete()
         .then(() => {
@@ -80,13 +81,23 @@ export const deleteTrip = id => {
     }
 }
 
+
 export const editTrip = (id, trip) => {
-    
-    const firestore = getFirestore()
-    console.log(id, trip);
     return (dispatch, getState, { getFirebase, getFirestore })  => {
-    
-    }
+        
+        const firestore = getFirestore()
+        const tripId = id;
+
+        console.log(trip);
+        console.log(id);
+
+        firestore.collection('trips').doc(tripId).update(trip)
+        .then(() => {
+            dispatch( {type: 'EDIT_TRIP', trip})
+        }).catch((err) => {
+            dispatch( {type: 'ADD_TRIP_ERROR',err})
+        })
+    } 
 }
 
 

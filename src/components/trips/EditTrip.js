@@ -8,19 +8,21 @@ import { Redirect } from 'react-router-dom'
 class EditTrip extends Component {
   
   state = {
-    title: '',
-    description: '',
-    arriveDate: '',
-    returnDate: '',
-    arrivePoint: '',
-    returnPoint: '',
-    travelTime: '',
-    carSits: '',
-    termsC: '',
-    tripType: '',
-    activeTrip: ''
+    title: this.props.trip.title,
+    description: this.props.trip.description,
+    arriveDate: this.props.trip.arriveDate,
+    returnDate: this.props.trip.returnDate,
+    arrivePoint: this.props.trip.arrivePoint,
+    returnPoint: this.props.trip.returnPoint,
+    travelTime: this.props.trip.travelTime,
+    carSits: this.props.trip.carSits,
+    termsC: this.props.trip.termsC,
+    tripType: this.props.trip.tripType,
+    activeTrip: this.props.trip.activeTrip,
+    editId:this.props.match.params.id
   }
 
+ 
   componentDidMount(){
     this.setState({
       title: this.props.trip.title,
@@ -33,8 +35,10 @@ class EditTrip extends Component {
       carSits: this.props.trip.carSits,
       termsC: this.props.trip.termsC,
       tripType: this.props.trip.tripType,
-      activeTrip: this.props.trip.tripactiveTrip
+      activeTrip: this.props.trip.activeTrip,
+      editId:this.props.match.params.id
     })
+   
   }
 
   handleChange = (e) => {
@@ -45,7 +49,7 @@ class EditTrip extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.editTrip(this.state)
+    this.props.editTrip(this.state.editId, this.state)
     this.props.history.push('/')
   }
 
@@ -67,11 +71,8 @@ class EditTrip extends Component {
 
             
   render() {
-    
+    //console.log(this.state);
     const { auth } = this.props;
-    
-    
-    
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container">
