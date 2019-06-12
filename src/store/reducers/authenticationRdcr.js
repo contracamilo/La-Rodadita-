@@ -14,11 +14,6 @@ const initState = {
         return {...state, user:action.payload}
       case 'LOGIN_ERROR':
         console.log('login error');
-        Swal.fire(
-            '¡Upps!',
-            '¡Algo salio mal, verifica tus datos y vuelve a intentar!',
-            'error'
-        )
         return {
           ...state,
           authError: 'Login failed'
@@ -48,12 +43,6 @@ const initState = {
         }
   
       case 'SIGNUP_ERROR':
-        console.log('signup error')
-        Swal.fire(
-          '¡Upps!',
-          '¡Algo salio mal, verifica tus datos y vuelve a intentar!',
-          'error'
-        )
         return {
           ...state,
           authError: action.err.message

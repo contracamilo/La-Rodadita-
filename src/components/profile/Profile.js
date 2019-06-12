@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ProfileUi from './profileUi';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
@@ -8,19 +8,31 @@ import { compose } from 'redux'
 
 class Profile extends Component {
   render() {
-      console.log(this.props);
+    
     const { trips, auth,  profiles } = this.props;
     
+    console.log(auth);
+    
     return (
-      <div className="dashboard container">
+      <div className="dashboard container ">
+        
         <div className="row">
-          <div className="col s12 m6">
-              
-              <p>{auth.email}</p>
-              <ProfileUi profiles={profiles}/>
+            
+            <div className="col s12 m6">
+              <div className="trip-details">
+                  <h2>Tu perfil</h2>
+                  <img 
+                    src={auth.photoURL}
+                    width={50}
+                  />
+                  <p>{auth.displayName}</p>
+                  <p>{auth.email}</p>
+                  <Link to={'/'}>Completa Tu Perfil</Link>
+                  
+              </div>
+            </div>
           </div>
-         
-        </div>
+        
       </div>
     )
   }

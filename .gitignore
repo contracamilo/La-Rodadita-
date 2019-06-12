@@ -1,5 +1,6 @@
 /dist/
 /node_modules/
+/dist/
 
 ### IntelliJ IDEA ###
 .idea
