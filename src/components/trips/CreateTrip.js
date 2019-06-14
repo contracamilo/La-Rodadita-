@@ -51,6 +51,7 @@ class CreateTrip extends Component {
   render() {
     
     const { auth } = this.props
+    console.log(this.props);
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container">

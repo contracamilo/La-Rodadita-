@@ -71,7 +71,7 @@ export const signIn = (credentials) => {
   }
 
   
-  export const googleLogin = () =>  auth.signInWithPopup(googleProvider)
+  export const googleLogin = () => auth.signInWithPopup(googleProvider)
   export const twitterLogin = () => auth.signInWithPopup(twitterProvider)
 
 

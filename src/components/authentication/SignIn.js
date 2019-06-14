@@ -4,7 +4,7 @@ import { signIn, googleLogin, twitterLogin } from '../../store/actions/authActio
 import { Redirect } from 'react-router-dom'
 import bg from '../../../images/roadtrip.jpg'
 import IntroText from '../layout/IntroText';
-
+import { getUser } from '../../store/actions/authActions'
 
 var bgStyle = {
   width: "100%",
@@ -19,6 +19,7 @@ class SignIn extends Component {
     email: '',
     password: ''
   }
+
 
   handleChange = (e) => {
     this.setState({
@@ -78,7 +79,7 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
   return{
     authError: state.auth.authError,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
   }
 }
 

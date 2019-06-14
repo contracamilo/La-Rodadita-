@@ -9,9 +9,15 @@ const initState = {
       case 'GET_USER':
         return action.payload
       case 'TRIP_STATUS':
-        return {...state, trips:action.payload}
+        return {
+          ...state, 
+          trips:action.payload
+        }
       case 'USER_STATUS':
-        return {...state, user:action.payload}
+        return {
+          ...state, 
+          user:action.payload
+        }
       case 'LOGIN_ERROR':
         console.log('login error');
         return {
@@ -21,7 +27,7 @@ const initState = {
       case 'LOGIN_SUCCESS':
         return {
           authError: null
-      }
+        }
       case 'SIGNOUT_SUCCESS':
         console.log('signout success');
         Swal.fire(
@@ -41,7 +47,6 @@ const initState = {
           ...state,
           authError: null
         }
-  
       case 'SIGNUP_ERROR':
         return {
           ...state,

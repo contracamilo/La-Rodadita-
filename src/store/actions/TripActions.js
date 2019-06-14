@@ -4,22 +4,45 @@ import { database } from '../../config/fbConfig';
 export const createTrip = (trip) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         
-        const firestore = getFirestore()
-        const profile = getState().firebase.profile 
-        const authorId = getState().firebase.auth.uid
-
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile; 
+        const authorId = getState().firebase.auth.uid;
         
-        firestore.collection('trips').add({
-            ...trip,
-            authorFirstName: profile.firstName,
-            authorLastName: profile.lastName, 
-            authorId: authorId,
-            createdAt: new Date()
-        }).then(() => {
-            dispatch( {type: 'ADD_TRIP',trip})
-        }).catch((err) => {
-            dispatch( {type: 'ADD_TRIP_ERROR',err})
-        })
+        const socialUser = getState().firebase.auth;
+        let prov = socialUser.providerData[0].providerId;
+        
+        console.log(prov);
+
+        if(prov == 'google.com' || prov == 'twitter.com'){
+                firestore.collection('trips').add({
+                ...trip,
+                authorFirstName: socialUser.displayName,
+                authorLastName: '', 
+                authorId: authorId,
+                createdAt: new Date()
+                })
+                .then(() => {
+                    dispatch( {type: 'ADD_TRIP',trip})
+                }).catch((err) => {
+                    dispatch( {type: 'ADD_TRIP_ERROR',err})
+                })
+        }
+
+        if(profile.isLoaded){
+            firestore.collection('trips').add({
+                    ...trip,
+                    authorFirstName: profile.firstName,
+                    authorLastName: profile.lastName, 
+                    authorId: authorId,
+                    createdAt: new Date()
+            })
+            .then(() => {
+                dispatch( {type: 'ADD_TRIP',trip})
+            }).catch((err) => {
+                dispatch( {type: 'ADD_TRIP_ERROR',err})
+            })
+        }
+        
     }
 }
 
@@ -43,27 +66,7 @@ export const getTrips = () => {
      }
  }
 
- /*
-export const createTrip = trip => {
-    return (dispatch, getState, { getFirebase }) => { 
-        const profile = getState().firebase.profile; 
-        const authorId = getState().firebase.auth.uid;
-        
-        database.push({
-            ...trip,
-            authorFirstName: profile.firstName,
-            authorLastName: profile.lastName,
-            authorId: authorId, 
-            createdAt: new Date()
-        })
-        .then(() => {
-            dispatch( {type: 'ADD_TRIP',trip})
-        }).catch((err) => {
-            dispatch( {type: 'ADD_TRIP_ERROR',err})
-        }) 
-    }
-}
-*/
+
 
 export const deleteTrip = id => {
     return (dispatch, getState, { getFirebase, getFirestore })  => {
