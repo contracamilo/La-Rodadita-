@@ -10,8 +10,7 @@ class Profile extends Component {
   render() {
     
     const { trips, auth,  profiles } = this.props;
-    
-    console.log(auth);
+    if(!auth.uid) return <Redirect to='/signin'/>
     
     return (
       <div className="dashboard container ">

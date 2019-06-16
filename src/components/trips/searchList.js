@@ -61,8 +61,6 @@ class SearchList extends Component {
     const { search, travelType } = this.state;
     const tripList = trips;
     
-    
-    
     const filteredTrip = tripList.filter(trip => {
       return trip.arriveDate.indexOf(search) !== -1;
     });
@@ -77,6 +75,7 @@ class SearchList extends Component {
     });
    */
 
+    if(!auth.uid) return <Redirect to='/signin'/>
     
     return (
       <div>
@@ -103,7 +102,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Ida y/o Vuelta</label>
-                      <select id="tripType"  className="browser-default" onChange={this.handleChangeType}>
+                      <select id="tripType" disabled="true" className="browser-default" onChange={this.handleChangeType}>
                         <option value="" defaultValue>Seleciona Una opción</option>
                         <option value="ida-vuelta">Ida y Vuelta</option>
                         <option value="ida">Solo ida</option>
@@ -114,7 +113,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Destino</label>
-                      <select id="tripDestiny"  className="browser-default" onChange={this.handleChangeDestiny}>
+                      <select id="tripDestiny" disabled="true" className="browser-default" onChange={this.handleChangeDestiny}>
                         <option value="" defaultValue>Seleciona Una opción</option>
                         <option value="bogota">Bogotá</option>
                         <option value="neiva">Neiva</option>

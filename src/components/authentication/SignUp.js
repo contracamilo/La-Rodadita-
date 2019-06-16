@@ -39,7 +39,7 @@ class SignUp extends Component {
           </div>
           <div className="sign_box__up">
               <form className="" onSubmit={this.handleSubmit}>
-                <h2 className="grey-text text-darken-3">CREA TU CUENTA</h2>
+                <h2 className="grey-text text-darken-3">Crea Tu Cuenta</h2>
                 <div className="input-field">
                   <label htmlFor="email">Correo Electrónico:</label>
                   <input type="email" id='email' onChange={this.handleChange} />
@@ -57,7 +57,7 @@ class SignUp extends Component {
                   <input type="text" id='lastName' onChange={this.handleChange} />
                 </div>
                 <div className="input-field">
-                  <button className="btn lighten-1 z-depth-0">CREAR</button>
+                  <button className="btn mr">CREAR</button>
                   <div className="center red-text">
                     { authError ? <p>{authError}</p> : null }
                   </div>

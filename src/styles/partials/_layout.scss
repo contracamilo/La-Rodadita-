@@ -165,7 +165,7 @@ form{
     }
 
     label{
-        color: $grey !important;
+        color: $grey;
         
     }
 
@@ -201,9 +201,27 @@ form{
         align-items: center;
         padding: 0 0%;
     }
+    form{
+        label{
+            color: $primary_color;
+        }
+        .input-field {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn{
+            width: 100%;
+            &.mr{
+                margin-right: 0px !important;
+            }
+            &:hover{
+                background-color: $primary_color_light !important;
+            }
+        }
+    }
     &__in{
         padding: 50px;
-        background-color: rgba($color: $white, $alpha: 0.5);
+        background-color: rgba($color: $white, $alpha: 0.7);
         width: 420px;
         
     }
@@ -220,7 +238,19 @@ form{
     }
     &__up{
         padding: 50px;
-        background-color: rgba($color: $white, $alpha: 0.5);
+        background-color: rgba($color: $white, $alpha: 0.7);
+    }
+    &__social{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+        padding: 0px 0;
+        button{
+            span{
+                font-size: 12px;
+            }
+        }
     }
 }
 

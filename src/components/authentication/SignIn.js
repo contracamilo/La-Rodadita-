@@ -54,23 +54,23 @@ class SignIn extends Component {
                 <input type="password" id='password' onChange={this.handleChange} />
               </div>
               <div className="input-field">
-                <button className="btn  lighten-1 z-depth-0">INGRESA</button>
+                <button className="btn mr">INGRESA</button>
                 <div className="center red-text">
                   { authError ? <p>{authError}</p> : null }
                 </div>
               </div>
-              <div className="login__social">
-                <div className="login__left">
-                  <button className="btn" onClick={(e) => this.props.googleLogin(e)}> <span>Google</span></button>
+            </form>
+            <p>Ingresa con tu red social favorita</p>
+            <div className="sign_box__social">
+                <div className="sign_box__left">
+                  <button className="btn mr" onClick={(e) => this.props.googleLogin(e)}> Google</button>
                 </div>
-                <div className="login__left">
-                  <button className="btn" onClick={(e) => this.props.twitterLogin(e)}><span>Twitter</span></button>
+                <div className="sign_box__left">
+                  <button className="btn mr" onClick={(e) => this.props.twitterLogin(e)}>Twitter</button>
                 </div>
               </div>
-            </form>
           </div>
-       
-        </div>
+       </div>
       </div>
     )
   }

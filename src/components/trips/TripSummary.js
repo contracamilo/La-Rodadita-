@@ -39,10 +39,10 @@ const TripSummary = ({trip}) => {
       </div>
       <div className="flex-row trip-signature">
         <div>
-          <span>Creado por: {trip.authorFirstName} {trip.authorLastName}</span>
-          <span>Fecha: {moment(trip.createdAt.toDate().toString()).calendar()}</span>
+          <span>Creado por: <b>{trip.authorFirstName} {trip.authorLastName}</b></span>
+          <span>Fecha:  <b>{moment(trip.createdAt.toDate().toString()).calendar()}</b></span>
         </div>
-        <div>VER MÁS +</div>
+        <div className="line-btn"><b>VER MÁS +</b></div>
       </div>
     </div>
   )
