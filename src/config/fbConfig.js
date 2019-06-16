@@ -4,6 +4,12 @@ import 'firebase/auth'
 import 'firebase/database' 
 
 
+export const actionCodeSettings = {
+  url: 'https://rodaditaapp.web.app/#/signin',
+  handleCodeInApp: true,
+  //dynamicLinkDomain: 'example.page.link'
+};
+
 var config = {
     apiKey: "AIzaSyC6ek0wQize9j3rBcj5ePrJqd0vBi_FC1w",
     authDomain: "rodaditaapp.firebaseapp.com",

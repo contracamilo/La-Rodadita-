@@ -19,6 +19,7 @@ import Contact from './components/layout/secondary_pages/Contact';
 import News from './components/layout/secondary_pages/News';
 import PrivacyPolicy from './components/layout/secondary_pages/PrivacyPolicy';
 import SearchList from './components/trips/searchList';
+import RecoverPass from './components/authentication/RecoverPass';
 
 
 
@@ -46,6 +47,7 @@ class App extends Component {
               <Route path='/quienes_somos'  component={Whoami} />
               <Route path='/privacy-policy' component={PrivacyPolicy}/>
               <Route path='/viajes'  component={SearchList} />
+              <Route path='/recuperar-contraseña'  component={RecoverPass} />
             </Switch>
           </div>
           <Footer />

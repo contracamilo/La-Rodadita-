@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signIn, googleLogin, twitterLogin } from '../../store/actions/authActions'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 import bg from '../../../images/roadtrip.jpg'
 import IntroText from '../layout/IntroText';
 import { getUser } from '../../store/actions/authActions'
@@ -57,6 +57,7 @@ class SignIn extends Component {
                 <button className="btn mr">INGRESA</button>
                 <div className="center red-text">
                   { authError ? <p>{authError}</p> : null }
+                  { authError ? <NavLink to='/recuperar-contraseña'>Olvidaste tu contraseña</NavLink> : null }
                 </div>
               </div>
             </form>

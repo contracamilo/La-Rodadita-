@@ -22,7 +22,7 @@ const initState = {
         console.log('login error');
         return {
           ...state,
-          authError: 'Login failed'
+          authError: '¡Ups revisa tus datos y vuelve a intentarlo!'
         }
       case 'LOGIN_SUCCESS':
         return {

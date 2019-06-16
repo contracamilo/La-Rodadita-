@@ -40,23 +40,35 @@ class TripDetails extends Component {
                     <p>&#8226; Ver detalles del viaje.</p>
                   </div>
                 </div>
-                <div className="card col l9">
-                   <div className="card-content">
-                    <span className="card-title">{trip.title}</span>
-                    <p><b>Destino:</b> {trip.destiny}</p>
-                    <p><b>Fecha del viaje:</b> {trip.arriveDate}</p>
-                    <p><b>Fecha del viaje:</b> {trip.arriveDate} <b>Hora:</b> {trip.arriveHour}</p>
-                    <p><b>Fecha del regreso:</b> {trip.returnDate} <b>Hora:</b> {trip.returnHour}</p>
-                    <p><b>Punto para el retorno:</b> {trip.returnPoint}</p>
-                    <p><b>Tiempo estimado:</b> {trip.travelTime}</p>
-                    <p><b>Asientos Disponibles:</b> {trip.carSits}</p>
-                    <p>{trip.description}</p>
-                    {auth.uid === trip.authorId && (
-                      <div className="card-buttons">
-                        <button className="btn"  onClick={this.handleDelete}>Eliminar</button>
-                        <Link className="btn" to={`/${key}/edit`}>Editar</Link> 
-                      </div>
-                    )}
+                <div className="card col s12 l9">
+                   <div className="card-content row">
+                    <div className="col s12 l12">
+                      <span className="card-title">{trip.title}</span>
+                    </div>
+                    <div className="col s12 l6">
+                      <p><b>Destino:</b> {trip.destiny}</p>
+                      <p><b>Fecha del viaje:</b> {trip.arriveDate}</p>
+                      <p><b>Fecha del viaje:</b> {trip.arriveDate} <b>Hora:</b> {trip.arriveHour}</p>
+                      <p><b>Fecha del regreso:</b> {trip.returnDate} <b>Hora:</b> {trip.returnHour}</p>
+                      <p><b>Punto para el retorno:</b> {trip.returnPoint}</p>
+                      <p><b>Tiempo estimado:</b> {trip.travelTime}</p>
+                      <p><b>Asientos Disponibles:</b> {trip.carSits}</p>
+                    </div>
+                    <div className="col s12 l6">
+                      <b>Detalles:</b>
+                      <p>{trip.content}</p>
+                      <b>Breve descripción:</b>
+                      <p>{trip.description}</p>
+                    </div>
+                    <div className="col s12 l12">
+                      {auth.uid === trip.authorId && (
+                        <div className="card-buttons">
+                          <button className="btn"  onClick={this.handleDelete}>Eliminar</button>
+                          <Link className="btn" to={`/${key}/edit`}>Editar</Link> 
+                        </div>
+                      )}
+                    </div>
+
                   </div>
                   <div className="card-action grey lighten-4 grey-text">
                     <div>Publicado {trip.authorFirstName} {trip.authorLastName}</div>

@@ -36,6 +36,23 @@ export const signIn = (credentials) => {
     }
   }
 
+  export const recoverPass = (email, actionCodeSettings) => {
+    return (dispatch, getState, {getFirebase}) => {
+      const firebase = getFirebase();
+      
+      console.log(email, actionCodeSettings);
+      firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      .then(function() {
+         window.localStorage.setItem('emailForSignIn', email);
+         window.history.back();
+      })
+      .catch(function(error) {
+        console.log('error', error)
+        dispatch({ type: 'LOGIN_ERROR', err })
+      });
+  
+    }
+  }
 
   export const signOut = () => {
     return (dispatch, getState, {getFirebase}) => {

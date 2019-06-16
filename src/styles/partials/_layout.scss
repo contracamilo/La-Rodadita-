@@ -254,6 +254,20 @@ form{
     }
 }
 
+.card-title{
+    //text-align: center;
+    color: $primary_color;
+    padding-bottom: 20px;
+}
+.card-buttons{
+    padding: 20px 0 0;
+    .btn{
+        &:hover{
+            background-color: $primary_color_light;
+        }
+    }
+}
+
 #trip-main{
     .main-quad{
         &__trips{
