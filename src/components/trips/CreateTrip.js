@@ -6,16 +6,20 @@ import { Redirect } from 'react-router-dom'
 class CreateTrip extends Component {
   state = {
     title: '',
+    destiny: '',
     description: '',
     arriveDate: '',
     returnDate: '',
+    arriveHour: '',
+    returnHour: '',
     arrivePoint: '',
     returnPoint: '',
     travelTime: '',
     carSits: '',
     termsC: '',
     tripType: '',
-    activeTrip: true
+    activeTrip: true,
+    disableButton:true
   }
 
 
@@ -42,7 +46,8 @@ class CreateTrip extends Component {
   handleTerms = (e) => {
     const termsC = document.getElementById('termsC').value
     this.setState({
-        termsC: String(termsC)
+        termsC: String(termsC),
+        disableButton:false,
     })
   }
 
@@ -68,34 +73,47 @@ class CreateTrip extends Component {
                 
                 <form className="white flex-row" onSubmit={this.handleSubmit}>
                 <input type="hidden" id='activeState' value="true" onSubmit={this.handleChange} />
-                
+
                 <div className="first-half">
                   <div className="select-field">
-                    <label>Ida y/o Vuelta</label>
-                    <select id="tripType"  className="browser-default" onChange={this.handleTrip}>
-                      <option value="" defaultValue>Seleciona Una opción</option>
-                      <option value="ida-vuelta">Ida y Vuelta</option>
-                      <option value="ida">Solo ida</option>
-                    </select>
+                    <label htmlFor="tripDestiny">Destino</label>
+                      <select id="destiny"  className="browser-default" onChange={this.handleChange}>
+                        <option value="" defaultValue>Seleciona Una opción</option>
+                        <option value="Bogotá">Bogotá</option>
+                        <option value="Neiva">Neiva</option>
+                      </select>
                   </div>
+
+
 
                   <div className="input-field">
                     <input type="text" id='title' onChange={this.handleChange} />
                     <label htmlFor="title">Titulo</label>
                   </div>
 
+                  <div className="flex-row flow-fields">
+                    <div className="select-field item date">
+                      <label htmlFor="arriveDate">Fecha del Viaje</label>
+                      <input id="arriveDate"  type="date" className="datepicker" onChange={this.handleChange}/>
+                    </div>
 
-                  <div className="input-field">
-                    <input id="arriveDate"  type="date" className="datepicker" onChange={this.handleChange}/>
-                    <label htmlFor="arriveDate">Fecha del Viaje</label>
+                    <div className="input-field item hour">
+                      <input id="arriveHour"  type="text" className="datepicker" onChange={this.handleChange}/>
+                      <label htmlFor="arriveHour">Hora de Salida</label>
+                    </div>
                   </div>
-
                   {
                     (this.state.tripType == 'ida-vuelta') ?
-                    <div className="input-field">
-                      <input id="returnDate"  type="date" className="datepicker" onChange={this.handleChange}/>
-                      <label htmlFor="returnDate">Fecha del Regreso</label>
-                    </div>
+                      <div className="flex-row flow-fields">
+                        <div className="select-field item date">
+                          <label htmlFor="returnDate">Fecha del Regreso</label>
+                          <input id="returnDate"  type="date" className="datepicker" onChange={this.handleChange}/>
+                        </div>
+                        <div className="input-field item hour">
+                          <input id="returnHour"  type="text" className="datepicker" onChange={this.handleChange}/>
+                          <label htmlFor="returnHour">Hora del Regreso</label>
+                        </div>
+                      </div>
                     :
                     ''
                   }
@@ -118,12 +136,19 @@ class CreateTrip extends Component {
                     <input id="travelTime" type="text" onChange={this.handleChange} />
                     <label htmlFor="travelTime">Tiempo Estimado de Viaje</label>
                   </div>
+              </div>
 
-                  
+
+              <div className="second-half">
+                
+                <div className="select-field">
+                    <label>Ida y/o Vuelta</label>
+                    <select id="tripType"  className="browser-default" onChange={this.handleTrip}>
+                      <option value="" defaultValue>Seleciona Una opción</option>
+                      <option value="ida-vuelta">Ida y Vuelta</option>
+                      <option value="ida">Solo ida</option>
+                    </select>
                 </div>
-
-
-                <div className="second-half">
                 
                 <div className="select-field">
                   <label>Lugares Disponibles</label>
@@ -158,11 +183,9 @@ class CreateTrip extends Component {
                       
                   </div>
         
-
-
                   <br/> 
                   <div className="btn-field">
-                    <button className="btn">Publicar Viaje</button>
+                    <button className="btn" disabled={this.state.disableButton}>Publicar Viaje</button>
                   </div>
                 </div>
                 

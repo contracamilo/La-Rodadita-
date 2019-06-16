@@ -92,6 +92,7 @@
      
 }
 
+
 form{
     justify-content: space-between;
     .first-half, .second-half{
@@ -100,6 +101,20 @@ form{
     .input-field {
         label{
             font-size: 16px !important;
+        }
+    }
+
+    .flex-row{
+        justify-content: space-between;
+        .item{
+            width: 50%;
+            &.date{
+                width: 54%;
+            }
+            &.hour{
+                margin-top: 9%;
+                width: 40%;
+            }
         }
     }
 
@@ -206,5 +221,13 @@ form{
     &__up{
         padding: 50px;
         background-color: rgba($color: $white, $alpha: 0.5);
+    }
+}
+
+#trip-main{
+    .main-quad{
+        &__trips{
+            width: 100%;
+        }
     }
 }

@@ -10,26 +10,31 @@ class SearchList extends Component {
   static defaultProps = { 
       trips: [],
       search: "",
-      travelType:""
+      travelType:"",
+      destiny:""
   }
 
   initalState = {
     search: "",
     date:"",
-    travelType:""
+    travelType:"",
+    destiny:""
   }
  
   state = {
     search: "",
     date:"",
-    travelType:""
+    travelType:"",
+    destiny:""
   }
 
   renderTrip = trip => {
     const { search } = this.state;
     
     return (
-      <SearchResults trip={trip}/>
+      <div key={trip.id} className="main-quad__trips">
+        <SearchResults trip={trip}/>
+      </div>
     );
   }
 
@@ -39,23 +44,44 @@ class SearchList extends Component {
     });
   }
 
+  handleChangeType = e => {
+    this.setState({ 
+      travelType:e.target.value 
+    });
+  }
+
+  handleChangeDestiny = e => {
+    this.setState({ 
+      destiny:e.target.value 
+    });
+  }
+
   render() {
     const { trips, auth } = this.props;
-    const { search } = this.state;
+    const { search, travelType } = this.state;
     const tripList = trips;
- 
-    console.log( tripList, search);
+    
+    
     
     const filteredTrip = tripList.filter(trip => {
-      return  trip.arriveDate.indexOf(search) !== -1;
-      
-    
+      return trip.arriveDate.indexOf(search) !== -1;
     });
 
+    /*
+    const filteredTripType = tripList.filter(trip => {
+      return trip.tripType.indexOf(travelType) !== -1;
+    });
+
+    const filteredTripDestiny = tripList.filter(trip => {
+      return trip.destiny.indexOf(destiny) !== -1;
+    });
+   */
+
+    
     return (
       <div>
-        <div className="container">
-          <div className="trip-details-top">
+        <div id="trip-main" className="container">
+          <div className="main-quad trip-details-top">
             <div className="row">
               <h2>VIAJES</h2>
               <div className="project-list section"> 
@@ -77,7 +103,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Ida y/o Vuelta</label>
-                      <select id="tripType"  className="browser-default" onChange={this.handleChange}>
+                      <select id="tripType"  className="browser-default" onChange={this.handleChangeType}>
                         <option value="" defaultValue>Seleciona Una opción</option>
                         <option value="ida-vuelta">Ida y Vuelta</option>
                         <option value="ida">Solo ida</option>
@@ -88,10 +114,10 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Destino</label>
-                      <select id="tripType"  className="browser-default" onChange={this.handleChange}>
+                      <select id="tripDestiny"  className="browser-default" onChange={this.handleChangeDestiny}>
                         <option value="" defaultValue>Seleciona Una opción</option>
-                        <option value="ida-vuelta">Bogotá</option>
-                        <option value="ida">Neiva</option>
+                        <option value="bogota">Bogotá</option>
+                        <option value="neiva">Neiva</option>
                       </select>
                     </div>
                   </div>
@@ -99,9 +125,9 @@ class SearchList extends Component {
                   <div className="col s12 l9">
                     <p>Selecciona los campos para filtrar tu busqueda.</p> 
                     <div>
-                      {filteredTrip.map(trip => {
+                      {(filteredTrip) && (filteredTrip.map(trip => {
                         return this.renderTrip(trip);
-                      })}
+                      }))}
                     </div>
                   </div>
                 </div>
