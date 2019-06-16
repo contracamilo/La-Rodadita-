@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { editTrip } from '../../store/actions/TripActions'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class EditTrip extends Component {
   
@@ -73,10 +73,12 @@ class EditTrip extends Component {
   render() {
     //console.log(this.state);
     const { auth } = this.props;
+    const key = this.props.match.params.id;
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container">
         <div className="trip-details-top">
+            <Link to={`/`}>Volver</Link> 
             <h2>Editar un viaje creado.</h2>
             <div className="row">
               <div className="col s12 l3">
@@ -166,7 +168,7 @@ class EditTrip extends Component {
 
                   <br/> 
                   <div className="btn-field">
-                    <button className="btn">Publicar Viaje</button>
+                    <button className="btn">Finalizar</button>
                   </div>
                 </div>
                 
@@ -199,7 +201,7 @@ export default compose(
   connect(mapStateToProps, { editTrip }),
   firestoreConnect([
     {
-      collection: 'trips'
+      collection: 'trips', limit: 4, orderBy:['createdAt', 'desc']
     }
   ])
 )(EditTrip)

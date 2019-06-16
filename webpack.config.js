@@ -75,7 +75,7 @@ module.exports = {
   devServer: {
     contentBase: DIST_DIR,
     hot: true,
-    port: 9008
+    port: 9004
 
   }
 };

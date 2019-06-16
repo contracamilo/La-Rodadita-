@@ -7,8 +7,9 @@ import profileReducer from '../../store/reducers/profileRdcr';
 const SignedInLinks = (props) => {
  
   return (
-    <div>
+    <div>   
       <ul className="right">
+        <li><NavLink to='/viajes'>Viajes</NavLink></li>
         <li><NavLink to='/create'>Crea un nuevo viaje</NavLink></li>
         <li><NavLink to='/profile'>Perfil</NavLink></li>
         <li><a onClick={props.signOut}>Salir</a></li>

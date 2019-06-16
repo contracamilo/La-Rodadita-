@@ -20,13 +20,14 @@ class TripDetails extends Component {
       const { trip, auth } = this.props;
       const key = this.props.match.params.id;
       if(!auth.uid) return <Redirect to='/signin'/>
-      console.log(trip)
+      
       if(trip) {
         return(
             <div className="container section">
               <div className="trip-details">
                 <div className="row">
                 <div className="card z-depth-0 col l6">
+                  <Link to={`/viajes`}>Volver</Link> 
                   <h2>Detalles del Viaje</h2>
                   <div className="card-content">
                     <span className="card-title">{trip.title}</span>
@@ -45,7 +46,7 @@ class TripDetails extends Component {
                     )}
                   </div>
                   <div className="card-action grey lighten-4 grey-text">
-                    <div>Posted by {trip.authorFirstName} {trip.authorLastName}</div>
+                    <div>Publicado {trip.authorFirstName} {trip.authorLastName}</div>
                     <div>{moment(trip.createdAt.toDate().toString()).calendar()}</div>
                   </div>
                 </div>
