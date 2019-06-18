@@ -49,7 +49,7 @@ const tripReducer = (state = initState, action) => {
         default:
             return state
     }
-   }
+}
 
 
 

@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
    
     auth: authReducer,
     trip: tripReducer,
-    profile: profileReducer,
+    user: profileReducer,
     blogs: blogReducer,
     car: carReducer,
     firestore: firestoreReducer, 

@@ -1,49 +1,28 @@
-const initState = {
-    profiles:[
-        {
-            id:'1',
-            bio: 'Hola soy camilo nacido en mordor...',
-            completedTrips: '87',
-            rate: '5',
-            blockedUser: 'false',
-            edad: '27',
-            phone: '3003522300',
-            cedula: '1030530952',
-            sexo: 'masculino',
-            preferences: 'no niños, no ancianos'
+import Swal from 'sweetalert2'
 
-        },
-        {
-            id:'2',
-            bio: 'Hola soy Juan nacido en el aberno...',
-            completedTrips: '87',
-            rate: '5',
-            blockedUser: 'false',
-            edad: '28',
-            phone: '3003522300',
-            cedula: '1030530952',
-            sexo: 'masculino',
-            preferences: 'no niños, no ancianos'
-
-        },
-        {
-            id:'3',
-            bio: 'Hola soy Legolas nacido en tirandor...',
-            completedTrips: '87',
-            rate: '5',
-            blockedUser: 'false',
-            edad: '27',
-            phone: '3003522300',
-            cedula: '1030530952',
-            sexo: 'masculino',
-            preferences: 'no niños, no ancianos'
-
-        }
-    ]
-}
+const initState = {}
 
 const profileReducer = (state = initState, action) => {
-    return state 
+    switch (action.type) {
+         case 'EDIT_PROFILE' :
+            console.log('edited profile', action.userProfile)
+            Swal.fire(
+                '¡Perfecto!',
+                'Has editado tu perfil!',
+                'success'
+            )
+            return state
+        case 'EDIT_PROFILE_ERROR' :
+            console.log('edit profile error', action.err)
+            Swal.fire(
+                '¡Uy!',
+                'algo salio mal, vuelve a intentar en un rato!',
+                'error'
+            )
+            return state
+        default:
+            return state
+    }
 }
 
 

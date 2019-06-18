@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ProfileUi from './profileUi';
 import { Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -9,9 +8,13 @@ import { compose } from 'redux'
 class Profile extends Component {
   render() {
     
-    const { trips, auth,  profiles } = this.props;
+    const { auth,  profile } = this.props;
     if(!auth.uid) return <Redirect to='/signin'/>
     
+    console.log(profile);
+
+    
+
     return (
       <div className="dashboard container ">
         
@@ -24,10 +27,13 @@ class Profile extends Component {
                     src={auth.photoURL}
                     width={50}
                   />
+                  <h4>{profile.firstName} {profile.lastName}</h4>
                   <p>{auth.displayName}</p>
                   <p>{auth.email}</p>
-                  <Link to={'/'}>Completa Tu Perfil</Link>
-                  
+                  {(auth.uid) &&
+                    <p>le putito</p>
+                  }
+                  {(auth.uid) && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
               </div>
             </div>
           </div>
@@ -38,20 +44,23 @@ class Profile extends Component {
 }
 
 
-const mapStateToProps = (state) => {
- 
+
+
+const mapStateToProps = (state, ownProps) => {
+   
   return {
-    trips: state.firestore.ordered.trips,
     auth: state.firebase.auth,
-    profiles: state.firestore.ordered.profiles
-    
+    profile: state.firebase.profile
   }
 }
+
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'trips', limit: 4, orderBy:['createdAt', 'desc'] },
-    { collection: 'profiles', limit: 1 }
+    { 
+      collection: 'users'
+      
+    }
   ])
 )(Profile)

@@ -20,6 +20,7 @@ import News from './components/layout/secondary_pages/News';
 import PrivacyPolicy from './components/layout/secondary_pages/PrivacyPolicy';
 import SearchList from './components/trips/searchList';
 import RecoverPass from './components/authentication/RecoverPass';
+import CreateProfile from './components/profile/CreateProfile';
 
 
 
@@ -46,7 +47,8 @@ class App extends Component {
               <Route path='/:id/edit' component={EditTrip} /> 
               <Route path='/quienes_somos'  component={Whoami} />
               <Route path='/privacy-policy' component={PrivacyPolicy}/>
-              <Route path='/viajes'  component={SearchList} />
+              <Route path='/viajes'  component={SearchList} /> 
+              <Route path='/actualiza-perfil'  component={CreateProfile} /> 
               <Route path='/recuperar-contraseña'  component={RecoverPass} />
             </Switch>
           </div>
