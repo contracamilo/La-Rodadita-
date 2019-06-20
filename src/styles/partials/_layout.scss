@@ -95,6 +95,7 @@
 
 form{
     justify-content: space-between;
+    flex-wrap: wrap;
     .first-half, .second-half{
         width: 48%
     }

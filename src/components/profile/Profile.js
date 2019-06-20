@@ -28,12 +28,20 @@ class Profile extends Component {
                     width={50}
                   />
                   <h4>{profile.firstName} {profile.lastName}</h4>
-                  <p>{auth.displayName}</p>
-                  <p>{auth.email}</p>
-                  {(auth.uid) &&
-                    <p>le putito</p>
-                  }
-                  {(auth.uid) && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
+                  <p>Correo Electrónico: {auth.email}</p>
+
+                  {(profile.profileCompleted && <div>
+                    <p>Celular:{profile.cellPhone}</p>
+                    <p>Dirección:{profile.address}</p>
+                    <p>Ciudad:{profile.cellPhone}</p>
+                    <p>Contacto en caso de emergencia:{profile.emergencyContact}</p>
+                    <p>Telefono de Persona de contacto:{profile.emergencyNum}</p>
+                    <p>{auth.displayName}</p>
+                  </div>)}
+                  
+                  
+                  {(!profile.profileCompleted) && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
+                  {(profile.profileCompleted) && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
               </div>
             </div>
           </div>

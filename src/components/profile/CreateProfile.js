@@ -1,27 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { updateProfile } from '../../store/actions/profileActions'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 
 class CreateProfile extends Component {
+  
   state = {
-    title: '',
-    destiny: '',
-    description: '',
-    arriveDate: '',
-    returnDate: '',
-    arriveHour: '',
-    returnHour: '',
-    arrivePoint: '',
-    returnPoint: '',
-    travelTime: '',
-    carSits: '',
-    termsC: '',
-    tripType: '',
-    activeTrip: true,
-    disableButton:true
+    disableButton:true,
+    docNumber:'',
+    docType:'',
+    cellPhone:'',
+    activeUser:true,
+    blockedUser:false,
+    profileCompleted:true,
+    howOld:'',
+    address:'',
+    emergencyNum:'',
+    emergencyContact:'',
+    cardPlate:'',
+    carModel:'',
+    carMark:'',
+    carColor:'',
+    userStars:5,
+    city:'',
+    driver:'',
+    termsC:''
   }
-
 
 
   handleChange = (e) => {
@@ -29,24 +33,23 @@ class CreateProfile extends Component {
       [e.target.id]: e.target.value
     })
   }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.updateProfile(this.state)
     this.props.history.push('/profile')
   }
 
-  handleTrip = (e) => {
+  handleDriver = (e) => {
     e.preventDefault();
-    const hideTrip = document.getElementById('tripType').value
     this.setState({
-        tripType: String(hideTrip)
+        driver:true
     })
   }
 
   handleTerms = (e) => {
-    const termsC = document.getElementById('termsC').value
     this.setState({
-        termsC: String(termsC),
+        termsC: true,
         disableButton:false,
     })
   }
@@ -55,9 +58,9 @@ class CreateProfile extends Component {
             
   render() {
     
-    const { auth } = this.props
-    console.log(this.props);
-    if(!auth.uid) return <Redirect to='/signin'/>
+    const { auth, profile } = this.props
+    console.log(this.props.profile.firstName);
+    if(!auth.uid) return <Redirect to='/signin'/>            
     return (
       <div className="container">
         <div className="trip-details-top">
@@ -71,128 +74,141 @@ class CreateProfile extends Component {
               </div>
               <div className="col s12 l9">
                 
-                <form className="white flex-row" onSubmit={this.handleSubmit}>
-                <input type="hidden" id='activeState' value="true" onSubmit={this.handleChange} />
+                
+              <form className="white flex-row" onSubmit={this.handleSubmit}>
+                
+                <input type="hidden" id='activeUser' value="true" onSubmit={this.handleChange} />
+                <input type="hidden" id='blockedUser' value="false" onSubmit={this.handleChange} />
+                <input type="hidden" id='profileCompleted' value="true" onSubmit={this.handleChange} />
+                <input type="hidden" id='userStars' value="5" onSubmit={this.handleChange} />
 
                 <div className="first-half">
-                  <div className="select-field">
-                    <label htmlFor="tripDestiny">Destino</label>
-                      <select id="destiny"  className="browser-default" onChange={this.handleChange}>
-                        <option value="" defaultValue>Seleciona Una opción</option>
-                        <option value="Bogotá">Bogotá</option>
-                        <option value="Neiva">Neiva</option>
-                      </select>
-                  </div>
+                   <h4><span>Usuario:</span> {profile.firstName} {profile.lastName}</h4>
+                </div>
+                <div className="second-half"></div>
+               
+                <div className="first-half">
+                 
+                    <div className="select-field item doc">
+                      <label htmlFor="docType">Tipo de doc.</label>
+                        <select id="docType"  className="browser-default" required onChange={this.handleChange}>
+                          <option value="" defaultValue>Escoge tipo de documento</option>
+                          <option value="CC">CC</option>
+                          <option value="CE">CE</option>
+                          <option value="TI">DNI</option>
+                        </select>
+                      </div>
 
+                      <div className="input-field item number">
+                        <label htmlFor="docNumber">Numero de Documento. *</label>
+                        <input id="docNumber"  type="text" required onChange={this.handleChange}/>
+                      </div>
+                 
 
 
                   <div className="input-field">
-                    <input type="text" id='title' onChange={this.handleChange} />
-                    <label htmlFor="title">Titulo</label>
+                    <input id="cellPhone"  type="text" required onChange={this.handleChange} />
+                    <label htmlFor="cellPhone"> Numero de Celular. *</label>
                   </div>
 
-                  <div className="flex-row flow-fields">
-                    <div className="select-field item date">
-                      <label htmlFor="arriveDate">Fecha del Viaje</label>
-                      <input id="arriveDate"  type="date" className="datepicker" onChange={this.handleChange}/>
-                    </div>
-
-                    <div className="input-field item hour">
-                      <input id="arriveHour"  type="text" className="datepicker" onChange={this.handleChange}/>
-                      <label htmlFor="arriveHour">Hora de Salida</label>
-                    </div>
+                  <div className="input-field">
+                    <input id="emergencyContact" required type="text" required onChange={this.handleChange} />
+                    <label htmlFor="emergencyContact">Nombre del Contacto para Emergecias</label>
                   </div>
-                  {
-                    (this.state.tripType == 'ida-vuelta') ?
-                      <div className="flex-row flow-fields">
-                        <div className="select-field item date">
-                          <label htmlFor="returnDate">Fecha del Regreso</label>
-                          <input id="returnDate"  type="date" className="datepicker" onChange={this.handleChange}/>
+
+                  <div className="input-field">
+                    <input id="city" required type="text" required onChange={this.handleChange} />
+                    <label htmlFor="city">Ciudad</label>
+                  </div>
+
+
+                </div>
+
+
+                <div className="second-half">
+                
+
+                <div className="select-field">
+                    <label>Eres conductor?</label>
+                    <select id="driver"  className="browser-default" onChange={this.handleDriver}>
+                      <option value="" defaultValue>Seleciona Una opción</option>
+                      <option value="driver">Soy Conductor</option>
+                      <option value="traveler">Soy Viajero</option>
+                    </select>
+                </div>
+
+
+                <div className="input-field">
+                    <input id="howOld" type="text" onChange={this.handleChange} />
+                    <label htmlFor="howOld">Edad</label>
+                </div>
+
+                 <div className="input-field">
+                    <input id="address" required type="text" required onChange={this.handleChange} />
+                    <label htmlFor="address">Dirección de residencia</label>
+                </div>
+
+                <div className="input-field">
+                    <input id="emergencyNum" type="text" required onChange={this.handleChange} />
+                    <label htmlFor="emergencyNum">Numero Telefónico del Contacto</label>
+                </div>
+
+                </div>
+                {(this.state.driver && 
+                  
+                    <div className="first-half">
+                      <h4>Datos de conductor</h4>
+                    </div>
+                )}
+                    <div className="second-half"></div>
+
+                {(this.state.driver &&    
+                      <div className="first-half">
+                        <div className="input-field">
+                          <input id="cardPlate" required type="text"  onChange={this.handleChange} />
+                            <label htmlFor="cardPlate">Placa</label>
                         </div>
-                        <div className="input-field item hour">
-                          <input id="returnHour"  type="text" className="datepicker" onChange={this.handleChange}/>
-                          <label htmlFor="returnHour">Hora del Regreso</label>
+
+                        <div className="input-field">
+                          <input id="carMark" type="text" required onChange={this.handleChange} />
+                          <label htmlFor="carMark">Marca</label>
                         </div>
                       </div>
-                    :
-                    ''
-                  }
-
-                  <div className="input-field">
-                    <input id="arrivePoint"  type="text" onChange={this.handleChange} />
-                    <label htmlFor="arrivePoint">Punto de Encuentro</label>
-                  </div>
-                  {
-                    (this.state.tripType == 'ida-vuelta') ?
-                  <div className="input-field">
-                    <input id="returnPoint" type="text" onChange={this.handleChange} />
-                    <label htmlFor="returnPoint">Punto de Encuentro - Vuelta</label>
-                  </div>
-                  :
-                    ''
-                  }
-
-                  <div className="input-field">
-                    <input id="travelTime" type="text" onChange={this.handleChange} />
-                    <label htmlFor="travelTime">Tiempo Estimado de Viaje</label>
-                  </div>
-              </div>
-
-
-              <div className="second-half">
-                
-                <div className="select-field">
-                    <label>Ida y/o Vuelta</label>
-                    <select id="tripType"  className="browser-default" onChange={this.handleTrip}>
-                      <option value="" defaultValue>Seleciona Una opción</option>
-                      <option value="ida-vuelta">Ida y Vuelta</option>
-                      <option value="ida">Solo ida</option>
-                    </select>
-                </div>
-                
-                <div className="select-field">
-                  <label>Lugares Disponibles</label>
-                    <select id="carSits"  className="browser-default" onChange={this.handleChange}>
-                      <option value="" disabled defaultValue>Escoge el numero de sillas que necesitas</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                    </select>
-                  </div>
-
-                  <div className="input-field">
-                    <textarea id="description" className="materialize-textarea" onChange={this.handleChange}></textarea>
-                    <label htmlFor="description">Has una pequeña descripción del viaje</label>
-                  </div>
-
-                  <div className="">
-                    <label htmlFor="content">Escribe detalles o preferencias.</label>
-                    <textarea id="content"  placeholder="No fumar, No bebidas alcoholica..."  onChange={this.handleChange}></textarea>
+                  )}
                   
-                  </div>
+                  {(this.state.driver &&    
+                      <div className="second-half">
+                        <div className="input-field">
+                          <input id="carModel"  type="text" required onChange={this.handleChange} />
+                          <label htmlFor="carModel">Modelo</label>
+                        </div>
 
-                
-                  <div className="check-field" >
-                      <label>
-                            <input  id="termsC" type="checkbox" value="yes" onChange={this.handleTerms}/>
-                            <span>He leido y acepto terminos y condiciones link</span>
-                      </label>
-                      
+                        <div className="input-field">
+                          <input id="carColor"  type="text" required onChange={this.handleChange} />
+                          <label htmlFor="carColor">Color</label>
+                        </div>
+                      </div>
+                  )}
+                  
+                  
+                  <div className="first-half">
+                    <div className="check-field" >
+                        <label htmlFor="termsC">
+                              <input  id="termsC" type="checkbox" onChange={this.handleTerms}/>
+                              <span>He leido y acepto <NavLink to='/terminos'>terminos y condiciones</NavLink></span>
+                        </label>
+                    </div>
+          
+                    <br/> 
+                    <div className="btn-field">
+                      <button className="btn" disabled={this.state.disableButton}>Actualizar Perfil</button>
+                    </div>
                   </div>
-        
-                  <br/> 
-                  <div className="btn-field">
-                    <button className="btn" disabled={this.state.disableButton}>Publicar Viaje</button>
-                  </div>
-                </div>
-                
+                  <div className="second-half"></div>
                 </form>
               </div>
             
-
+              
             </div>
         </div>
      </div>
@@ -204,7 +220,8 @@ class CreateProfile extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   }
 }
 
