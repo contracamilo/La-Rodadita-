@@ -11,41 +11,98 @@ class Profile extends Component {
     const { auth,  profile } = this.props;
     if(!auth.uid) return <Redirect to='/signin'/>
     
-    console.log(profile);
+    console.log(auth, profile);
 
     
 
     return (
-      <div className="dashboard container ">
-        
-        <div className="row">
-            
-            <div className="col s12 m6">
-              <div className="trip-details">
-                  <h2>Tu perfil</h2>
-                  <img 
-                    src={auth.photoURL}
-                    width={50}
-                  />
-                  <h4>{profile.firstName} {profile.lastName}</h4>
-                  <p>Correo Electrónico: {auth.email}</p>
+      <div className="container">
+        <div className="trip-details-top">
 
-                  {(profile.profileCompleted && <div>
-                    <p>Celular:{profile.cellPhone}</p>
-                    <p>Dirección:{profile.address}</p>
-                    <p>Ciudad:{profile.cellPhone}</p>
-                    <p>Contacto en caso de emergencia:{profile.emergencyContact}</p>
-                    <p>Telefono de Persona de contacto:{profile.emergencyNum}</p>
-                    <p>{auth.displayName}</p>
-                  </div>)}
-                  
-                  
+        <div className="row">
+            <h2>Tu perfil</h2>
+            <div className="col s12 l3">
+              <div className="picture">
+                <img 
+                  src={auth.photoURL}
+                  width={200}
+                />
+              </div>
+              <div>
                   {(!profile.profileCompleted) && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
                   {(profile.profileCompleted) && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
               </div>
             </div>
-          </div>
-        
+            <div className="col s12 l4">
+                <div className="profile-item">
+                  <span>Nombre</span>
+                  { profile.profileCompleted 
+                    ? (<h4>{profile.firstName} {profile.lastName}</h4>)
+                    : (<h4>{auth.firstName} {auth.lastName}</h4>) 
+                  }
+                </div>
+
+                <div className="profile-item">
+                  <span>Correo Electrónico:</span>
+                  <p>{auth.email}</p>
+                </div>
+              
+                {(profile.profileCompleted &&
+                  <div>
+                    <div className="profile-item">
+                      <span>Edad:</span>
+                      <p>{profile.howOld}</p>
+                    </div>
+
+                    <div className="profile-item">
+                      <span>Ciudad:</span>
+                      <p>{profile.city}</p>
+                    </div>
+                  
+                    <div className="profile-item double">
+                      <span>Estado:</span>
+                      <p>{profile.activeUser && (<div><span className="green"></span>Activo</div>)}</p>
+                      <div className="starts">
+                        Calificación General:
+                        {profile.userStars}
+                      </div>
+                    </div>
+                  </div>
+                
+                )}
+
+            </div>
+            <div className="col s12 l4">
+            {(profile.profileCompleted &&
+                  <div>
+                    <div className="profile-item">
+                      <span>Edad:</span>
+                      <p>{profile.howOld}</p>
+                    </div>
+
+                    <div className="profile-item">
+                      <span>Ciudad:</span>
+                      <p>{profile.city}</p>
+                    </div>
+                  
+                    <div className="profile-item double">
+                      <span>Estado:</span>
+                      <p>{profile.activeUser && (<div><span className="green"></span>Activo</div>)}</p>
+                      <div className="starts">
+                          <p>Celular:{profile.cellPhone}</p>
+                        <p>Dirección:{profile.address}</p>
+                        <p>Ciudad:{profile.cellPhone}</p>
+                        <p>Contacto en caso de emergencia:{profile.emergencyContact}</p>
+                        <p>Telefono de Persona de contacto:{profile.emergencyNum}</p>
+                      </div>
+                    </div>
+                  </div>
+                
+                )}
+            </div>
+            <div className="col s12 l4"></div>
+        </div>
+        </div> 
       </div>
     )
   }
