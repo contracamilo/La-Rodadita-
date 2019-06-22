@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { updateProfile } from '../../store/actions/profileActions'
 import { Redirect, NavLink } from 'react-router-dom'
 
+
 class CreateProfile extends Component {
   
   state = {
