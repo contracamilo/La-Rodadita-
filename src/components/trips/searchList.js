@@ -102,7 +102,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Ida y/o Vuelta</label>
-                      <select id="tripType" disabled="true" className="browser-default" onChange={this.handleChangeType}>
+                      <select id="tripType" disabled={true} className="browser-default" onChange={this.handleChangeType}>
                         <option value="" defaultValue>Seleciona Una opción</option>
                         <option value="ida-vuelta">Ida y Vuelta</option>
                         <option value="ida">Solo ida</option>
@@ -113,7 +113,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Destino</label>
-                      <select id="tripDestiny" disabled="true" className="browser-default" onChange={this.handleChangeDestiny}>
+                      <select id="tripDestiny" disabled={true} className="browser-default" onChange={this.handleChangeDestiny}>
                         <option value="" defaultValue>Seleciona Una opción</option>
                         <option value="bogota">Bogotá</option>
                         <option value="neiva">Neiva</option>
@@ -123,11 +123,13 @@ class SearchList extends Component {
 
                   <div className="col s12 l9">
                     <p>Selecciona los campos para filtrar tu busqueda.</p> 
-                    <div>
-                      {(filteredTrip) && (filteredTrip.map(trip => {
-                        return this.renderTrip(trip);
-                      }))}
-                    </div>
+                      <div>
+                        {
+                          (filteredTrip) 
+                          ? (filteredTrip.map(trip => {return this.renderTrip(trip);}))
+                          : <p>...Cargando</p>
+                        }
+                      </div>
                   </div>
                 </div>
               </div>
