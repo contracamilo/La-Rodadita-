@@ -23,6 +23,10 @@ class TripDetails extends Component {
     this.props.history.push('/')
   }
 
+  handleScroll = () => {
+    window.scrollBy(0, 700)
+  }
+
   render() {
       const { trip, auth, comments } = this.props;
       const key = this.props.match.params.id;
@@ -42,6 +46,7 @@ class TripDetails extends Component {
                 <div className="col s12 l12">
                   <div className="breadcrum">
                     <Link to={`/viajes`}> <button className="return-btn">&lt;</button> <span>Volver</span></Link>
+                    <button className="scroll-btn" onClick={this.handleScroll}> <span>Dejar Mensaje</span></button>
                   </div>
                 </div>
                 <div className="col s12 l3">
@@ -56,7 +61,7 @@ class TripDetails extends Component {
                 <div className="card col s12 l9">
                    <div className="card-content row">
                     <div className="col s12 l12">
-                      <span className="card-title">{trip.title}</span>
+                      <h4>{trip.title}</h4>
                     </div>
                     <div className="col s12 l6">
                       <p><b>Destino:</b> {trip.destiny}</p>
@@ -91,7 +96,7 @@ class TripDetails extends Component {
               </div>
               </div>
               <div className="row">
-                <div className="comments">
+                <div id="messages" className="comments">
                   <h2>Déjale un mensaje al creador del viaje.</h2>
                   <div className="col s12 l3">
                    <h4>Escribe aquí:</h4>

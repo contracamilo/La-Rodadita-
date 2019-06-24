@@ -66,6 +66,14 @@ body {
 	span{
 		margin-left: 10px;
 	}
+
+	.scroll-btn{
+		background: transparent;
+		border:0;
+		font-family: $primary_font;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
 }
 
 .return-btn{

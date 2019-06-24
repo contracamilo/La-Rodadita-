@@ -39,7 +39,7 @@ class SubmitComments extends Component {
                                 type="text" 
                                 name="commentbody" 
                                 id="commentBody"
-                                placeholder="Deja un mensaje" 
+                                placeholder="Tu mensaje:" 
                                 required
                             >
                             </textarea>

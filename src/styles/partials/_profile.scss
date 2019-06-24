@@ -4,7 +4,7 @@
     .main {
         text-align: center;
     }
-    
+
     .center {
         text-align: center;
     }
@@ -92,6 +92,7 @@
             border-radius: 8px;
             padding: 3px 8px;
             margin-top: 30px;
+
             p {
                 display: flex;
                 align-items: center;
@@ -106,10 +107,32 @@
             text-align: center;
         }
     }
-    &__grid{
+
+    &__grid {
         &.main-quad__trips {
             width: 100%;
         }
+    }
+}
+
+.comments {
+    padding-top: 30px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        color: $grey;
+    }
+}
+
+.message-submit {
+
+    textarea {
+        height: 150px;
+        border-radius: 3px;
+        padding-top: 12px;
+        font-size: 14px;
     }
 }
 
@@ -118,21 +141,24 @@
     border-radius: 12px;
     margin-bottom: 20px;
     padding: 5px;
-    &__head{
+
+    &__head {
         background-color: rgba($color: $grey, $alpha: 0.7);
         color: $white;
         border-radius: 20px;
         padding: 5px 12px;
         margin-top: 20px;
         text-align: right;
+
         p {
             margin: 0;
             font-size: 12px;
-            
+
         }
-        
+
     }
-    &__body{
+
+    &__body {
         color: $light_grey;
         padding: 5px 12px;
     }
