@@ -50,9 +50,7 @@ export const createTrip = (trip) => {
 
 
 export const getTrips = () => {
-    console.log('hey')
     return (dispatch)  => {
-         
         database.on('value', snapshot => {
           console.log(snapshot.val());
         })
@@ -61,12 +59,49 @@ export const getTrips = () => {
         }).catch((err) => {
             dispatch( {type: 'ADD_TRIP_ERROR',err})
         }) 
+    }
+}
+
+
+/*
+export const getComments = (tripId) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
         
- 
-     }
+        const firestore = getFirestore()
+        
+        firestore.collection('trips').doc(tripId).collection('comments').get()
+        .then(() => {
+            dispatch( {type: 'GET_REASONS', comments})
+        }).catch((err) => {
+            dispatch( {type: 'GET_REASONS_ERROR',err})
+        })
+    }
+}
+*/
+
+export const saveComment = (tripId, comment) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+
+        const firestore = getFirestore();
+        const profile = getState().firebase.profile; 
+        const authorId = getState().firebase.auth.uid;
+        
+        
+        firestore.collection('comments').add({
+            ...comment,
+            authorFirstName: profile.firstName,
+            authorLastName: profile.lastName,
+            authorId: authorId,
+            tripId:tripId,
+            createdAt: new Date()
+        })
+        .then(() => {
+            console.log('success', comment)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
  }
-
-
 
 export const deleteTrip = id => {
     return (dispatch, getState, { getFirebase, getFirestore })  => {

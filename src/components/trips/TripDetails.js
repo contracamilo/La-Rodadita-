@@ -1,26 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
-import { deleteTrip } from '../../store/actions/TripActions'
+import { deleteTrip, getComments } from '../../store/actions/TripActions'
 import { compose } from 'redux'
 import { Redirect, Link} from 'react-router-dom'
+import Comment from '../comments/Comment'
 import moment from 'moment'
+import SubmitComments from '../comments/SubmitComments';
 
 
 
 class TripDetails extends Component {
+  
+  state = {
+    tripKey: this.props.match.params.id
+  }
+
   
   handleDelete = (e) => {
     e.preventDefault();
     this.props.deleteTrip(this.props.match.params.id)
     this.props.history.push('/')
   }
-  
+
   render() {
-      const { trip, auth } = this.props;
+      const { trip, auth, comments } = this.props;
       const key = this.props.match.params.id;
+      
+     
+
       if(!auth.uid) return <Redirect to='/signin'/>
       
+      
+
       if(trip) {
         return(
             <div className="container section">
@@ -38,6 +50,7 @@ class TripDetails extends Component {
                     <p>&#8226; Ver detalles del viaje.</p>
                     <p>&#8226; Eliminar o editar viaje.</p>
                     <p>&#8226; Ver detalles del viaje.</p>
+                    <p>&#8226; Dejarle un mensaje al creador para pactar el viaje.</p>
                   </div>
                 </div>
                 <div className="card col s12 l9">
@@ -72,10 +85,23 @@ class TripDetails extends Component {
                   </div>
                   <div className="card-action grey lighten-4 grey-text">
                     <div>Publicado {trip.authorFirstName} {trip.authorLastName}</div>
-                    <div>{moment(trip.createdAt.toDate().toString()).calendar()}</div>
+                    <div></div>
                   </div>
                 </div>
-                </div>
+              </div>
+              </div>
+              <div className="row">
+                <div className="comments">
+                  <h2>Déjale un mensaje al creador del viaje.</h2>
+                  <div className="col s12 l3">
+                   <h4>Escribe aquí:</h4>
+                    <SubmitComments tripId={this.props.match.params.id}/>
+                  </div>
+                  <div className="col s12 l9">
+                    <h4>Mensajes:</h4>
+                    <Comment tripKey={this.state.tripKey}/>
+                  </div>
+                </div>    
               </div>
             </div>
         )
@@ -98,8 +124,10 @@ const mapStateToProps = (state, ownProps) => {
     const trips = state.firestore.data.trips
     const trip = trips ? trips[id] : null
     return {
+       
        trip: trip,
-       auth: state.firebase.auth
+       auth: state.firebase.auth,
+       comments: state.firestore.data.comments
     }
 }
 
@@ -113,8 +141,7 @@ const mapDispatchToProps = (dispatch) => {
 export default compose(
    connect(mapStateToProps, mapDispatchToProps),
    firestoreConnect([
-     {
-       collection: 'trips'
-     }
-   ])
+    { collection: 'trips'},
+    { collection: 'comments'}
+  ])
 )(TripDetails)
