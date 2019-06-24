@@ -18,12 +18,18 @@ class Comment extends Component {
   }
 
   render() {
-    const { comments, tripKey } = this.props
+    const { comments, tripKey } = this.props;
+    const commentsToFilter = comments;
     
+    const filteredComments = commentsToFilter.filter(com => {
+      let result = com.tripId.indexOf(this.state.tripKey) !== -1;
+      return result;
+    })
+ 
     return (
       <div>
         {comments 
-          ? <CommentUi comments={comments}/>
+          ? <CommentUi comments={filteredComments}/>
           : <p>..loading</p>
         }
       </div>
