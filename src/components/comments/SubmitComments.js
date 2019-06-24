@@ -50,7 +50,7 @@ class SubmitComments extends Component {
                         </div>
                 </div>
                 </form>
-            <div> 
+            </div> 
         )
     }
 }
