@@ -17,24 +17,20 @@ const FooterLinks  = () => {
         <ul className="list-item">
           <li><NavLink to='/privacy-policy' className="grey-text text-lighten-3">Politica de Privacidad</NavLink></li>
           <li><NavLink to='/news' className="grey-text text-lighten-3">Noticias</NavLink></li>
-          <li><NavLink to='/contact' className="grey-text text-lighten-3">Contacto</NavLink></li>
         </ul>
         <ul className="list-item social">
-          <li><a href='https://www.facebook.com/' target="_blank" className="grey-text text-lighten-3">
+          <li><a href='https://www.facebook.com/LaRodaditaNeiva' target="_blank" className="grey-text text-lighten-3">
                 <img src={facebook} width={20} alt="facebok"/>
                 <span>Facebook</span></a>
           </li>
-          <li><a href='https://twitter.com/' className="grey-text text-lighten-3">
-              <img src={twitter} width={20} alt="facebok"/>
-              <span>Twitter</span></a></li>
-          <li><a href='https://www.instagram.com/' target="_blank" className="grey-text text-lighten-3">
+
+          <li><a href='https://www.instagram.com/larodadita/' target="_blank" className="grey-text text-lighten-3">
               <img src={instagram} width={20} alt="facebok"/>  
               <span>instagram</span></a></li>
         </ul>
       
       </div>
 
-   
     </div>
   )
 }

@@ -112,6 +112,16 @@
             }
         }
     }
+    &.map {
+        color: $primary_color;
+        ul {
+            li {
+                a {
+                    color: $primary_color !important;
+                }
+            }
+        }
+    }
 }
 
 .container {

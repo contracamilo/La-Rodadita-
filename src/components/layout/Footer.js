@@ -2,7 +2,7 @@ import React from 'react'
 import FooterLinks from './FooterLinks';
 import FooterForm from './secondary_pages/FooterForm';
 import rodadita from '../../../images/la_rodadita_white.png'
-
+import { NavLink } from 'react-router-dom'
 
 
 
@@ -36,7 +36,8 @@ const Footer = () => {
             <div className="container">
               <div className="flex-row">
                <p>© 2019 Todos los derechos reservados. La Rodadita</p>  
-               <a className="grey-text text-lighten-4 right" href="#!">Mapa del Sitio</a>
+               
+               <NavLink to='/sitemap' className="grey-text text-lighten-4 right">Mapa del Sitio</NavLink>
              </div>
             </div>
           </div>

@@ -1,17 +1,14 @@
 import React from 'react'
 
- const Whoami = () => {
+const Whoami = () => {
   return (
     <div>
-        <div className="container secondary-cont">
-            <h2>Quienes Somos</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type 
-                 and scrambled it to make a type specimen book. It has survived not only five centuries, but also 
-                 the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 
-                 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with 
-                 desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </div>
+      <div className="container secondary-cont terms">
+        <h2>Quienes Somos</h2>
+        <h4> SOBRE NOSOTROS</h4>
+        <p>
+          Somos un grupo de emprendedores opitas que buscamos crear una comunidad de confianza entre viajeros. Con este modelo de economía colaborativa vamos a cambiar la forma tradicional de viajar entre Neiva y Bogotá.</p>
+      </div>
     </div>
   )
 }
