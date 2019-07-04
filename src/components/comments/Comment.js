@@ -8,28 +8,17 @@ import CommentUi from './CommentUi';
 class Comment extends Component {
   
   state = {
-    tripKey:''
+    tripKey:this.props.tripKey
   }
 
-  componentDidMount(){
-    this.setState({
-      tripKey: this.props.tripKey
-    })
-  }
 
   render() {
     const { comments, tripKey } = this.props;
-    const commentsToFilter = comments;
-    
-    const filteredComments = commentsToFilter.filter(com => {
-      let result = com.tripId.indexOf(this.state.tripKey) !== -1;
-      return result;
-    })
- 
+   
     return (
       <div>
         {comments 
-          ? <CommentUi comments={filteredComments}/>
+          ? <CommentUi comments={comments} keyTrip={tripKey}/>
           : <p>..loading</p>
         }
       </div>

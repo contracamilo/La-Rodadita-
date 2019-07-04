@@ -12,9 +12,16 @@ import SubmitComments from '../comments/SubmitComments';
 
 class TripDetails extends Component {
   
-  state = {
+constructor(props){
+  super(props);
+
+  this.state = {
     tripKey: this.props.match.params.id
   }
+
+}
+
+
 
   
   handleDelete = (e) => {

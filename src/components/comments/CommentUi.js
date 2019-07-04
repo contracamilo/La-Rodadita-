@@ -1,10 +1,20 @@
 import React from 'react'
 import moment from 'moment'
 
-export default function CommentUi({comments}) {
+export default function CommentUi(props) {
+
+    const { comments, keyTrip } = props;
+    
+    const filteredComments = comments.filter(com => {
+        return  com.tripId.indexOf(keyTrip) !== -1;
+    })
+
+    //console.log(comments, keyTrip ,filteredComments);
+
+
     return (
         <div className="messages">
-            {comments && comments.map(comment => {
+            {filteredComments && filteredComments.map(comment => {
                 return (
                    <div key={comment.id} className="message">
                    
