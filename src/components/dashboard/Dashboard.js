@@ -19,6 +19,9 @@ class Dashboard extends Component {
       <div className="dashboard wrapper">
         <div className="wrapper sliderTr">
              <SliderGAllery />
+             <div className="title">
+                <h2>Viaja cómodo y seguro a tu destino.</h2>
+             </div>
         </div>
         <SearchLayout />
         <div className="container">

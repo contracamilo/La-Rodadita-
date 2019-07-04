@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createTrip } from '../../store/actions/TripActions'
 import { Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class CreateTrip extends Component {
   state = {
@@ -55,8 +56,7 @@ class CreateTrip extends Component {
             
   render() {
     
-    const { auth } = this.props
-    console.log(this.props);
+    const { auth, profile } = this.props
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container">
@@ -69,8 +69,12 @@ class CreateTrip extends Component {
                   <p>Registrar un nuevo viaje para que viajeros se suscriban a él.</p>
                 </div>
               </div>
+              
+              
               <div className="col s12 l9">
-                
+                {
+                (profile.driver)
+                ?
                 <form className="white flex-row" onSubmit={this.handleSubmit}>
                 <input type="hidden" id='activeState' value="true" onSubmit={this.handleChange} />
 
@@ -139,7 +143,7 @@ class CreateTrip extends Component {
               </div>
 
 
-              <div className="second-half">
+                <div className="second-half">
                 
                 <div className="select-field">
                     <label>Ida y/o Vuelta</label>
@@ -190,6 +194,14 @@ class CreateTrip extends Component {
                 </div>
                 
                 </form>
+                :
+                <div>
+                  <h4>Recuerda que debes ser un conductor para crear viajes</h4>
+                  <p>Si eres CONDUCTOR, te invitamos a completar tu perfil <NavLink to='/profile' >AQUI</NavLink></p>
+                </div>
+                
+                
+                }
               </div>
             
 
@@ -204,7 +216,8 @@ class CreateTrip extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
   }
 }
 
