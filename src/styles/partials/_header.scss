@@ -1,157 +1,184 @@
-nav{
-	background-color: transparent;
-	color: white;
-	box-shadow: none;
-	a{
-		color: white;
-		text-decoration: none;
-	}
-	.HeaderCont{
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-		 
-
+nav {
+    background-color: transparent;
+    color: white;
+    box-shadow: none;
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    .HeaderCont {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
-header{
-	background-color: rgba($color: #000000, $alpha: 0.7);
-	padding: 25px 0;
-	width: 100%;
-	@include pos($top:0, $z:9)
+header {
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    padding: 25px 0;
+    width: 100%;
+    @include pos($top: 0, $z: 9);
+    @media(max-width: 768px) {
+        padding: 10px 0 0;
+    }
+    .right {
+        @media (max-width: 720px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 39px;
+        }
+    }
 }
 
-.HeaderCont{
-	display: flex;
-	
-	.logo{
-		width: 30%;
-		img{
-			margin-top: 10px;
-		}
-		span{
-			@extend %hidden;
-		}
-		&:hover{
-			opacity: 0.8;
-		}
-	}
-	.links{
-		width: 70%;
-		ul{
-			display: flex;
-			li{
-				padding:  0 10px;
-				a{
-					&:hover{
-						background-color: transparent;
-						color: $yellow;
-					}
-					&.btn-floating{
-						background-color: $primary_color_light;
-						&:hover{
-							background-color: $yellow;
-							color: $primary_color;
-						}
-					}
-				}
-			}
-		}
-	}
+.HeaderCont {
+    .links {
+        ul {
+            li {
+                padding: 0 10px;
+                a {
+                    padding: unset;
+                    @media(max-width: 768px) {
+                        text-transform: uppercase;
+                    }
+                    &:hover {
+                        background-color: transparent;
+                        color: $yellow;
+                    }
+                    &.btn-floating {
+                        background-color: $primary_color_light !important;
+                        &:hover {
+                            background-color: $yellow;
+                            color: $primary_color;
+                        }
+                        @media(max-width: 768px) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-.search{
-	background-color: $primary_color;
+.search {
+    background-color: $primary_color;
 }
 
-.search-bar{
-	background-color: $primary_color;
-	width: 100%;
-	height: 200px;
-	margin-top: -50px;
-	@media (max-width: 1300px) {
-		margin-top: -53px;
-		height: 140px;
-	}
+.search-bar {
+    background-color: $primary_color;
+    width: 100%;
+    height: 200px;
+    margin-top: -50px;
+    @media (max-width: 1300px) {
+        margin-top: -53px;
+        height: 140px;
+    }
 }
 
-.main-quad{
-	display: flex;
-	justify-content: space-between;
-	@media (max-width: 600px) {
-		flex-wrap: wrap;
-	}
-	&__trips{
-		width: 70%;
-		margin-top: 30px;
-		@media (max-width: 600px) {
-			width: 100%;
-		}
-		.car_icon{
-			
-			img{
-				width: 80%;
-				height: auto;
-				margin-top: 10px;
-			}
-		}
-		.trip_type{
-			p{
-				text-transform: uppercase;
-				@media (max-width: 1300px) {
-					font-size: 14px;
-				}
-			}
-		}
-		.trip-card{
-			border-bottom: 1px solid rgba($color: $grey, $alpha: 0.3);
-			padding: 10px 0;
-			margin-bottom: 20px;
-		}
-		.item{
-			width: 16%;
-			padding: 0 10px;
-			font-size: 15px;
-			color: $secondary_color;
-			text-transform: lowercase;
-			span{
-				display: block;
-				color: $primary_color;
-				text-transform: capitalize;
-				font-size: 12px;
-			}
-		}
-		.trip_active{
-			text-align: center;
-			text-transform: uppercase;
-			span{
-				width: 8px;
-				height: 8px;
-				border-radius:50%;
-				margin: 0 auto;
-				margin-top: 5px; 
-			}
-		}
-		.trip-signature{
-			margin-top: 8px;
-			width: 100%;
-			background-color: rgba($color: $grey, $alpha: 0.3);
-			color: #727272;
-			border-radius: 3px;
-			padding: 0 10px;
-			text-transform: uppercase;
-			span{
-				padding-right: 15px;
-			}
-		}
-	}
-	&__notifications{
-		width: 30%;
-		@media (max-width: 600px) {
-			display: none;
-		}
-	}
+.main-quad {
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 600px) {
+        flex-wrap: wrap;
+    }
+    &__trips {
+        width: 70%;
+        margin-top: 30px;
+        @media (max-width: 600px) {
+            width: 100%;
+        }
+        .card-title {
+            font-size: 30px;
+            color: $grey;
+            text-align: center;
+        }
+        .car_icon {
+            img {
+                width: 80%;
+                height: auto;
+                margin-top: 10px;
+            }
+        }
+        .trip_type {
+            p {
+                text-transform: uppercase;
+                @media (max-width: 1300px) {
+                    font-size: 14px;
+                }
+            }
+        }
+        .trip-card {
+            border-bottom: 1px solid rgba($color: $grey, $alpha: 0.3);
+            padding: 10px 0;
+            margin-bottom: 20px;
+            .flex-row {
+                @media (max-width: 600px) {
+                    border: 1px solid rgba($color: $grey, $alpha: 0.3);
+                    border-radius: 5px;
+                    padding: 15px;
+                    flex-flow: wrap;
+                }
+            }
+        }
+        .item {
+            width: 16%;
+            padding: 0 10px;
+            font-size: 15px;
+            color: $secondary_color;
+            text-transform: lowercase;
+            @media (max-width: 600px) {
+                width: 50%;
+                margin-bottom: 7px;
+                font-size: 18px;
+                p {
+                    font-size: 18px;
+                }
+            }
+            span {
+                display: block;
+                color: $primary_color;
+                text-transform: capitalize;
+                font-size: 12px;
+            }
+        }
+        .trip_active {
+            text-align: center;
+            text-transform: uppercase;
+            @media (max-width: 600px) {
+                text-align: left;
+            }
+            span {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                margin: 0 auto;
+                margin-top: 5px;
+                @media (max-width: 600px) {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+        }
+        .trip-signature {
+            margin-top: 8px;
+            width: 100%;
+            background-color: rgba($color: $grey, $alpha: 0.3);
+            color: #727272;
+            border-radius: 3px;
+            padding: 0 10px;
+            text-transform: uppercase;
+            span {
+                padding-right: 15px;
+            }
+        }
+    }
+    &__notifications {
+        width: 30%;
+        @media (max-width: 600px) {
+            display: none;
+        }
+    }
 }
-
-

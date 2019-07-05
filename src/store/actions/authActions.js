@@ -1,4 +1,4 @@
-import { auth, googleProvider, twitterProvider } from '../../config/fbConfig'
+import { auth, googleProvider, twitterProvider, facebookProvider } from '../../config/fbConfig'
 
 export const getUser = () => {
     return dispatch => {
@@ -108,3 +108,4 @@ export const signUp = (newUser) => {
 
 export const googleLogin = () => auth.signInWithPopup(googleProvider)
 export const twitterLogin = () => auth.signInWithPopup(twitterProvider)
+export const facebookLogin = () => auth.signInWithPopup(facebookProvider)

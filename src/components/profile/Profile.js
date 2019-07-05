@@ -22,13 +22,10 @@ class Profile extends react.Component {
 		const { auth, profile, trips } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 
-		const personalTrip = trips;
 		
+		let personalTrip = (trips) ? trips : [''];
 		
-		const filteredUserTrips = personalTrip.filter(trip => {
-			let result = trip.authorId.indexOf(this.state.userId) !== -1;
-			return result
-		})
+		const filteredUserTrips = personalTrip.filter(trip => trip.authorId.indexOf(this.state.userId) !== -1);
 
 		const qTrips = Array.from(filteredUserTrips, ({activeTrip}) => activeTrip);
 
@@ -44,7 +41,7 @@ class Profile extends react.Component {
 							<h5 className="center">Te invitamos a completar <Link to={'/actualiza-perfil'}>aquí</Link>  tu perfil para disfrutar La Rodadita al 100%.</h5>
 						)}
 						
-						<div className="col s12 l3 main">
+						<div className="col s5 l3 main">
 							<div className="profile__picture">
 								{auth.photoURL
 									? (<img src={auth.photoURL} width={200} />)
@@ -56,7 +53,7 @@ class Profile extends react.Component {
 								{profile.profileCompleted && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
 							</div>
 						</div>
-						<div className="col s12 l3 info">
+						<div className="col s7 l3 info">
 							<div className="profile__item">
 								<span>Nombre</span>
 								<h4>
@@ -93,7 +90,7 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-						<div className="col s12 l3">
+						<div className="col s6 l3">
 							{profile.profileCompleted && (
 								<div>
 									<div className="profile__item">
@@ -125,7 +122,7 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-						<div className="col s12 l3" />
+						<div className="col s6 l3" />
 							{profile.profileCompleted && (
 								<div>
 									<div>

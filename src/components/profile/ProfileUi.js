@@ -4,10 +4,14 @@ import ProfileSummary from './ProfileSummary'
 
 
 const ProfileUi = ({profiles}) => {
+  let profs = [];
+  profs = (profiles) ? profiles : [' '];
+  
+  
   return (
     
     <div className="project-list section">  
-        { profiles && profiles.map(profile => {
+        { profiles && profs.map(profile => {
           return(  
             <ProfileSummary profile={profile} key={profile.id}/>
           )

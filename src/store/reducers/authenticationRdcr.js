@@ -19,6 +19,11 @@ const authReducer = (state = initState, action) => {
                 user: action.payload
             }
         case 'LOGIN_ERROR':
+            Swal.fire(
+                '¡upps!',
+                '¡Hubo un Error!',
+                'Error'
+            )
             return {
                 ...state,
                 authError: '¡Ups revisa tus datos y vuelve a intentarlo!'

@@ -1,41 +1,36 @@
 .profile {
     margin-bottom: 70px;
-
     .main {
         text-align: center;
     }
-
     .center {
         text-align: center;
     }
-
     .info {
         padding: 0 20px;
     }
-
     .car {
         background-color: $light_grey;
     }
-
+    .col {
+        @media (max-width: 600px) {
+            margin-bottom: 15px;
+        }
+    }
     h2 {
         color: $grey;
     }
-
     h5 {
         color: $light_grey;
         margin-bottom: 50px;
-
         a {
             font-size: 25px;
         }
     }
-
     h4 {
         font-size: 26px;
     }
-
     &__picture {
-
         width: 190px;
         height: 190px;
         overflow: hidden;
@@ -46,7 +41,13 @@
         align-content: center;
         margin: 0 auto;
         margin-bottom: 20px;
-
+        @media (max-width: 600px) {
+            width: 100%;
+            height: auto;
+            img {
+                width: 100%;
+            }
+        }
         span {
             font-size: 40px;
             text-align: center;
@@ -56,16 +57,12 @@
             color: $white;
         }
     }
-
     &__buttons {
-
         a {
             text-align: center;
         }
     }
-
     &__item {
-
         .green {
             display: block;
             font-size: 0;
@@ -74,17 +71,14 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-
         span {
             color: $grey;
             font-size: 12px;
         }
-
         p {
             margin-top: 0;
             margin-bottom: 5px;
         }
-
         &.double {
             display: flex;
             justify-content: space-between;
@@ -92,22 +86,21 @@
             border-radius: 8px;
             padding: 3px 8px;
             margin-top: 30px;
-
             p {
                 display: flex;
                 align-items: center;
             }
         }
     }
-
     &__my-trips {
         padding-top: 50px;
-
+        @media (max-width: 600px) {
+            padding-top: 0px;
+        }
         h2 {
             text-align: center;
         }
     }
-
     &__grid {
         &.main-quad__trips {
             width: 100%;
@@ -117,7 +110,6 @@
 
 .comments {
     padding-top: 30px;
-
     h2 {
         text-align: center;
         margin-bottom: 60px;
@@ -127,19 +119,16 @@
 }
 
 .message-submit {
-
     textarea {
         height: 150px;
         border-radius: 3px;
         padding-top: 12px;
         font-size: 14px;
     }
-
     button {
         width: 100%;
         margin-top: 12px;
     }
-
 }
 
 .message {
@@ -147,7 +136,6 @@
     border-radius: 12px;
     margin-bottom: 20px;
     padding: 5px;
-
     &__head {
         background-color: rgba($color: $grey, $alpha: 0.7);
         color: $white;
@@ -155,15 +143,11 @@
         padding: 5px 12px;
         margin-top: 20px;
         text-align: right;
-
         p {
             margin: 0;
             font-size: 12px;
-
         }
-
     }
-
     &__body {
         color: $light_grey;
         padding: 5px 12px;

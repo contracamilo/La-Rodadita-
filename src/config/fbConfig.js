@@ -5,7 +5,7 @@ import 'firebase/database'
 
 
 export const actionCodeSettings = {
-    url: 'https://rodaditaapp.web.app/#/cambiar-contraseña',
+    url: 'https://larodadita.com/#/cambiar-contraseña',
     handleCodeInApp: true,
     //dynamicLinkDomain: 'example.page.link'
 };
@@ -28,4 +28,5 @@ export const auth = firebase.auth()
     //export const newPassword = getASecureRandomPassword();
 export const googleProvider = new firebase.auth.GoogleAuthProvider()
 export const twitterProvider = new firebase.auth.TwitterAuthProvider()
+export const facebookProvider = new firebase.auth.FacebookAuthProvider()
 export default firebase;

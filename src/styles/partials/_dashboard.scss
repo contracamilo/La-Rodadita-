@@ -44,9 +44,17 @@
         position: absolute;
         width: 100%;
         top: calc(50% + 40px);
+        @media (max-width: 720px) {
+            position: unset;
+        }
         h2 {
             color: $white;
             text-align: center;
+            @media (max-width: 720px) {
+                font-size: 30px;
+                color: $grey;
+                padding: 15px 60px;
+            }
         }
     }
 }

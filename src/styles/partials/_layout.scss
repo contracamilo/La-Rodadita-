@@ -20,27 +20,50 @@
     background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px 20px !important;
+    @media(max-width: 768px) {
+        margin: 20px 0;
+        text-align: center;
+    }
 }
 
 .trip-details-top {
     padding-top: 170px;
     padding-bottom: 70px;
+    @media(max-width: 768px) {
+        padding-top: 150px;
+    }
     h2 {
         text-align: center;
         margin-bottom: 60px;
         position: relative;
         color: #98a8bf;
+        @media(max-width: 768px) {
+            margin-bottom: 30px;
+        }
     }
     h4 {
         font-size: 18px;
         line-height: 25px;
         width: 60%;
+        @media(max-width: 768px) {
+            width: 100%;
+            &:after {
+                left: calc(50% - 10px);
+            }
+        }
     }
     .first-half {
         padding: 0 15px 0 15px;
+        @media(max-width: 768px) {
+            padding: 0 0px 0 0px;
+            width: 100%;
+        }
     }
     .second-half {
         padding: 0 0px 0 0px;
+        @media(max-width: 768px) {
+            width: 100%;
+        }
     }
 }
 
@@ -51,7 +74,9 @@
 
 .sliderTr {
     .image-gallery {
-        height: 400px;
+        @media(max-width: 768px) {
+            width: auto;
+        }
     }
 }
 
@@ -227,15 +252,17 @@ form {
     }
 }
 
+.aling-center {
+    align-items: center;
+}
+
 .sign_box {
     padding-top: 200px;
     padding-bottom: 85px;
     background-size: cover !important;
     background-position: center !important;
-    .flex-row {
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 0%;
+    @media (max-width: 600px) {
+        padding-top: 150px;
     }
     form {
         label {
@@ -247,18 +274,22 @@ form {
         }
         .btn {
             width: 100%;
-            &.mr {
-                margin-right: 0px !important;
-            }
-            &:hover {
-                background-color: $primary_color_light !important;
+        }
+        .recover {
+            text-align: center;
+            padding: 20px 0;
+            a {
+                font-size: 16px;
             }
         }
     }
     &__in {
-        padding: 50px;
+        padding: 50px !important;
         background-color: rgba($color: $white, $alpha: 0.7);
-        width: 420px;
+        @media (max-width: 600px) {
+            margin-top: 30px;
+            padding: 20px 20px 10px !important;
+        }
     }
     &__info {
         color: $white;
@@ -276,12 +307,20 @@ form {
         background-color: rgba($color: $white, $alpha: 0.7);
     }
     &__social {
-        display: flex;
+        //display: flex;
         justify-content: space-between;
         align-items: center;
         align-content: center;
         padding: 0px 0;
+        @media (max-width: 600px) {
+            display: unset;
+        }
         button {
+            width: 100%;
+            padding: 0;
+            @media (max-width: 600px) {
+                margin-bottom: 20px;
+            }
             span {
                 font-size: 12px;
             }
@@ -315,10 +354,18 @@ form {
 .main-search {
     background-color: $primary_color;
     padding: 20px 0;
-    margin-top: -40px;
+    margin-top: 0px;
+    @media (max-width: 720px) {
+        margin-top: 0px;
+        background-color: transparent;
+        border: 1px solid rgba($color: $light_grey, $alpha: 0.2);
+    }
     label {
         color: $white;
         text-transform: uppercase;
+        @media (max-width: 720px) {
+            color: $primary_color;
+        }
     }
     .spc {
         //background: $white !important;
@@ -326,6 +373,10 @@ form {
         color: $white;
         border-radius: 5px !important;
         text-align: center;
+        @media (max-width: 720px) {
+            border: 1px solid $grey !important;
+            color: $primary_color;
+        }
     }
     .btn {
         width: 100%;

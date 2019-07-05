@@ -32,13 +32,20 @@ class SignUp extends Component {
     const { auth, authError } = this.props;
     if(auth.uid) return <Redirect to='/'/>
     return (
-       <div className="sign_box" style={bgStyle}>
-          <div className="container flex-row">
-          <div className="sign_box__info">
+       
+      <div className="sign_box" style={bgStyle}>
+        <div className="container">
+          
+          <div className="row flex-row aling-center">
+          
+          <div className="sign_box__info col s12 m7 l7">
              <IntroText />
           </div>
-          <div className="sign_box__up">
-              <form className="" onSubmit={this.handleSubmit}>
+          <div className="sign_box__in col s12 m5 l5">
+            <div className="row">
+            
+            <div className="col s12 m12 l12">
+            <form className="" onSubmit={this.handleSubmit}>
                 <h2 className="grey-text text-darken-3">Crea Tu Cuenta</h2>
                 <div className="input-field">
                   <label htmlFor="email">Correo Electrónico:</label>
@@ -64,9 +71,16 @@ class SignUp extends Component {
                 </div>
               </form>
             </div>
-
+            
+            </div>
+          
           </div>
+       
+          </div>
+       
+       </div>
       </div>
+    
 
     )
   }
