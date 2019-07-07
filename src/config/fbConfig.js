@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
 import 'firebase/database'
+import 'firebase/storage'
 
 
 export const actionCodeSettings = {
@@ -25,6 +26,7 @@ firebase.firestore().settings({})
 
 export const database = firebase.database().ref('/User/Trips')
 export const auth = firebase.auth()
+export const storage = firebase.storage()
     //export const newPassword = getASecureRandomPassword();
 export const googleProvider = new firebase.auth.GoogleAuthProvider()
 export const twitterProvider = new firebase.auth.TwitterAuthProvider()

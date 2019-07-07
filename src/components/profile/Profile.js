@@ -5,6 +5,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import TripList from '../trips/TripList'
 import carIcon from '../../../images/car_icon.png'
+import ImageUpload from './ImageUpload';
+import ImageCarUpload from './ImageCarUpload';
 
 class Profile extends react.Component {
 	
@@ -25,10 +27,12 @@ class Profile extends react.Component {
 		
 		let personalTrip = (trips) ? trips : [''];
 		
-		const filteredUserTrips = personalTrip.filter(trip => trip.authorId.indexOf(this.state.userId) !== -1);
+		const filteredUserTrips = personalTrip.filter(trip => (trip.authorId) && trip.authorId.indexOf(this.state.userId) !== -1);
 
 		const qTrips = Array.from(filteredUserTrips, ({activeTrip}) => activeTrip);
 
+
+		console.log(profile);
 		
 		if(!auth.uid) return <Redirect to='/signin'/>
 
@@ -41,19 +45,33 @@ class Profile extends react.Component {
 							<h5 className="center">Te invitamos a completar <Link to={'/actualiza-perfil'}>aquí</Link>  tu perfil para disfrutar La Rodadita al 100%.</h5>
 						)}
 						
-						<div className="col s5 l3 main">
+						<div className="col s12 l3 main">
 							<div className="profile__picture">
-								{auth.photoURL
-									? (<img src={auth.photoURL} width={200} />)
-									: (<span>{profile.initials}</span>)
+								
+								{
+									(!profile.picture) 
+									? <div className="mn">
+										{auth.photoURL
+										? (<img src={auth.photoURL} width={200} />)
+										: (<span>{profile.initials}</span>)
+										}
+									  </div>
+									 
+									: <img src={profile.picture} width={200} />
 								}
+								
+								
+								
 							</div>
 							<div className="profile__buttons">
 								{!profile.profileCompleted && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
 								{profile.profileCompleted && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
 							</div>
+							<div className="profile__buttons">
+								{(!profile.picture) && <ImageUpload/>}
+							</div>
 						</div>
-						<div className="col s7 l3 info">
+						<div className="col s12 l5 info">
 							<div className="profile__item">
 								<span>Nombre</span>
 								<h4>
@@ -90,7 +108,8 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-						<div className="col s6 l3">
+						
+						<div className="col s12 l4">
 							{profile.profileCompleted && (
 								<div>
 									<div className="profile__item">
@@ -122,31 +141,61 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-						<div className="col s6 l3" />
+				</div>
+				<div className="clearfix"></div>
+				<div className="row car-section">
+						<div className="col s12 l12" />
 							{profile.profileCompleted && (
 								<div>
-									<div>
-										<img src={carIcon} alt="Car Icon" />
+									<div className="col s12 l3">
+										
+										<div className="profile__picture">
+											
+											{
+												(!profile.carPicture) 
+												? <div className="mn">
+													{auth.photoURL
+													? (<img src={auth.photoURL} width={200} />)
+													: (<img className="crc" src={carIcon} alt="Car Icon" />)
+													}
+												</div>
+												
+												: <img src={profile.carPicture} width={200} />
+											}
+											
+											
+											
+										</div>
+										<div className="profile__buttons">
+											{(!profile.carPicture) && <ImageCarUpload/>}
+										</div>
+									
 									</div>
-									<div className="profile__item">
-										<span>Placa:</span>
-										<p>{profile.cardPlate}</p>
-									</div>
-									<div className="profile__item">
-										<span>Model:</span>
-										<p>{profile.carModel}</p>
-									</div>
-									<div className="profile__item">
-										<span>Marca:</span>
-										<p>{profile.carMark}</p>
-									</div>
-									<div className="profile__item">
-										<span>Color:</span>
-										<p>{profile.carColor}</p>
+									<div className="col s12 l9">
+										<p className="adv"> <span>Información del carro:</span></p>
+										<div className="flex-row car-items">
+											<div className="profile__item">
+												<span>Placa:</span>
+												<h4>{profile.cardPlate}</h4>
+											</div>
+											<div className="profile__item">
+												<span>Model:</span>
+												<h4>{profile.carModel}</h4>
+											</div>
+											<div className="profile__item">
+												<span>Marca:</span>
+												<h4>{profile.carMark}</h4>
+											</div>
+											<div className="profile__item">
+												<span>Color:</span>
+												<h4>{profile.carColor}</h4>
+											</div>
+										</div>
+
 									</div>
 								</div>
 							)}
-					</div>
+						</div>
 				</div>
 
 				<div className="profile__my-trips">
