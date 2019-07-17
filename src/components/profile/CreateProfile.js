@@ -25,11 +25,15 @@ class CreateProfile extends Component {
     userStars:5,
     city:'',
     driver:'',
-    termsC:''
+    termsC:'',
+    petFriendly:'',
+    price:'',
+    commonArrive:''
   }
 
 
   handleChange = (e) => {
+    e.preventDefault();
     this.setState({
       [e.target.id]: e.target.value
     })
@@ -174,6 +178,25 @@ class CreateProfile extends Component {
                           <input id="carMark" type="text" required onChange={this.handleChange} />
                           <label htmlFor="carMark">Marca</label>
                         </div>
+
+                    <div className="select-field item doc">
+                      <label htmlFor="petFriendly">Pet Friendly</label>
+                        <select id="petFriendly"  className="browser-default" required onChange={this.handleChange}>
+                          <option value="" defaultValue>Viajas con mascotas</option>
+                          <option value="si">Si</option>
+                          <option value="no">No</option>
+                          
+                        </select>
+                      </div>
+
+
+                   
+                    <div className="">
+                    <br />
+                      <label htmlFor="commonArrive">Puntos de Salida Comunes</label>
+                      <textarea id="commonArrive"  placeholder="Salgo siempre de la plaza central..."  onChange={this.handleChange}></textarea>
+                    </div>
+
                       </div>
                   )}
                   
@@ -188,15 +211,27 @@ class CreateProfile extends Component {
                           <input id="carColor"  type="text" required onChange={this.handleChange} />
                           <label htmlFor="carColor">Color</label>
                         </div>
+
+                        <div className="select-field item ">
+                        <label htmlFor="price">Valor cupo entre $25.000 COP y $45.000 COP</label>
+                          <input id="price" placeholder="$25.000...$45.000"  type="number" min="25000" max="45000" required onChange={this.handleChange} />
+                          
+                        </div>
+                        
+
+                        
                       </div>
+
                   )}
+
+
                   
                   
                   <div className="first-half">
                     <div className="check-field" >
                         <label htmlFor="termsC">
                               <input  id="termsC" type="checkbox" onChange={this.handleTerms}/>
-                              <span>He leido y acepto <NavLink to='/terminos'>terminos y condiciones</NavLink></span>
+                              <span>He leido y acepto <NavLink to='/terminos'>términos y condiciones</NavLink></span>
                         </label>
                     </div>
           

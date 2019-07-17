@@ -31,6 +31,12 @@ class Profile extends react.Component {
 
 		const qTrips = Array.from(filteredUserTrips, ({activeTrip}) => activeTrip);
 
+		const formatter = new Intl.NumberFormat('en-US', {
+				style: 'currency',
+				currency: 'USD',
+				minimumFractionDigits: 0
+		})
+
 
 		console.log(profile);
 		
@@ -189,6 +195,21 @@ class Profile extends react.Component {
 											<div className="profile__item">
 												<span>Color:</span>
 												<h4>{profile.carColor}</h4>
+											</div>
+										</div>
+
+										<div>
+											<div className="profile__item">
+												<span>Pet Friendly:</span>
+												<p>{profile.petFriendly}</p>
+											</div>
+											<div className="profile__item">
+												<span>Tarifa General:</span>
+												<p>{formatter.format(profile.price)} COP</p>
+											</div>
+											<div className="profile__item">
+												<span>Puntos de Salida Comunes</span>
+												<p>{profile.commonArrive}</p>
 											</div>
 										</div>
 

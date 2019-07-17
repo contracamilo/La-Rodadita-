@@ -5,13 +5,13 @@ import { uploadCarPic } from '../../store/actions/profileActions'
 class ImageCarUpload extends Component {
     
     state = {
-        file:null,
+        carfile:null,
         image: null,
         url: ''
     }
     
     handleChange = (e) => {
-
+        e.preventDefault();
         let value = e.target.value
         let val =  value.substring(12, value.length).split('.').shift();
        
@@ -26,10 +26,10 @@ class ImageCarUpload extends Component {
     }
 
 
-    handleUpload = (e) => {
+    handleUploadCar = (e) => {
         e.preventDefault();
-        const {file, image} = this.state
-        this.props.uploadCarPic(file.trim(), image)
+        const {carfile, image} = this.state
+        this.props.uploadCarPic(carfile.trim(), image)
     }
     
     
@@ -40,16 +40,16 @@ class ImageCarUpload extends Component {
                 <form className="cnt">
                     <div>
                         <label htmlFor="file">Buscar</label>
-                        <input id="file" name="file"  type="file" onChange={this.handleChange}/>
+                        <input id="carfile" name="carfile"  type="file" onChange={this.handleChange}/>
                     </div>    
                     <div>
-                        <button className="btn" onClick={this.handleUpload}>Subir Foto</button>
+                        <button className="btn" onClick={this.handleUploadCar}>Subir Foto</button>
                     </div>
                  </form>
                  <div className="name">
                     
                         {
-                            (this.state.file) && <p> <strong> Archivo:</strong> {this.state.file}</p>
+                            (this.state.carfile) && <p> <strong> Archivo:</strong> {this.state.file}</p>
                         }
                        
                  </div>
