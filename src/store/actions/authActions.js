@@ -1,4 +1,4 @@
-import { auth, googleProvider, twitterProvider, facebookProvider } from '../../config/fbConfig'
+import { auth, firebase, googleProvider, twitterProvider, facebookProvider } from '../../config/fbConfig'
 
 export const getUser = () => {
     return dispatch => {
@@ -20,15 +20,31 @@ export const getUser = () => {
     }
 }
 
+
+export const sendVerification = (email) => {
+    return (dispatch, getState, { getFirebase }) => {
+
+        const firebase = getFirebase();
+        const user = firebase.auth().currentUser;
+
+        user.sendEmailVerification().then(function() {
+            window.localStorage.setItem('emailForSignIn', email)
+        }).catch(function(error) {
+            console.log('error', error)
+        });
+    }
+}
+
 export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
+
 
         firebase.auth().signInWithEmailAndPassword(
             credentials.email,
             credentials.password
         ).then(() => {
-            dispatch({ type: 'LOGIN_SUCCESS' })
+            dispatch({ type: 'LOGIN_SUCCESS' });
         }).catch((err) => {
             dispatch({ type: 'LOGIN_ERROR', err })
         })

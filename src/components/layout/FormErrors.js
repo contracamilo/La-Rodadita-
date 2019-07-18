@@ -6,7 +6,7 @@ import React from 'react'
     {Object.keys(formErrors).map((fieldName, i) => {
       if(formErrors[fieldName].length > 0){
         return (
-          <p data-error="wrong" key={i}>{fieldName}: {formErrors[fieldName]} {' '}</p> 
+          <p data-error="wrong" key={i}>{formErrors[fieldName]} {' '}</p> 
         )        
       } else {
         return '';
