@@ -17,13 +17,6 @@ const createProfile = ((profile) => {
 });
 
 
-const postmarkKey = functions.config().postmark.key
-const mailTransport = nodemailer.createTransport(postmarkTransport({
-    auth: {
-        apiKey: postmarkKey
-    }
-}))
-
 
 exports.tripCreated = functions.firestore
     .document('trips/{tripId}')
