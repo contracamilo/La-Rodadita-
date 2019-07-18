@@ -20,7 +20,6 @@ import News from './components/layout/secondary_pages/News';
 import PrivacyPolicy from './components/layout/secondary_pages/PrivacyPolicy';
 import SearchList from './components/trips/searchList';
 import RecoverPass from './components/authentication/RecoverPass';
-import ChangePass from './components/authentication/ChangePass';
 import CreateProfile from './components/profile/CreateProfile';
 import Sitemap from './components/layout/secondary_pages/Sitemap';
 import Thankyou from './components/layout/secondary_pages/Thanks';
@@ -53,7 +52,6 @@ class App extends Component {
               <Route path='/viajes'  component={SearchList} /> 
               <Route path='/actualiza-perfil'  component={CreateProfile} /> 
               <Route path='/recuperar-contraseña'  component={RecoverPass} />
-              <Route path='/cambiar-contraseña'  component={ChangePass} />
               <Route path='/thank-you'  component={Thankyou} />
             </Switch>
           </div>

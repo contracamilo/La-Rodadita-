@@ -1,184 +1,259 @@
-*{
-	box-sizing: border-box;
-	&:focus{ outline:0 !important; }
+* {
+    box-sizing: border-box;
+    &:focus {
+        outline: 0 !important;
+    }
 }
 
 body {
-	font-family: $secondary_font;
+    font-family: $secondary_font;
     @include fontStyle($color: $txt_color, $size: 16px);
     -webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	overflow-x:hidden; 
-	background-color: $white;
-	padding: 0;
-	margin: 0;
-	position: relative;
-	
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    background-color: $white;
+    padding: 0;
+    margin: 0;
+    position: relative;
 }
 
 
 /****************************
  * PLACEHOLDER CLASSES
  ****************************/
- .btn {
-	padding: 0px 35px;
-	display: inline-block;
-	letter-spacing: 1px;
-	zoom: 1;
-	text-align: center;
-	text-transform: uppercase;
-	outline: none;
-	border: none;
-	border-radius: 0;
-	cursor: pointer;
-	transition: all .3s ease-in-out;
-	font-size: 12px;
-	background-color:$primary_color;
-	color: $white;
-	position: relative;
-	margin-right: 20px;
-	@include btn-effect;
-	span{
-		z-index: 9;
-		font-size: 16px;
-		@media(max-width:768px){
-			font-size: 14px;
-		}
-	}
-	@media(max-width:768px){
-		font-size: 14px;
-		padding: 14px 11px;
-	}
-	
-}
-.line-btn{
-	color: $primary_color;
-}
 
-.btn-floating{
-	text-align: center;
-	text-transform: uppercase;
+.btn {
+    padding: 0px 35px;
+    display: inline-block;
+    letter-spacing: 1px;
+    zoom: 1;
+    text-align: center;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    font-size: 12px;
+    background-color: $primary_color;
+    color: $white;
+    position: relative;
+    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    border-radius: 4px;
+    @include btn-effect;
+    span {
+        z-index: 9;
+        font-size: 16px;
+        @media(max-width: 768px) {
+            font-size: 14px;
+        }
+    }
+    @media(max-width:768px) {
+        font-size: 14px;
+        padding: 14px 11px;
+    }
+    &:hover {
+        background-color: $primary_color_light;
+    }
 }
 
-.breadcrum{
-	margin-bottom: 30px;
-	text-transform: uppercase;
-	span{
-		margin-left: 10px;
-	}
-
-	.scroll-btn{
-		background: transparent;
-		border:0;
-		font-family: $primary_font;
-		text-transform: uppercase;
-		cursor: pointer;
-	}
+.line-btn {
+    color: $primary_color;
 }
 
-.return-btn{
-	background: transparent;
-	border:1px solid $primary_color;
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
+.btn-floating {
+    text-align: center;
+    text-transform: uppercase;
 }
 
-.yellow{
-	background-color: $yellow;
-	color: black;
+.breadcrum {
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    span {
+        margin-left: 10px;
+    }
+    .scroll-btn {
+        background: transparent;
+        border: 0;
+        font-family: $primary_font;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+}
+
+.return-btn {
+    background: transparent;
+    border: 1px solid $primary_color;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.yellow {
+    background-color: $yellow;
+    color: black;
 }
 
 %hidden {
-	position: absolute;
-	display: block;
-	overflow: hidden;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	width: 1px;
-	margin: -1px;
-	padding: 0;
-	border: 0;
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
 }
 
 %animated {
-	transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
-%triangle{
-	width: 0;
-	height: 0;
-	border-top:30px solid transparent;
-    border-left:30px solid transparent;
-    border-right:30px solid transparent;
-	border-bottom: 30px solid $primary_color;
-	
+%triangle {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid $primary_color;
 }
 
-
-
-h1,h2,h3, h4, h5{
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: $primary_font;
     font-weight: bold;
-    margin:0;
+    margin: 0;
     padding: 0;
 }
 
-h2{
-	font-size: 45px;
+h2 {
+    font-size: 45px;
 }
 
-h4{
-	font-size: 22px;
-	margin: 10px 0 20px;
-	position: relative;
-	color: $grey;
-	&:after{
-		@include pseudo($bottom:-10px);
-		width: 20px;
-		height: 1px;
-		background-color: $grey;
-	}
+h4 {
+    font-size: 22px;
+    margin: 10px 0 20px;
+    position: relative;
+    color: $grey;
+    &:after {
+        @include pseudo($bottom: -10px);
+        width: 20px;
+        height: 1px;
+        background-color: $grey;
+    }
 }
 
-a, input, button {
+a,
+input,
+button {
     color: $primary_color;
-	transition: all 0.3s ease-in-out;
-	@media (min-width:1200px) {
-		&:hover,
-		&:focus{
-			text-decoration: none;
-		}
-	}
+    transition: all 0.3s ease-in-out;
+    @media (min-width: 1200px) {
+        &:hover, &:focus {
+            text-decoration: none;
+        }
+    }
 }
 
-ul{
-	li{
-		list-style-type: none;
-	}
+ul {
+    li {
+        list-style-type: none;
+    }
 }
 
-
-a{
-	font-size: 14px ;
+a {
+    font-size: 14px;
 }
-
-
 
 .hidden {
-	@extend %hidden;
+    @extend %hidden;
 }
 
-
-
-.container{
+.container {
     max-width: 1170px;
-    padding-left:15px;
+    padding-left: 15px;
     padding-right: 15px;
-    margin:0 auto;
-    @media(max-width:768px){
-        padding-left:0px;
+    margin: 0 auto;
+    @media(max-width: 768px) {
+        padding-left: 0px;
         padding-right: 0px;
     }
-     
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.lds-ellipsis div {
+    position: absolute;
+    top: 27px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: $primary_color;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+    left: 45px;
+    animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(19px, 0);
+    }
+}
+
+.formErrors {
+    color: red;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }

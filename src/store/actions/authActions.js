@@ -39,18 +39,30 @@ export const signIn = (credentials) => {
 export const recoverPass = (email, actionCodeSettings) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-
+        /*
         firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-            .then(function() {
-                window.localStorage.setItem('emailForSignIn', email);
+        .then(function() {
+            window.localStorage.setItem('emailForSignIn', email);
+            dispatch({ type: 'RECOVER_SUCCESS' });
+        })
+        .catch(function(error) {
+            dispatch({ type: 'LOGIN_ERROR', error })
+        }); */
+
+
+        firebase.auth().sendPasswordResetEmail(email, actionCodeSettings)
+            .then(() => {
                 dispatch({ type: 'RECOVER_SUCCESS' });
-            })
-            .catch(function(error) {
+            }).catch((error) => {
                 dispatch({ type: 'LOGIN_ERROR', error })
             });
 
+
+
     }
 }
+
+
 
 
 
@@ -61,11 +73,14 @@ export const changePass = (newPassword) => {
         const firebase = getFirebase();
         let user = firebase.auth().currentUser;
 
+        console.log(user)
+
+        /*
         user.updatePassword(newPassword).then(function() {
             dispatch({ type: 'CHANGE_SUCCESS' });
         }).catch(function(error) {
             dispatch({ type: 'LOGIN_ERROR', error })
-        });
+        });*/
 
     }
 }

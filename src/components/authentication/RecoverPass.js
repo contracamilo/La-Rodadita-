@@ -4,6 +4,7 @@ import { recoverPass } from '../../store/actions/authActions'
 import { Redirect, NavLink } from 'react-router-dom'
 import bg from '../../../images/roadtrip.jpg'
 import { actionCodeSettings  } from '../../config/fbConfig'
+import FormErrors from '../layout/FormErrors'
 
 
 var bgStyle = {
@@ -17,14 +18,42 @@ class RecoverPass extends Component {
   
   state = {
     email: '',
+    formErrors: {email: ''},
+    emailValid: false,
+    formValid: false
   }
 
 
   handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
     this.setState({
-      [e.target.id]: e.target.value
-    })
+      [name]: value
+    }, () => this.validateField(name, value))
   }
+
+  validateField(fieldName, value) {
+    let fieldValidationErrors = this.state.formErrors;
+    let emailValid = this.state.emailValid;
+
+    switch (fieldName) {
+      case 'email':
+        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+        fieldValidationErrors.email = emailValid ? '' : ' Verifique los datos ingresados';
+        break;
+      default:
+        break;
+    }
+    this.setState({
+      formErrors: fieldValidationErrors,
+      emailValid: emailValid,
+    }, this.validateForm);
+  }
+
+  validateForm() {
+    this.setState({formValid:this.state.emailValid});
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.recoverPass(this.state.email, actionCodeSettings)
@@ -47,14 +76,16 @@ class RecoverPass extends Component {
 
                         <div className="col s12 m12 l12">
                             <form className="" onSubmit={this.handleSubmit}>
-                                <h4 className="grey-text text-darken-3">Ingresa el correo:</h4>
+                                <h4 className="grey-text text-darken-3">Ingresa el correo: {' '} <br/></h4>
                                 <div className="input-field">
                                     <label htmlFor="email">Correo Electrónico:</label>
-                                    <input type="email" id='email' onChange={this.handleChange} />
+                                    <input type="email" name="email" id='email' onChange={this.handleChange} />
                                 </div>
-
+                                <div className="panel panel-default">
+                                  <FormErrors formErrors={this.state.formErrors} />
+                                </div>
                                 <div className="input-field">
-                                    <button className="btn mr">enviar</button>
+                                   <button type="submit" className="btn mr" disabled={!this.state.formValid}>ENVIAR</button>
                                 </div>
                             </form>
                         </div>
