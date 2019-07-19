@@ -7,7 +7,7 @@ import { Redirect, Link} from 'react-router-dom'
 import Comment from '../comments/Comment'
 import moment from 'moment'
 import SubmitComments from '../comments/SubmitComments';
-
+import Spinner from '../layout/Spinner';
 
 
 class TripDetails extends Component {
@@ -120,7 +120,7 @@ constructor(props){
       }
       return (
           <div className="container">
-              ...loading
+              <Spinner />
           </div>
       )
     

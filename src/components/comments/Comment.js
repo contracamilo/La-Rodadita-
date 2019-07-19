@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import CommentUi from './CommentUi';
-
+import Spinner from '../layout/Spinner'
 
 class Comment extends Component {
   
@@ -19,7 +19,7 @@ class Comment extends Component {
       <div>
         {comments 
           ? <CommentUi comments={comments} keyTrip={tripKey}/>
-          : <p>..loading</p>
+          : <Spinner />
         }
       </div>
     )

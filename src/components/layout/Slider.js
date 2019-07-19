@@ -13,10 +13,18 @@ class SliderGAllery extends Component {
     ]
  
     return (
-      <ImageGallery items={images} />
+      <ImageGallery 
+        items={images} 
+        showPlayButton={false}
+        showThumbnails={false}
+        useBrowserFullscreen={false}
+        showThumbnails={false}
+        showFullscreenButton={false}
+      />
     );
   }
  
 }
+
 
 export default SliderGAllery

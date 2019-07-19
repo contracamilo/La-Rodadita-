@@ -54,7 +54,9 @@ body {
         font-size: 14px;
         padding: 14px 11px;
     }
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
         background-color: $primary_color_light;
     }
 }

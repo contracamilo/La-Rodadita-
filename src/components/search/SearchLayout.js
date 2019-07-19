@@ -30,7 +30,7 @@ class SearchLayout extends Component {
                     </div>
                     <div className="col s12 m2 l2">
                       <div className="btn-field">
-                        <label htmlFor="search"></label>
+                        <label htmlFor="search" className="hidelabel">buscar</label>
                           {/*<button id="btn-search" className="btn" disabled={this.state.disableButton}>Buscar</button>*/}
                           <NavLink to='/viajes' className="btn yellow">Buscar</NavLink>
                       </div>

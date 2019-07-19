@@ -27,11 +27,13 @@ export const sendVerification = (email) => {
         const firebase = getFirebase();
         const user = firebase.auth().currentUser;
 
-        user.sendEmailVerification().then(function() {
-            window.localStorage.setItem('emailForSignIn', email)
-        }).catch(function(error) {
-            console.log('error', error)
-        });
+        if (user) {
+            user.sendEmailVerification().then(function() {
+                window.localStorage.setItem('emailForSignIn', email)
+            }).catch(function(error) {
+                console.log('error', error)
+            });
+        }
     }
 }
 
