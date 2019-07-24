@@ -10,8 +10,6 @@ const SignedInLinks = (props) => {
  if(auth.displayName){
     initial = auth.displayName.substring(0,2)
  }
- console.log(initial);
- 
  
  return (
     <div className="links">   

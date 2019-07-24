@@ -9,38 +9,35 @@ import ImageUpload from './ImageUpload';
 import ImageCarUpload from './ImageCarUpload';
 
 class Profile extends react.Component {
-	
+
 	state = {
-		userId:''
+		userId: ''
 	}
 
-	componentDidMount(){
+	componentDidMount() {
 		this.setState({
 			userId: this.props.auth.uid
 		})
 	}
-	
+
 	render() {
 		const { auth, profile, trips } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 
-		
 		let personalTrip = (trips) ? trips : [''];
-		
+
 		const filteredUserTrips = personalTrip.filter(trip => (trip.authorId) && trip.authorId.indexOf(this.state.userId) !== -1);
 
-		const qTrips = Array.from(filteredUserTrips, ({activeTrip}) => activeTrip);
+		const qTrips = Array.from(filteredUserTrips, ({ activeTrip }) => activeTrip);
 
 		const formatter = new Intl.NumberFormat('en-US', {
-				style: 'currency',
-				currency: 'USD',
-				minimumFractionDigits: 0
+			style: 'currency',
+			currency: 'USD',
+			minimumFractionDigits: 0
 		})
 
 
-		console.log(profile);
-		
-		if(!auth.uid) return <Redirect to='/signin'/>
+		if (!auth.uid) return <Redirect to='/signin' />
 
 		return (
 			<div className="container profile">
@@ -50,31 +47,31 @@ class Profile extends react.Component {
 						{!profile.profileCompleted && (
 							<h5 className="center">Te invitamos a completar <Link to={'/actualiza-perfil'}>aquí</Link>  tu perfil para disfrutar La Rodadita al 100%.</h5>
 						)}
-						
+
 						<div className="col s12 l3 main">
 							<div className="profile__picture">
-								
+
 								{
-									(!profile.picture) 
-									? <div className="mn">
-										{auth.photoURL
-										? (<img src={auth.photoURL} width={200} />)
-										: (<span>{profile.initials}</span>)
-										}
-									  </div>
-									 
-									: <img src={profile.picture} width={200} />
+									(!profile.picture)
+										? <div className="mn">
+											{auth.photoURL
+												? (<img src={auth.photoURL} width={200} />)
+												: (<span>{profile.initials}</span>)
+											}
+										</div>
+
+										: <img src={profile.picture} width={200} />
 								}
-								
-								
-								
+
+
+
 							</div>
 							<div className="profile__buttons">
 								{!profile.profileCompleted && <Link to={'/actualiza-perfil'}>Completa Tu Perfil</Link>}
 								{profile.profileCompleted && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
 							</div>
 							<div className="profile__buttons">
-								{(!profile.picture) && <ImageUpload/>}
+								{(!profile.picture) && <ImageUpload />}
 							</div>
 						</div>
 						<div className="col s12 l5 info">
@@ -89,10 +86,10 @@ class Profile extends react.Component {
 								<span>Correo Electrónico:</span>
 								<p>{auth.email}</p>
 							</div>
-							
+
 							{profile.profileCompleted && (
 								<div>
-									
+
 									<div className="profile__item">
 										<span>Edad:</span>
 										<p>{profile.howOld}</p>
@@ -114,7 +111,7 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-						
+
 						<div className="col s12 l4">
 							{profile.profileCompleted && (
 								<div>
@@ -147,98 +144,106 @@ class Profile extends react.Component {
 								</div>
 							)}
 						</div>
-				</div>
-				<div className="clearfix"></div>
-				<div className="row car-section">
+					</div>
+					<div className="clearfix"></div>
+
+
+					<div className="row car-section">
 						<div className="col s12 l12" />
-							{profile.profileCompleted && (
-								<div>
-									<div className="col s12 l3">
-										
-										<div className="profile__picture">
-											
-											{
-												(!profile.carPicture) 
+						{(profile.driver && profile.driver !== '') && (
+							<div>
+								<div className="col s12 l3">
+
+									<div className="profile__picture">
+
+										{
+											(!profile.carPicture)
 												? <div className="mn">
 													{auth.photoURL
-													? (<img src={auth.photoURL} width={200} />)
-													: (<img className="crc" src={carIcon} alt="Car Icon" />)
+														? (<img src={auth.photoURL} width={200} />)
+														: (<img className="crc" src={carIcon} alt="Car Icon" />)
 													}
 												</div>
-												
+
 												: <img src={profile.carPicture} width={200} />
-											}
-											
-											
-											
-										</div>
-										<div className="profile__buttons">
-											{(!profile.carPicture) && <ImageCarUpload/>}
-										</div>
-									
-									</div>
-									<div className="col s12 l9">
-										<p className="adv"> <span>Información del carro:</span></p>
-										<div className="flex-row car-items">
-											<div className="profile__item">
-												<span>Placa:</span>
-												<h4>{profile.cardPlate}</h4>
-											</div>
-											<div className="profile__item">
-												<span>Model:</span>
-												<h4>{profile.carModel}</h4>
-											</div>
-											<div className="profile__item">
-												<span>Marca:</span>
-												<h4>{profile.carMark}</h4>
-											</div>
-											<div className="profile__item">
-												<span>Color:</span>
-												<h4>{profile.carColor}</h4>
-											</div>
-										</div>
+										}
 
-										<div>
-											<div className="profile__item">
-												<span>Pet Friendly:</span>
-												<p>{profile.petFriendly}</p>
-											</div>
-											<div className="profile__item">
-												<span>Tarifa General:</span>
-												<p>{formatter.format(profile.price)} COP</p>
-											</div>
-											<div className="profile__item">
-												<span>Puntos de Salida Comunes</span>
-												<p>{profile.commonArrive}</p>
-											</div>
-										</div>
+
 
 									</div>
+									<div className="profile__buttons">
+										{(!profile.carPicture) && <ImageCarUpload />}
+									</div>
+
 								</div>
-							)}
-						</div>
+								<div className="col s12 l9">
+									<p className="adv"> <span>Información del carro:</span></p>
+									<div className="flex-row car-items">
+										<div className="profile__item">
+											<span>Placa:</span>
+											<h4>{profile.cardPlate}</h4>
+										</div>
+										<div className="profile__item">
+											<span>Model:</span>
+											<h4>{profile.carModel}</h4>
+										</div>
+										<div className="profile__item">
+											<span>Marca:</span>
+											<h4>{profile.carMark}</h4>
+										</div>
+										<div className="profile__item">
+											<span>Color:</span>
+											<h4>{profile.carColor}</h4>
+										</div>
+									</div>
+
+									<div>
+										<div className="profile__item">
+											<span>Pet Friendly:</span>
+											<p>{profile.petFriendly}</p>
+										</div>
+										<div className="profile__item">
+											<span>Tarifa General:</span>
+											<p>{formatter.format(profile.price)} COP</p>
+										</div>
+										<div className="profile__item">
+											<span>Puntos de Salida Comunes</span>
+											<p>{profile.commonArrive}</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
 
-				<div className="profile__my-trips">
-					<h2>Mis viajes</h2>
-				</div>
-				<div className="row">
-					<div className="col l2 s12">
-						<h4>Info:</h4>
-						<div className="profile__item">
-							<span>Viajes Activos:</span>
-							<p>{ qTrips.length }</p>
-						</div>	
-					</div>
-					<div className="col l10 s12">
-						<div className="profile__grid main-quad__trips">
-							{(trips)
-								? <TripList trips={filteredUserTrips} />
-								: <p>..loading</p>
-							}
+				{ (profile.driver && profile.driver !== '') && (
+					<react.Fragment>
+						<div className="profile__my-trips">
+							<h2>Mis viajes</h2>
 						</div>
-					</div>
-				</div>
+						<div className="row">
+							<div className="col l2 s12">
+								<h4>Info:</h4>
+								<div className="profile__item">
+									<span>Viajes Activos:</span>
+									<p>{qTrips.length}</p>
+								</div>
+							</div>
+							<div className="col l10 s12">
+								<div className="profile__grid main-quad__trips">
+									{(trips)
+										? <TripList trips={filteredUserTrips} />
+										: <p>..loading</p>
+									}
+								</div>
+							</div>
+						</div>
+					</react.Fragment>
+				)}
+
+
 			</div>
 		);
 	}
@@ -256,6 +261,6 @@ export default compose(
 	connect(mapStateToProps),
 	firestoreConnect([
 		{ collection: 'users' },
-		{ collection: 'trips',  orderBy: ['createdAt', 'desc'] }
+		{ collection: 'trips', orderBy: ['createdAt', 'desc'] }
 	])
 )(Profile);

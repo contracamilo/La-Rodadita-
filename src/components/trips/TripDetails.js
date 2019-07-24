@@ -38,12 +38,9 @@ constructor(props){
       const { trip, auth, comments } = this.props;
       const key = this.props.match.params.id;
       
-     
-
       if(!auth.uid) return <Redirect to='/signin'/>
       
       
-
       if(trip) {
         return(
             <div className="container section">
@@ -107,7 +104,7 @@ constructor(props){
                   <h2>Déjale un mensaje al creador del viaje.</h2>
                   <div className="col s12 l3">
                    <h4>Escribe aquí:</h4>
-                    <SubmitComments tripId={this.props.match.params.id}/>
+                    <SubmitComments tripId={this.props.match.params.id} authMail={trip.tripUserMail}/>
                   </div>
                   <div className="col s12 l9">
                     <h4>Mensajes:</h4>

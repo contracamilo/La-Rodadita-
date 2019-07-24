@@ -1,4 +1,5 @@
-import { auth, firebase, googleProvider, twitterProvider, facebookProvider } from '../../config/fbConfig'
+import { auth, firebase, firestore, googleProvider, twitterProvider, facebookProvider } from '../../config/fbConfig'
+import Swal from 'sweetalert2'
 
 export const getUser = () => {
     return dispatch => {
@@ -139,6 +140,61 @@ export const signUp = (newUser) => {
 }
 
 
-export const googleLogin = () => auth.signInWithPopup(googleProvider)
-export const twitterLogin = () => auth.signInWithPopup(twitterProvider)
-export const facebookLogin = () => auth.signInWithPopup(facebookProvider)
+export const googleLogin = () => {
+    auth.signInWithPopup(googleProvider)
+        .then(resp => {
+            const name = resp.user.displayName.split(' ');
+
+            return firestore.collection('users').doc(resp.user.uid).set({
+                firstName: name[0],
+                lastName: name[1],
+                initials: resp.user.displayName.substring(0, 2)
+            });
+        }).catch((err) => {
+            Swal.fire(
+                '¡Ups!',
+                '¡Hubo un error al acceder con Google!',
+                'Error'
+            )
+        });
+}
+
+export const twitterLogin = () => {
+    auth.signInWithPopup(twitterProvider)
+        .then(resp => {
+            const name = resp.user.displayName;
+
+            return firestore.collection('users').doc(resp.user.uid).set({
+                firstName: name,
+                lastName: '',
+                initials: name.substring(0, 2)
+            });
+
+        }).catch((err) => {
+            Swal.fire(
+                '¡Ups!',
+                '¡Hubo un error al acceder con twitter!',
+                'Error'
+            )
+        });
+}
+
+export const facebookLogin = () => {
+    auth.signInWithPopup(facebookProvider)
+        .then(resp => {
+            const name = resp.user.displayName.split(' ');
+
+            return firestore.collection('users').doc(resp.user.uid).set({
+                firstName: name[0],
+                lastName: name[1],
+                initials: resp.user.displayName.substring(0, 2)
+            });
+
+        }).catch((err) => {
+            Swal.fire(
+                '¡Ups!',
+                '¡Hubo un error al acceder con facebook!',
+                'Error'
+            )
+        });
+}

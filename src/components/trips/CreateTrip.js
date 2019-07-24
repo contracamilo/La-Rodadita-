@@ -19,6 +19,10 @@ class CreateTrip extends Component {
     carSits: '',
     termsC: '',
     tripType: '',
+    tripUserMail:this.props.auth.email,
+    price:this.props.profile.price,
+    petFriendly: this.props.profile.petFriendly,
+    commonArrive: this.props.profile.commonArrive,
     activeTrip: true,
     disableButton:true
   }
@@ -32,6 +36,7 @@ class CreateTrip extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     this.props.createTrip(this.state)
     this.props.history.push('/')
   }
@@ -57,6 +62,7 @@ class CreateTrip extends Component {
   render() {
     
     const { auth, profile } = this.props
+   
     if(!auth.uid) return <Redirect to='/signin'/>
     return (
       <div className="container">
@@ -77,7 +83,7 @@ class CreateTrip extends Component {
                 ?
                 <form className="white flex-row" onSubmit={this.handleSubmit}>
                 <input type="hidden" id='activeState' value="true" onSubmit={this.handleChange} />
-
+                
                 <div className="first-half">
                   <div className="select-field">
                     <label htmlFor="tripDestiny">Destino</label>

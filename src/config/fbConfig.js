@@ -27,7 +27,7 @@ firebase.firestore().settings({})
 export const database = firebase.database().ref('/User/Trips')
 export const auth = firebase.auth()
 export const storage = firebase.storage()
-    //export const newPassword = getASecureRandomPassword();
+export const firestore = firebase.firestore()
 export const googleProvider = new firebase.auth.GoogleAuthProvider()
 export const twitterProvider = new firebase.auth.TwitterAuthProvider()
 export const facebookProvider = new firebase.auth.FacebookAuthProvider()

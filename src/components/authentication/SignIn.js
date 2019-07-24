@@ -75,7 +75,6 @@ class SignIn extends Component {
   
   render() {
     const { authError, auth } = this.props;
-    console.log(this.props);
     if(auth.uid) return <Redirect to='/'/>
     
     return (

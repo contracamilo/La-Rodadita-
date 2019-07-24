@@ -1,8 +1,18 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
-const nodemailer = require('nodemailer')
-const postmarkTransport = require('nodemailer-postmark-transport')
+const nodemailer = require('nodemailer');
+const cors = require('cors')({ origin: true });
+
 admin.initializeApp(functions.config().firebase);
+
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'rodaditapp@gmail.com',
+        pass: 'Work.1986'
+    }
+});
 
 const createNotification = ((notification) => {
     return admin.firestore().collection('notifications')
@@ -14,6 +24,40 @@ const createProfile = ((profile) => {
     return admin.firestore().collection('profiles')
         .add(profile)
         .then(doc => console.log('profile added', doc));
+});
+
+
+
+exports.sendMail = functions.https.onRequest((req, res) => {
+    cors(req, res, () => {
+
+        // getting dest email by query string
+        const dest = req.query.dest;
+
+        const mailOptions = {
+            from: 'LA RODADITA <rodaditapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
+            to: dest,
+            subject: 'ALGUIEN QUIERE VIAJAR CONTIGO!!!', // email subject
+            html: `<p style="font-size: 16px;">Un usuario de <a href="https://larodadita.com/" target="_blank">larodadita.com</a> quiere viajar contigo, ¡Revisa tu cuenta y ponte en contacto!</p>
+                <br />
+                <img width="500" src="https://images.pexels.com/photos/825890/pexels-photo-825890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+            ` // email content in HTML
+        };
+
+        // returning result
+        return transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                return res.send(err.toString());
+            }
+            return res.send({
+                payload: {
+                    status: 'sended',
+                    sended: true,
+                    info: info
+                }
+            });
+        });
+    });
 });
 
 

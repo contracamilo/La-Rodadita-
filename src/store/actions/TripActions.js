@@ -1,5 +1,5 @@
 import { database } from '../../config/fbConfig';
-
+import axios from 'axios'
 
 export const createTrip = (trip) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -28,7 +28,22 @@ export const createTrip = (trip) => {
                 })
         }
 
-        if (profile.isLoaded) {
+        if (prov == 'facebook.com') {
+            firestore.collection('trips').add({
+                    ...trip,
+                    authorFirstName: socialUser.displayName,
+                    authorLastName: '',
+                    authorId: authorId,
+                    createdAt: new Date()
+                })
+                .then(() => {
+                    dispatch({ type: 'ADD_TRIP', trip })
+                }).catch((err) => {
+                    dispatch({ type: 'ADD_TRIP_ERROR', err })
+                })
+        }
+
+        if (prov !== 'facebook.com' && prov !== 'twitter.com') {
             firestore.collection('trips').add({
                     ...trip,
                     authorFirstName: profile.firstName,
@@ -63,8 +78,16 @@ export const getTrips = () => {
 }
 
 
+const mailingFunction = (mail) => {
+    const url = `https://us-central1-rodaditaapp.cloudfunctions.net/sendMail?dest=${mail}`;
 
-export const saveComment = (tripId, comment) => {
+    axios.get(url)
+        .then((resp) => console.log(resp))
+        .catch((err) => console.log(err))
+}
+
+
+export const saveComment = (tripId, comment, mail) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
 
         const firestore = getFirestore();
@@ -81,7 +104,9 @@ export const saveComment = (tripId, comment) => {
                 createdAt: new Date()
             })
             .then(() => {
-                console.log('success', comment)
+                console.log('success', comment);
+                mailingFunction(mail)
+
             }).catch((err) => {
                 console.log(err)
             })

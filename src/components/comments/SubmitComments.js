@@ -8,23 +8,31 @@ class SubmitComments extends Component {
     
     state = {
         uid: '',
-        commentBody: ''
+        commentBody: '',
+        disabledButton:true
     }
 
 
     handleChange = (e) => {
         this.setState({
-            commentBody: e.target.value
+            commentBody: e.target.value,
+            disabledButton:false
         })
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const comment = {
             commentBody: this.state.commentBody,
             uid: this.props.tripId
         }
-        this.props.saveComment(this.props.tripId, comment)
+        this.props.saveComment(this.props.tripId, comment, this.props.authMail)
+        this.setState({
+            uid: '',
+            commentBody: '',
+            disabledButton:true
+        })
     }
 
     render() {
@@ -46,7 +54,7 @@ class SubmitComments extends Component {
                             <label htmlFor="commentbody"></label>
                         </div>
                         <div className="form-entrie">
-                            <button className="btn">Ok!</button>
+                            <button className="btn" disabled={this.state.disabledButton}>Ok!</button>
                         </div>
                 </div>
                 </form>

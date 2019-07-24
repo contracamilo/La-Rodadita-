@@ -336,6 +336,9 @@ form {
 
 .card-buttons {
     padding: 20px 0 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     .btn {
         &:hover {
             background-color: $primary_color_light;
