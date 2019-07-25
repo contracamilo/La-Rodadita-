@@ -35,14 +35,14 @@ const authReducer = (state = initState, action) => {
         case 'SIGNOUT_SUCCESS':
             Swal.fire(
                 '¡Adios!',
-                '¡Has salido de la aplicacion!',
+                '¡Has salido de la aplicación!',
                 'info'
             )
             return state
         case 'SIGNUP_SUCCESS':
             Swal.fire(
                 '¡Bienvenido!',
-                '¡Has creado una cuenta en la rodadita!',
+                '¡Has creado una cuenta en La Rodadita!',
                 'success'
             )
             return {
@@ -56,7 +56,7 @@ const authReducer = (state = initState, action) => {
             }
         case 'RECOVER_SUCCESS':
             Swal.fire(
-                '¡Atencion!',
+                '¡Atención!',
                 '¡Te enviaremos un correo con los pasos a seguir!',
                 'info'
             )

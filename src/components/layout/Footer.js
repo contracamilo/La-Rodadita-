@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="pd">
                   <div className="logo">
                      <h5><img src={rodadita} width={193} alt="LA RODADITA"/></h5>
-                     <p>Suscribete para recibir información.</p>
+                     <p>Suscríbete para recibir información.</p>
                      <FooterForm />
                      <p className="contact">Contacto: <a href="mailto:contacto@larodadita.com" target="_blank"> contacto@larodadita.com </a></p>
                   </div>

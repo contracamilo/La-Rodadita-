@@ -136,7 +136,7 @@ class Profile extends react.Component {
 									</div>
 
 									<div className="profile__item">
-										<span>Telefono de Persona de contacto:</span>
+										<span>Teléfono de Persona de contacto:</span>
 										<p>{profile.emergencyNum}</p>
 									</div>
 

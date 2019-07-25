@@ -10,29 +10,41 @@ class EditTrip extends Component {
   state = {
     title: this.props.trip.title,
     description: this.props.trip.description,
+    arriveHour: this.props.trip.arriveHour,
+    returnHour: this.props.trip.returnHour,
     arriveDate: this.props.trip.arriveDate,
     returnDate: this.props.trip.returnDate,
     arrivePoint: this.props.trip.arrivePoint,
     returnPoint: this.props.trip.returnPoint,
     travelTime: this.props.trip.travelTime,
     carSits: this.props.trip.carSits,
+    content: this.props.trip.content,
+    description: this.props.trip.description,
+    destiny: this.props.trip.destiny,
+    finishPoint: this.props.trip.finishPoint,
     termsC: this.props.trip.termsC,
     tripType: this.props.trip.tripType,
     activeTrip: this.props.trip.activeTrip,
     editId:this.props.match.params.id
   }
 
- 
+
   componentDidMount(){
     this.setState({
       title: this.props.trip.title,
       description: this.props.trip.description,
+      arriveHour: this.props.trip.arriveHour,
+      returnHour: this.props.trip.returnHour,
       arriveDate: this.props.trip.arriveDate,
       returnDate: this.props.trip.returnDate,
       arrivePoint: this.props.trip.arrivePoint,
       returnPoint: this.props.trip.returnPoint,
       travelTime: this.props.trip.travelTime,
       carSits: this.props.trip.carSits,
+      content: this.props.trip.content,
+      description: this.props.trip.description,
+      destiny: this.props.trip.destiny,
+      finishPoint: this.props.trip.finishPoint,
       termsC: this.props.trip.termsC,
       tripType: this.props.trip.tripType,
       activeTrip: this.props.trip.activeTrip,
@@ -71,7 +83,6 @@ class EditTrip extends Component {
 
             
   render() {
-    //console.log(this.state);
     const { auth } = this.props;
     const key = this.props.match.params.id;
     if(!auth.uid) return <Redirect to='/signin'/>
@@ -83,7 +94,7 @@ class EditTrip extends Component {
             <div className="row">
               <div className="col s12 l3">
                 <div className="adviser">
-                  <h4>¿Qué puedes hacer aquì?</h4>
+                  <h4>¿Qué puedes hacer aquí?</h4>
                   <p>Editar detalles de un viaje ya creado.</p>
                 </div>
               </div>
@@ -143,6 +154,15 @@ class EditTrip extends Component {
                     <input id="travelTime" type="text" onChange={this.handleChange} value={this.state.travelTime}/>
                   </div>
 
+                  <div className="select-field padding-bottom-12">
+                        <label htmlFor="activeTrip">Estado del viaje</label>
+                        <select id="activeTrip" className="browser-default" onChange={this.handleChange}>
+                          <option value={this.state.activeTrip} defaultValue>Activo</option>
+                          <option value={'abierto'}>Activo</option>
+                          <option value={'cerrado'}>Cerrado</option>
+                        </select>
+                  </div>
+
                   
                 </div>
 
@@ -159,6 +179,31 @@ class EditTrip extends Component {
                     <textarea id="description" className="materialize-textarea" onChange={this.handleChange} value={this.state.description}></textarea>
                     
                   </div>
+
+                  <div className="select-field">
+                    <label htmlFor="arriveHour">Hora del Viaje</label>
+                    <input id="arriveHour"  type="text" className="datepicker" onChange={this.handleChange} value={this.state.arriveHour}/>
+                   
+                  </div>
+
+                  <div className="select-field">
+                    <label htmlFor="returnHour">Hora del Regreso</label>
+                    <input id="returnHour"  type="text" className="datepicker" onChange={this.handleChange} value={this.state.returnHour}/>
+                  </div>
+
+                  <div className="select-field">
+                    <label htmlFor="finishPoint">Punto de Llegada</label>
+                    <input id="finishPoint"  type="text" className="datepicker" onChange={this.handleChange} value={this.state.finishPoint}/>
+                  </div>
+
+                   <label htmlFor="destiny">Destino</label>
+                        <select id="destiny" className="browser-default" onChange={this.handleChange}>
+                          <option value={this.state.destiny} defaultValue>{this.state.destiny.toUpperCase()}</option>
+                          <option value="bogota">Bogotá</option>
+                          <option value="neiva">Neiva</option>
+                   </select>
+
+
 
                   <div className="">
                     <label htmlFor="content">Escribe detalles o preferencias.</label>

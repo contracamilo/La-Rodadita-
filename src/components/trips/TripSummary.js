@@ -4,7 +4,6 @@ import carIcon from '../../../images/car_icon.png'
 
 const TripSummary = ({trip}) => {
 
-  //console.log({trip})
   return (
     <div className="trip-card">
       <div className="flex-row">
@@ -13,7 +12,7 @@ const TripSummary = ({trip}) => {
         </div>
         <div className="item trip_type">
           {
-            (trip.tripType == 'ida') ?
+            (trip.tripType == 'solo') ?
               <p>SOlO IDA</p>
             :
               <p>IDA Y VUELTA</p> 
@@ -26,13 +25,13 @@ const TripSummary = ({trip}) => {
         <div className="item car_sits">
            <span>Asientos:</span> {trip.carSits}
         </div>
-        <div className="item trip_time"><span>Tiempo est.:</span> {trip.travelTime}</div>
+        <div className="item trip_time"><span>Destino:</span>{trip.destiny == "neiva" && "BOG ➡ NEI"}{trip.destiny == "bogota" && "NEI ➡ BOG"}</div>
        
        <div className="item trip_active">
-         { (trip.activeTrip == true) ?
+         { (trip.activeTrip == true || trip.activeTrip == 'abierto') ?
            <div>Activo <span className="green"></span></div>
           :
-          <div>Inactivo<span className="red"></span></div>
+           <div>Cerrado<span className="red"></span></div>
          }
        </div>
         

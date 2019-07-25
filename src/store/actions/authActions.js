@@ -134,7 +134,16 @@ export const signUp = (newUser) => {
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' });
         }).catch((err) => {
+            console.log(err.code);
             dispatch({ type: 'SIGNUP_ERROR', err });
+            if (err.code == 'auth/email-already-in-use') {
+                Swal.fire(
+                    'Ups!',
+                    'la cuenta de correo que quieres usar ya esta en uso',
+                    'error'
+                )
+            }
+
         });
     }
 }
@@ -152,9 +161,9 @@ export const googleLogin = () => {
             });
         }).catch((err) => {
             Swal.fire(
-                '¡Ups!',
-                '¡Hubo un error al acceder con Google!',
-                'Error'
+                'Good job!',
+                'You clicked the button!',
+                'success'
             )
         });
 }
@@ -172,9 +181,9 @@ export const twitterLogin = () => {
 
         }).catch((err) => {
             Swal.fire(
-                '¡Ups!',
-                '¡Hubo un error al acceder con twitter!',
-                'Error'
+                'Ups!',
+                `hubo un error inténtalo más tarde`,
+                'error'
             )
         });
 }
@@ -191,10 +200,12 @@ export const facebookLogin = () => {
             });
 
         }).catch((err) => {
-            Swal.fire(
-                '¡Ups!',
-                '¡Hubo un error al acceder con facebook!',
-                'Error'
-            )
+            if (err.email) {
+                Swal.fire(
+                    'Ups!',
+                    `Puede que tu cuenta ya este registrada con ${err.email} o hubo un error inténtalo de nuevo`,
+                    'error'
+                )
+            }
         });
 }

@@ -17,6 +17,11 @@ body {
     position: relative;
 }
 
+input::-webkit-datetime-edit-fields-wrapper {
+    font-size: 14px;
+    font-family: $secondary_font;
+}
+
 
 /****************************
  * PLACEHOLDER CLASSES

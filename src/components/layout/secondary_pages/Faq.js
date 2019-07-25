@@ -6,12 +6,12 @@ const Faq = () => {
         <div className="container secondary-cont terms">
             <h2>Preguntas Frecuentes</h2>
 
-            <h4>¿ Qué es la rodadita ?</h4>
+            <h4>¿Qué es la rodadita?</h4>
 
             La Rodadita es una comunidad de economía colaborativa en la que los viajeros buscan viajar cómodo, seguro y por un precio
             más económico en la ruta Neiva - Bogotá - Neiva.
 
-            <h4>Por qué usar la Rodadita ? </h4>
+            <h4>¿Por qué usar la Rodadita? </h4>
             <ul>
                 <li><strong>Ahorras Dinero</strong> y tiempo : Olvídate de hacer filas, trasladarte a la terminal y de pagar precios
                     injustos.En La Rodadita compartimos gastos de viaje y hacemos nuevas amistades!</li>
@@ -24,25 +24,25 @@ const Faq = () => {
 
             </ul>
 
-            <h4>Cuáles son sus beneficios ?</h4> 
+            <h4>¿Cuáles son sus beneficios?</h4> 
             <p> Ahorro, medio ambiente, rápido, sencillo</p>
 
-            <h4>Cómo funciona ?</h4>
+            <h4>¿Cómo funciona?</h4>
             <p>Es muy fácil, los viajeros que tengan cupos disponibles en su carro publican su cupo junto con más información(Fecha,
                 hora de viaje, tipo de carro, etc), y los viajeros que estén buscando un cupo y, cuyas preferencias sean
                 las mismas que la del conductor, solicitan el cupo. De esta forma los dos viajeros se comunican y planean
                 el viaje.SENCILLO! </p>
 
-            <h4>Cuánto vale viajar ?</h4>
+            <h4>¿Cuánto vale viajar?</h4>
             <p>Estamos comprometidos con la preservación del medio ambiente y el ahorro de dinero, por esto hemos establecido
                 un valor máximo por persona de 45, 000 COP y un valor mínimo de 25, 000 COP por cada viaje.</p>
 
-            <h4>Cómo pago mi cupo ?</h4>
+            <h4>¿Cómo pago mi cupo?</h4>
             <p>Antes de empezar el viaje paga a tu compañero de viaje la cantidad acordada exacta en DINERO EN EFECTIVO.También
                 puedes acordar ingresos a cuentas bancarias o como mejor se ajuste para las dos partes.</p>
 
 
-            <h4>Buscas Cupo ?</h4>
+            <h4>¿Buscas Cupo?</h4>
             Sigue estos pasos :
             <ul>
                 <li><strong> 1. REGISTRO:</strong> Regístrate en nuestra página utilizando tu correo electrónico.</li>
@@ -70,7 +70,7 @@ const Faq = () => {
             </ul>
 
 
-            <h4>VAS EN CARRO Y TIENES CUPO ?</h4>
+            <h4>¿VAS EN CARRO Y TIENES CUPO?</h4>
             Sigue estos pasos :
 
             <ul>

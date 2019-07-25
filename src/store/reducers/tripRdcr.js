@@ -8,21 +8,21 @@ const tripReducer = (state = initState, action) => {
         case 'ADD_TRIP':
             Swal.fire(
                 '¡Perfecto!',
-                'Has creado un nuevo viaje!',
+                '¡Has creado un nuevo viaje!',
                 'success'
             )
             return state
         case 'EDIT_TRIP':
             Swal.fire(
                 '¡Perfecto!',
-                'Has editado tu viaje!',
+                '¡Has editado tu viaje!',
                 'success'
             )
             return state
         case 'REMOVE_TRIP':
             Swal.fire(
                 '¡OH!',
-                'Has eliminado un viaje!',
+                '¡Has eliminado un viaje!',
                 'success'
             )
             return state
@@ -36,7 +36,7 @@ const tripReducer = (state = initState, action) => {
         case 'ADD_TRIP_ERROR':
             Swal.fire(
                 '¡Uy!',
-                'algo salio mal, vuelve a intentar en un rato!',
+                '¡Algo salió mal, vuelve a intentar en un rato!',
                 'error'
             )
             return state
@@ -50,7 +50,7 @@ const tripReducer = (state = initState, action) => {
         case 'GET_SUSCRIPTION_ERROR':
             Swal.fire(
                 '¡Uy!',
-                'algo salio mal, vuelve a intentar en un rato!',
+                '¡Algo salió mal, vuelve a intentar en un rato!',
                 'error'
             )
             return state

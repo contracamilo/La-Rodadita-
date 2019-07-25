@@ -161,6 +161,40 @@
     }
 }
 
+.padding-bottom-12 {
+    padding-bottom: 12px
+}
+
+.padding-top-12 {
+    padding-top: 12px
+}
+
+.padding-top-24 {
+    padding-top: 24px
+}
+
+.padding-bottom-24 {
+    padding-bottom: 24px
+}
+
+.advice-text {
+    font-size: 14px;
+    color: $grey;
+}
+
+.trip-state {
+    padding: 7px 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    color: #f1f1f1;
+    &.red {
+        background-color: rgba($color: #ff0000, $alpha: 0.6);
+    }
+    &.green {
+        background-color: rgba($color: #11a252, $alpha: 0.6);
+    }
+}
+
 form {
     justify-content: space-between;
     flex-wrap: wrap;
@@ -178,10 +212,13 @@ form {
         .item {
             width: 50%;
             &.date {
-                width: 54%;
+                width: 52%;
+                &::placeholder {
+                    font-size: 7px !important;
+                }
             }
             &.hour {
-                margin-top: 9%;
+                margin-top: 0.5%;
                 width: 40%;
             }
         }

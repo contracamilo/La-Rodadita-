@@ -10,8 +10,8 @@ const FooterLinks  = () => {
       
       <div className="flex-row">
         <ul className="list-item">
-          <li><NavLink to='/quienes_somos' className="grey-text text-lighten-3">Quienes Somos</NavLink></li>
-          <li><NavLink to='/terminos' className="grey-text text-lighten-3">Terminos y Condiciones</NavLink></li>
+          <li><NavLink to='/quienes_somos' className="grey-text text-lighten-3">Quiénes Somos</NavLink></li>
+          <li><NavLink to='/terminos' className="grey-text text-lighten-3">Términos y Condiciones</NavLink></li>
           <li><NavLink to='/faq' className="grey-text text-lighten-3">Preguntas Frecuentes</NavLink></li>
         </ul>
         <ul className="list-item">

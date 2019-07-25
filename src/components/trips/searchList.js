@@ -5,27 +5,30 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { Link, Redirect } from 'react-router-dom'
 import TripList from '../trips/TripList'
 import SearchResults from './SearchResults';
+import Spinner from '../layout/Spinner'
 
 class SearchList extends Component {
   static defaultProps = { 
       trips: [],
       search: "",
-      travelType:"",
+      tripType:"",
       destiny:""
   }
 
   initalState = {
     search: "",
     date:"",
-    travelType:"",
-    destiny:""
+    tripType:"",
+    destiny:"",
+    shown:""
   }
  
   state = {
     search: "",
     date:"",
-    travelType:"",
-    destiny:""
+    tripType:"",
+    destiny:"",
+    shown:""
   }
 
   renderTrip = trip => {
@@ -40,40 +43,50 @@ class SearchList extends Component {
 
   handleChange = e => {
     this.setState({ 
-      search: e.target.value 
+      search: e.target.value,
+      shown:"fecha"   
     });
   }
 
   handleChangeType = e => {
     this.setState({ 
-      travelType:e.target.value 
+      tripType:e.target.value,
+      shown:"ida-vuelta"  
     });
   }
 
   handleChangeDestiny = e => {
     this.setState({ 
-      destiny:e.target.value 
+      destiny:e.target.value,
+      shown:"destino" 
     });
   }
 
+
+
   render() {
     const { trips, auth } = this.props;
-    const { search, travelType } = this.state;
+    const { search, destiny, tripType } = this.state;
     const tripList = trips;
     
     const filteredTrip = tripList.filter(trip => {
       return trip.arriveDate.indexOf(search) !== -1;
     });
 
-    /*
+    
     const filteredTripType = tripList.filter(trip => {
-      return trip.tripType.indexOf(travelType) !== -1;
+      console.log(trip.tripType)
+      return trip.tripType.indexOf(tripType) !== -1;
     });
 
     const filteredTripDestiny = tripList.filter(trip => {
       return trip.destiny.indexOf(destiny) !== -1;
     });
-   */
+
+    const shown = 'fecha';
+
+    console.log('hello', filteredTripType);
+   
 
     if(!auth.uid) return <Redirect to='/signin'/>
     
@@ -87,7 +100,7 @@ class SearchList extends Component {
                 <div className="row">
                   <div className="col s12 l3">
                     <div className="adviser">
-                      <h4>¿Qué puedes hacer aquì?</h4>
+                      <h4>¿Qué puedes hacer aquí?</h4>
                       <p>Encuentra el viaje que se ajuste a tu agenda.</p>
                     </div>
                   </div>
@@ -102,10 +115,10 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Ida y/o Vuelta</label>
-                      <select id="tripType" disabled={true} className="browser-default" onChange={this.handleChangeType}>
-                        <option value="" defaultValue>Seleciona Una opción</option>
+                      <select id="tripType" className="browser-default" onChange={this.handleChangeType}>
+                        <option value="" defaultValue>Selecciona una opción</option>
                         <option value="ida-vuelta">Ida y Vuelta</option>
-                        <option value="ida">Solo ida</option>
+                        <option value="solo">Solo ida</option>
                       </select>
                     </div>
                   </div>
@@ -113,8 +126,8 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label>Destino</label>
-                      <select id="tripDestiny" disabled={true} className="browser-default" onChange={this.handleChangeDestiny}>
-                        <option value="" defaultValue>Seleciona Una opción</option>
+                      <select id="tripDestiny" className="browser-default" onChange={this.handleChangeDestiny}>
+                        <option value="" defaultValue>Selecciona una opción</option>
                         <option value="bogota">Bogotá</option>
                         <option value="neiva">Neiva</option>
                       </select>
@@ -122,15 +135,39 @@ class SearchList extends Component {
                   </div>
 
                   <div className="col s12 l9">
-                    <p>Selecciona los campos para filtrar tu busqueda.</p> 
-                      <div>
+                    <p>Selecciona los campos para filtrar tu búsqueda.</p> 
+                      
+                      { this.state.shown == 'fecha' || this.state.shown == '' && (
+                        <div>
+                          {
+                            (filteredTrip) 
+                            ? (filteredTrip.map(trip => {return this.renderTrip(trip);}))
+                            : <Spinner/>
+                          }
+                        </div>
+                      )}
+                      
+                      
+                      { this.state.shown == 'destino' && (
+                        <div>
                         {
-                          (filteredTrip) 
-                          ? (filteredTrip.map(trip => {return this.renderTrip(trip);}))
-                          : <p>...Cargando</p>
+                            (filteredTripDestiny) 
+                            ? (filteredTripDestiny.map(trip => {return this.renderTrip(trip);}))
+                            : <Spinner/>
                         }
-                      </div>
-                  </div>
+                        </div>
+                     )}
+
+                     { this.state.shown == 'ida-vuelta' && (
+                        <div>
+                        {
+                            (filteredTripType) 
+                            ? (filteredTripType.map(trip => {return this.renderTrip(trip);}))
+                            : <Spinner/>
+                        }
+                        </div>
+                     )}
+                   </div>
                 </div>
               </div>
             </div>

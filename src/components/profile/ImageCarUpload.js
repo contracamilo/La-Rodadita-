@@ -39,7 +39,7 @@ class ImageCarUpload extends Component {
                 <p className="adv">Agrega una foto del auto: <span>Debe ser reciente y solo del auto.</span></p>
                 <form className="cnt">
                     <div>
-                        <label htmlFor="file">Buscar</label>
+                        <label htmlFor="carfile">Buscar</label>
                         <input id="carfile" name="carfile"  type="file" onChange={this.handleChange}/>
                     </div>    
                     <div>

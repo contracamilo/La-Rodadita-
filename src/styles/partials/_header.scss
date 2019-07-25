@@ -14,7 +14,7 @@ nav {
 }
 
 header {
-    background-color: rgba($color: #666666, $alpha: 0.7);
+    background-color: rgba($color: #4b4b4b, $alpha: 0.9);
     padding: 25px 0;
     width: 100%;
     @include pos($top: 0, $z: 9);
@@ -124,6 +124,9 @@ header {
                     padding: 15px;
                     flex-flow: wrap;
                 }
+            }
+            .trip_time {
+                text-transform: uppercase;
             }
         }
         .item {

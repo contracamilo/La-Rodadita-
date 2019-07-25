@@ -41,8 +41,9 @@ class CreateProfile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.updateProfile(this.state)
-    this.props.history.push('/profile')
+    this.props.updateProfile(this.state);
+    this.props.history.push('/profile');
+    window.location.reload();
   }
 
   handleDriver = (e) => {
@@ -73,7 +74,7 @@ class CreateProfile extends Component {
             <div className="row">
               <div className="col s12 l3">
                 <div className="adviser">
-                  <h4>¿Qué puedes hacer aquì?</h4>
+                  <h4>¿Qué puedes hacer aquí?</h4>
                   <p>Es necesario que completes tu perfil para que otros viajeros esten confiados para viajar contigo.</p>
                 </div>
               </div>
@@ -136,7 +137,7 @@ class CreateProfile extends Component {
                 <div className="select-field">
                     <label>Eres conductor?</label>
                     <select id="driver"  className="browser-default" onChange={this.handleDriver}>
-                      <option value="" defaultValue>Seleciona Una opción</option>
+                      <option value="" defaultValue>Selecciona Una opción</option>
                       <option value="driver">Soy Conductor</option>
                       <option value="traveler">Soy Viajero</option>
                     </select>
@@ -268,4 +269,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps ,mapDispatchToProps)(CreateProfile)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateProfile)

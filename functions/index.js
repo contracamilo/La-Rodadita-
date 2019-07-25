@@ -37,8 +37,8 @@ exports.sendMail = functions.https.onRequest((req, res) => {
         const mailOptions = {
             from: 'LA RODADITA <rodaditapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
             to: dest,
-            subject: 'ALGUIEN QUIERE VIAJAR CONTIGO!!!', // email subject
-            html: `<p style="font-size: 16px;">Un usuario de <a href="https://larodadita.com/" target="_blank">larodadita.com</a> quiere viajar contigo, ¡Revisa tu cuenta y ponte en contacto!</p>
+            subject: 'ALGUIEN QUIERE VIAJAR CONTIGO', // email subject
+            html: `<p style="font-size: 16px;">Un usuario de <a href="https://larodadita.com/" target="_blank">www.larodadita.com</a> quiere viajar contigo. ¡Revisa tu cuenta y ponte en contacto!</p>
                 <br />
                 <img width="500" src="https://images.pexels.com/photos/825890/pexels-photo-825890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
             ` // email content in HTML
@@ -68,7 +68,7 @@ exports.tripCreated = functions.firestore
 
         const trip = doc.data();
         const notification = {
-            content: '- Añadio un nuevo viaje',
+            content: '- Añadió un nuevo viaje',
             user: `${trip.authorFirstName} ${trip.authorLastName}`,
             time: admin.firestore.FieldValue.serverTimestamp()
         }

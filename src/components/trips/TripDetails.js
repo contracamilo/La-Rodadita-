@@ -39,8 +39,14 @@ constructor(props){
       const key = this.props.match.params.id;
       
       if(!auth.uid) return <Redirect to='/signin'/>
+
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0
+      })
       
-      
+      console.log(trip);
       if(trip) {
         return(
             <div className="container section">
@@ -55,7 +61,7 @@ constructor(props){
                 </div>
                 <div className="col s12 l3">
                   <div className="adviser">
-                    <h4>¿Qué puedes hacer aquì?</h4>
+                    <h4>¿Qué puedes hacer aquí?</h4>
                     <p>&#8226; Ver detalles del viaje.</p>
                     <p>&#8226; Eliminar o editar viaje.</p>
                     <p>&#8226; Ver detalles del viaje.</p>
@@ -66,21 +72,40 @@ constructor(props){
                    <div className="card-content row">
                     <div className="col s12 l12">
                       <h4>{trip.title}</h4>
+                      <div className={`trip-state ${(trip.activeTrip == 'abierto') ? 'green' : ''} ${(trip.activeTrip == 'cerrado') ? 'red' : ''}`}>
+                        { (trip.activeTrip == true || trip.activeTrip == 'abierto') ?
+                          <div><b>🚗 Estado del viaje:</b> Activo <span className="green"></span></div>
+                          :
+                          <div> <b>🚗  Estado del viaje:</b> Cerrado<span className="red"></span></div>
+                        }
+                      </div>
                     </div>
                     <div className="col s12 l6">
                       <p><b>Destino:</b> {trip.destiny}</p>
                       <p><b>Fecha del viaje:</b> {trip.arriveDate}</p>
                       <p><b>Fecha del viaje:</b> {trip.arriveDate} <b>Hora:</b> {trip.arriveHour}</p>
                       <p><b>Fecha del regreso:</b> {trip.returnDate} <b>Hora:</b> {trip.returnHour}</p>
+                      <p><b>Punto para la salida:</b> {trip.arrivePoint}</p>
+                      <p><b>Punto para la llegada:</b> {trip.finishPoint}</p>
                       <p><b>Punto para el retorno:</b> {trip.returnPoint}</p>
                       <p><b>Tiempo estimado:</b> {trip.travelTime}</p>
                       <p><b>Asientos Disponibles:</b> {trip.carSits}</p>
+                      
                     </div>
                     <div className="col s12 l6">
+                      <b>Pet Friendly:</b> 
+                      <p>🐶 {trip.petFriendly}</p>
                       <b>Detalles:</b>
                       <p>{trip.content}</p>
                       <b>Breve descripción:</b>
                       <p>{trip.description}</p>
+                      <h4>{formatter.format(trip.price)} COP</h4>
+
+                    </div>
+                    <div className="col s12 l12">
+                      <div className="padding-top-24 advice-text">
+                        <p><b>Punto de salida frecuente:</b> {trip.commonArrive}</p>
+                      </div>
                     </div>
                     <div className="col s12 l12">
                       {auth.uid === trip.authorId && (
@@ -94,7 +119,6 @@ constructor(props){
                   </div>
                   <div className="card-action grey lighten-4 grey-text">
                     <div>Publicado {trip.authorFirstName} {trip.authorLastName}</div>
-                    <div></div>
                   </div>
                 </div>
               </div>

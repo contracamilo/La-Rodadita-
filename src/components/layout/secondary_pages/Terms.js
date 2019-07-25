@@ -4,8 +4,8 @@ const Terms = () => {
     return (
         <div>
         <div className="container secondary-cont terms">
-            <h2> Terminos y condiciones de uso</h2>
-            <h4>Términos y condiciones LA RODADITA</h4>
+            <h2> Términos y condiciones de uso</h2>
+            <h4>T&C LA RODADITA</h4>
             <p>
                 1. Aspectos generales La relación entre LA RODADITA(en adelante, LA PLATAFORMA), y el usuario de los servicios prestados
                 en el sitio web www.larodadita.com(en adelante, EL USUARIO), se encuentran regidos por los Términos y Condiciones(en
