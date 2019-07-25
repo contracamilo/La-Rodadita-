@@ -85,9 +85,6 @@ class SearchList extends Component {
 
     const shown = 'fecha';
 
-    console.log('hello', filteredTripType);
-   
-
     if(!auth.uid) return <Redirect to='/signin'/>
     
     return (

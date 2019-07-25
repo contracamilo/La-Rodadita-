@@ -7,6 +7,7 @@ import TripList from '../trips/TripList'
 import carIcon from '../../../images/car_icon.png'
 import ImageUpload from './ImageUpload';
 import ImageCarUpload from './ImageCarUpload';
+import Spinner from '../layout/Spinner';
 
 class Profile extends react.Component {
 
@@ -71,7 +72,9 @@ class Profile extends react.Component {
 								{profile.profileCompleted && <Link to={'/actualiza-perfil'}>Edita Tu Perfil</Link>}
 							</div>
 							<div className="profile__buttons">
-								{(!profile.picture) && <ImageUpload />}
+								<ImageUpload />
+								{' '}
+								{(profile.picture) && <div className="profile__item center"><span> Puedes Cambiarla</span></div>}
 							</div>
 						</div>
 						<div className="col s12 l5 info">
@@ -172,7 +175,8 @@ class Profile extends react.Component {
 
 									</div>
 									<div className="profile__buttons">
-										{(!profile.carPicture) && <ImageCarUpload />}
+										<ImageCarUpload />
+										{(profile.carPicture) && <div className="profile__item center"><span> Puedes Cambiarla</span></div>}
 									</div>
 
 								</div>
@@ -227,7 +231,7 @@ class Profile extends react.Component {
 							<div className="col l2 s12">
 								<h4>Info:</h4>
 								<div className="profile__item">
-									<span>Viajes Activos:</span>
+									<span>Viajes:</span>
 									<p>{qTrips.length}</p>
 								</div>
 							</div>
@@ -235,7 +239,7 @@ class Profile extends react.Component {
 								<div className="profile__grid main-quad__trips">
 									{(trips)
 										? <TripList trips={filteredUserTrips} />
-										: <p>..loading</p>
+										: <Spinner />
 									}
 								</div>
 							</div>

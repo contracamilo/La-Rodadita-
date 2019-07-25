@@ -65,7 +65,7 @@ class CreateProfile extends Component {
   render() {
     
     const { auth, profile } = this.props
-    console.log(this.props.profile.firstName);
+    //console.log(this.props.profile.firstName);
     if(!auth.uid) return <Redirect to='/signin'/>            
     return (
       <div className="container">

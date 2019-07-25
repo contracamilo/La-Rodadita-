@@ -49,7 +49,7 @@ class ImageCarUpload extends Component {
                  <div className="name">
                     
                         {
-                            (this.state.carfile) && <p> <strong> Archivo:</strong> {this.state.file}</p>
+                            (this.state.carfile) && <p> <strong> Archivo:</strong> {this.state.carfile}</p>
                         }
                        
                  </div>

@@ -43,6 +43,7 @@ export const updateProfile = (profileInfo) => {
 
 
 
+
 export function uploadPic(image, picture) {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase();
@@ -56,7 +57,7 @@ export function uploadPic(image, picture) {
         let storageRef = storage.ref('userImages').child(`${image}/${date}`).put(picture);
 
 
-        storageRef.on('state_changed', function (snapshot) {
+        storageRef.on('state_changed', function(snapshot) {
 
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
@@ -68,26 +69,26 @@ export function uploadPic(image, picture) {
                     console.log('Upload is running');
                     break;
             }
-        }, function (error) {
+        }, function(error) {
             dispatch({ type: 'EDIT_PROFILE_ERROR', error })
-        }, function () {
-            storageRef.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        }, function() {
+            storageRef.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 //console.log('File available at', downloadURL);
-                
+
                 firestore.collection('users').doc(authorId).update({
-                picture: downloadURL
+                    picture: downloadURL
                 }).then(() => {
                     dispatch({ type: 'EDIT_PROFILE', picture })
                 }).catch((err) => {
                     dispatch({ type: 'EDIT_PROFILE_ERROR', err })
                 })
-            
-            
+
+
             });
         });
 
 
-       
+
     }
 }
 
@@ -105,7 +106,7 @@ export function uploadCarPic(image, picture) {
         let storageRef = storage.ref('userImages').child(`${image}/${date}`).put(picture);
 
 
-        storageRef.on('state_changed', function (snapshot) {
+        storageRef.on('state_changed', function(snapshot) {
 
             var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log('Upload is ' + progress + '% done');
@@ -117,32 +118,25 @@ export function uploadCarPic(image, picture) {
                     console.log('Upload is running');
                     break;
             }
-        }, function (error) {
+        }, function(error) {
             dispatch({ type: 'EDIT_PROFILE_ERROR', error })
-        }, function () {
-            storageRef.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        }, function() {
+            storageRef.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 //console.log('File available at', downloadURL);
-                
+
                 firestore.collection('users').doc(authorId).update({
-                carPicture: downloadURL
+                    carPicture: downloadURL
                 }).then(() => {
                     dispatch({ type: 'EDIT_PROFILE', picture })
                 }).catch((err) => {
                     dispatch({ type: 'EDIT_PROFILE_ERROR', err })
                 })
-            
-            
+
+
             });
         });
 
 
-       
+
     }
 }
-
-
-
-
-
-
-
