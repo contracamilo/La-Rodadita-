@@ -23,6 +23,7 @@ import RecoverPass from './components/authentication/RecoverPass';
 import CreateProfile from './components/profile/CreateProfile';
 import Sitemap from './components/layout/secondary_pages/Sitemap';
 import Thankyou from './components/layout/secondary_pages/Thanks';
+import EditProfile from './components/profile/EditProfile';
 
 
 class App extends Component {
@@ -50,7 +51,7 @@ class App extends Component {
               <Route path='/sitemap'  component={Sitemap} />
               <Route path='/privacy-policy' component={PrivacyPolicy}/>
               <Route path='/viajes'  component={SearchList} /> 
-              <Route path='/actualiza-perfil'  component={CreateProfile} /> 
+              <Route path='/actualiza-perfil'  component={EditProfile} /> 
               <Route path='/recuperar-contraseña'  component={RecoverPass} />
               <Route path='/thank-you'  component={Thankyou} />
             </Switch>

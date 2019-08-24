@@ -43,7 +43,6 @@ class CreateProfile extends Component {
     e.preventDefault();
     this.props.updateProfile(this.state);
     this.props.history.push('/profile');
-    window.location.reload();
   }
 
   handleDriver = (e) => {
@@ -119,7 +118,7 @@ class CreateProfile extends Component {
 
                   <div className="input-field">
                     <input id="emergencyContact" required type="text" required onChange={this.handleChange} />
-                    <label htmlFor="emergencyContact">Nombre del Contacto para Emergecias</label>
+                    <label htmlFor="emergencyContact">Nombre del Contacto para Emergencias</label>
                   </div>
 
                   <div className="input-field">

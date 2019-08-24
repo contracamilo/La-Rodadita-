@@ -42,7 +42,6 @@ export const signIn = (credentials) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
 
-
         firebase.auth().signInWithEmailAndPassword(
             credentials.email,
             credentials.password
@@ -58,16 +57,6 @@ export const signIn = (credentials) => {
 export const recoverPass = (email, actionCodeSettings) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-        /*
-        firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-        .then(function() {
-            window.localStorage.setItem('emailForSignIn', email);
-            dispatch({ type: 'RECOVER_SUCCESS' });
-        })
-        .catch(function(error) {
-            dispatch({ type: 'LOGIN_ERROR', error })
-        }); */
-
 
         firebase.auth().sendPasswordResetEmail(email, actionCodeSettings)
             .then(() => {
@@ -92,14 +81,6 @@ export const changePass = (newPassword) => {
         const firebase = getFirebase();
         let user = firebase.auth().currentUser;
 
-        console.log(user)
-
-        /*
-        user.updatePassword(newPassword).then(function() {
-            dispatch({ type: 'CHANGE_SUCCESS' });
-        }).catch(function(error) {
-            dispatch({ type: 'LOGIN_ERROR', error })
-        });*/
 
     }
 }
@@ -153,17 +134,18 @@ export const googleLogin = () => {
     auth.signInWithPopup(googleProvider)
         .then(resp => {
             const name = resp.user.displayName.split(' ');
-
-            return firestore.collection('users').doc(resp.user.uid).set({
-                firstName: name[0],
-                lastName: name[1],
-                initials: resp.user.displayName.substring(0, 2)
-            });
+            if (name) {
+                return firestore.collection('users').doc(resp.user.uid).set({
+                    firstName: name[0],
+                    lastName: name[1],
+                    initials: resp.user.displayName.substring(0, 2)
+                });
+            }
         }).catch((err) => {
             Swal.fire(
-                'Good job!',
-                'You clicked the button!',
-                'success'
+                'Ups!',
+                `hubo un error inténtalo más tarde`,
+                'error'
             )
         });
 }
@@ -173,12 +155,13 @@ export const twitterLogin = () => {
         .then(resp => {
             const name = resp.user.displayName;
 
-            return firestore.collection('users').doc(resp.user.uid).set({
-                firstName: name,
-                lastName: '',
-                initials: name.substring(0, 2)
-            });
-
+            if (name) {
+                return firestore.collection('users').doc(resp.user.uid).set({
+                    firstName: name,
+                    lastName: '',
+                    initials: name.substring(0, 2)
+                });
+            }
         }).catch((err) => {
             Swal.fire(
                 'Ups!',
@@ -192,12 +175,13 @@ export const facebookLogin = () => {
     auth.signInWithPopup(facebookProvider)
         .then(resp => {
             const name = resp.user.displayName.split(' ');
-
-            return firestore.collection('users').doc(resp.user.uid).set({
-                firstName: name[0],
-                lastName: name[1],
-                initials: resp.user.displayName.substring(0, 2)
-            });
+            if (name) {
+                return firestore.collection('users').doc(resp.user.uid).set({
+                    firstName: name[0],
+                    lastName: name[1],
+                    initials: resp.user.displayName.substring(0, 2)
+                });
+            }
 
         }).catch((err) => {
             if (err.email) {

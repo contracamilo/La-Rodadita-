@@ -61,6 +61,39 @@ exports.sendMail = functions.https.onRequest((req, res) => {
 });
 
 
+exports.sendMailReg = functions.https.onRequest((req, res) => {
+    cors(req, res, () => {
+
+        // getting dest email by query string
+        const dest = req.query.dest;
+
+        const mailOptions = {
+            from: 'LA RODADITA <rodaditapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
+            to: dest,
+            subject: 'Te Registraste en La Rodadita', // email subject
+            html: `<p style="font-size: 16px;">Te Registraste para recibir Información de La Rodadita. Te invitamos a crear tu cuenta, o usar activamente nuestra iniciativa <a href="https://larodadita.com/" target="_blank">www.larodadita.com</a></p>
+                <br />
+                <img width="500" src="https://images.pexels.com/photos/825890/pexels-photo-825890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+            ` // email content in HTML
+        };
+
+        // returning result
+        return transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                return res.send(err.toString());
+            }
+            return res.send({
+                payload: {
+                    status: 'sended',
+                    sended: true,
+                    info: info
+                }
+            });
+        });
+    });
+});
+
+
 
 exports.tripCreated = functions.firestore
     .document('trips/{tripId}')

@@ -11,7 +11,12 @@ import SearchLayout from '../search/SearchLayout';
 import SliderGAllery from '../layout/Slider';
 
 class Dashboard extends Component {
+  
+  
+  
+  
   render() {
+    console.log('props', this.props);
     const { trips, auth, reasons, blog, notifications } = this.props;
     if(!auth.uid) return <Redirect to='/signin'/>
     

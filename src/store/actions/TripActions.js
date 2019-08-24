@@ -13,21 +13,6 @@ export const createTrip = (trip) => {
 
         console.log(prov);
 
-        if (prov == 'google.com' || prov == 'twitter.com') {
-            firestore.collection('trips').add({
-                    ...trip,
-                    authorFirstName: socialUser.displayName,
-                    authorLastName: '',
-                    authorId: authorId,
-                    createdAt: new Date()
-                })
-                .then(() => {
-                    dispatch({ type: 'ADD_TRIP', trip })
-                }).catch((err) => {
-                    dispatch({ type: 'ADD_TRIP_ERROR', err })
-                })
-        }
-
         if (prov == 'facebook.com') {
             firestore.collection('trips').add({
                     ...trip,
@@ -41,9 +26,20 @@ export const createTrip = (trip) => {
                 }).catch((err) => {
                     dispatch({ type: 'ADD_TRIP_ERROR', err })
                 })
-        }
-
-        if (prov !== 'facebook.com' && prov !== 'twitter.com') {
+        } else if (prov == 'google.com' || prov == 'twitter.com') {
+            firestore.collection('trips').add({
+                    ...trip,
+                    authorFirstName: socialUser.displayName,
+                    authorLastName: '',
+                    authorId: authorId,
+                    createdAt: new Date()
+                })
+                .then(() => {
+                    dispatch({ type: 'ADD_TRIP', trip })
+                }).catch((err) => {
+                    dispatch({ type: 'ADD_TRIP_ERROR', err })
+                })
+        } else {
             firestore.collection('trips').add({
                     ...trip,
                     authorFirstName: profile.firstName,
@@ -57,7 +53,6 @@ export const createTrip = (trip) => {
                     dispatch({ type: 'ADD_TRIP_ERROR', err })
                 })
         }
-
     }
 }
 
@@ -80,6 +75,14 @@ export const getTrips = () => {
 
 const mailingFunction = (mail) => {
     const url = `https://us-central1-rodaditaapp.cloudfunctions.net/sendMail?dest=${mail}`;
+
+    axios.get(url)
+        .then((resp) => console.log(resp))
+        .catch((err) => console.log(err))
+}
+
+const mailingFunctionRef = (mail) => {
+    const url = `https://us-central1-rodaditaapp.cloudfunctions.net/sendMailReg?dest=${mail}`;
 
     axios.get(url)
         .then((resp) => console.log(resp))
@@ -123,7 +126,8 @@ export const submitMail = (mail) => {
                 createdAt: new Date()
             })
             .then(() => {
-                dispatch({ type: 'GET_SUSCRIPTION', mail })
+                dispatch({ type: 'GET_SUSCRIPTION', mail });
+                mailingFunctionRef(mail)
             }).catch((err) => {
                 dispatch({ type: 'GET_SUSCRIPTION_ERROR', err })
             })
