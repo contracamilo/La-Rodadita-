@@ -65,7 +65,7 @@ export const getTrips = () => {
                 console.log(snapshot.val());
             })
             .then(() => {
-                dispatch({ type: 'GET_TRIPS', payload: snapshot.val() })
+                dispatch({ type: 'GET_TRIPS', payload: snapshot.val(), search: '' })
             }).catch((err) => {
                 dispatch({ type: 'ADD_TRIP_ERROR', err })
             })

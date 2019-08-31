@@ -8,92 +8,74 @@ import SearchResults from './SearchResults';
 import Spinner from '../layout/Spinner'
 
 class SearchList extends Component {
-  static defaultProps = { 
-      trips: [],
-      search: "",
-      tripType:"",
-      destiny:""
+  state = {
+    search: '',
+    searchValue: '',
+    tripType: '',
+    destiny: '',
+    all: true
   }
 
-  initalState = {
-    search: "",
-    date:"",
-    tripType:"",
-    destiny:"",
-    shown:""
-  }
- 
-  state = {
-    search: "",
-    date:"",
-    tripType:"",
-    destiny:"",
-    shown:""
-  }
 
   renderTrip = trip => {
-    const { search } = this.state;
-    
     return (
       <div key={trip.id} className="main-quad__trips">
-        <SearchResults trip={trip}/>
+        <SearchResults trip={trip} />
       </div>
     );
   }
 
   handleChange = e => {
-    this.setState({ 
-      search: e.target.value,
-      shown:"fecha"   
+    this.setState({
+      searchValue: e.target.value,
+      all: false
     });
   }
 
   handleChangeType = e => {
-    this.setState({ 
-      tripType:e.target.value,
-      shown:"ida-vuelta"  
+    this.setState({
+      tripType: e.target.value,
+      all: false
     });
   }
 
   handleChangeDestiny = e => {
-    this.setState({ 
-      destiny:e.target.value,
-      shown:"destino" 
+    this.setState({
+      destiny: e.target.value,
+      all: false
     });
   }
 
 
 
   render() {
-    const { trips, auth } = this.props;
-    const { search, destiny, tripType } = this.state;
-    const tripList = trips;
-    
-    const filteredTrip = tripList.filter(trip => {
-      return trip.arriveDate.indexOf(search) !== -1;
+
+    const { trips = [], auth } = this.props;
+    const { searchValue, tripType, destiny, all } = this.state;
+
+    const pushedTrips = []
+
+    const filteredTrip = trips.filter(trip => {
+
+      if (searchValue) return trip.arriveDate.indexOf(searchValue) !== -1;
+      if (tripType) return trip.tripType.indexOf(tripType) !== -1;
+      if (tripType) return trip.destiny.indexOf(destiny) !== -1;
+
+
     });
 
-    
-    const filteredTripType = tripList.filter(trip => {
-      console.log(trip.tripType)
-      return trip.tripType.indexOf(tripType) !== -1;
-    });
+    const concatTrips = pushedTrips.concat(filteredTrip);
+    console.log(concatTrips, trips)
 
-    const filteredTripDestiny = tripList.filter(trip => {
-      return trip.destiny.indexOf(destiny) !== -1;
-    });
+    if (!auth.uid) return <Redirect to='/signin' />
 
-    const shown = 'fecha';
-
-    if(!auth.uid) return <Redirect to='/signin'/>
-    
     return (
       <div>
         <div id="trip-main" className="container">
           <div className="main-quad trip-details-top">
             <div className="row">
               <h2>VIAJES</h2>
-              <div className="project-list section"> 
+              <div className="project-list section">
                 <div className="row">
                   <div className="col s12 l3">
                     <div className="adviser">
@@ -105,7 +87,7 @@ class SearchList extends Component {
                   <div className="col s12 m3 l3">
                     <div className="select-field">
                       <label htmlFor="search">Fecha</label>
-                      <input type="date" id='search' onChange={this.handleChange} value={this.state.search}/>
+                      <input type="date" id='search' onChange={this.handleChange} value={searchValue} />
                     </div>
                   </div>
 
@@ -132,39 +114,20 @@ class SearchList extends Component {
                   </div>
 
                   <div className="col s12 l9">
-                    <p>Selecciona los campos para filtrar tu búsqueda.</p> 
-                      
-                      { this.state.shown == 'fecha' || this.state.shown == '' && (
-                        <div>
-                          {
-                            (filteredTrip) 
-                            ? (filteredTrip.map(trip => {return this.renderTrip(trip);}))
-                            : <Spinner/>
-                          }
-                        </div>
-                      )}
-                      
-                      
-                      { this.state.shown == 'destino' && (
-                        <div>
-                        {
-                            (filteredTripDestiny) 
-                            ? (filteredTripDestiny.map(trip => {return this.renderTrip(trip);}))
-                            : <Spinner/>
-                        }
-                        </div>
-                     )}
+                    <p>Selecciona los campos para filtrar tu búsqueda.</p>
+                    <div>
+                      {
+                        (concatTrips)
+                          ? (concatTrips.map(trip => { return this.renderTrip(trip); }))
+                          : <Spinner />
+                      }
+                      {
+                        (trips && all) && trips.map(trip => { return this.renderTrip(trip); })
+                         
+                      }
+                    </div>
 
-                     { this.state.shown == 'ida-vuelta' && (
-                        <div>
-                        {
-                            (filteredTripType) 
-                            ? (filteredTripType.map(trip => {return this.renderTrip(trip);}))
-                            : <Spinner/>
-                        }
-                        </div>
-                     )}
-                   </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -176,10 +139,12 @@ class SearchList extends Component {
 }
 
 const mapStateToProps = (state) => {
-  
+
   return {
     trips: state.firestore.ordered.trips,
     auth: state.firebase.auth,
+    search: [],
+    searchValue: ''
   }
 }
 
@@ -187,7 +152,7 @@ const mapStateToProps = (state) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'trips',  orderBy:['createdAt', 'desc'] },
-    
+    { collection: 'trips', orderBy: ['createdAt', 'desc'] },
+
   ])
 )(SearchList)
