@@ -1,47 +1,26 @@
-[debug] [2019-07-25T16:21:35.467Z] ----------------------------------------------------------------------
-[debug] [2019-07-25T16:21:35.469Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
-[debug] [2019-07-25T16:21:35.469Z] CLI Version:   7.1.0
-[debug] [2019-07-25T16:21:35.469Z] Platform:      darwin
-[debug] [2019-07-25T16:21:35.469Z] Node Version:  v10.15.3
-[debug] [2019-07-25T16:21:35.470Z] Time:          Thu Jul 25 2019 11:21:35 GMT-0500 (Colombia Standard Time)
-[debug] [2019-07-25T16:21:35.470Z] ----------------------------------------------------------------------
+[debug] [2019-09-16T20:14:31.184Z] ----------------------------------------------------------------------
+[debug] [2019-09-16T20:14:31.186Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] [2019-09-16T20:14:31.186Z] CLI Version:   7.1.0
+[debug] [2019-09-16T20:14:31.186Z] Platform:      darwin
+[debug] [2019-09-16T20:14:31.186Z] Node Version:  v10.15.3
+[debug] [2019-09-16T20:14:31.187Z] Time:          Mon Sep 16 2019 15:14:31 GMT-0500 (Colombia Standard Time)
+[debug] [2019-09-16T20:14:31.187Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-07-25T16:21:35.482Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-07-25T16:21:35.485Z] > authorizing via signed-in user
-[debug] [2019-07-25T16:21:35.485Z] [iam] checking project rodaditaapp for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
-[debug] [2019-07-25T16:21:35.487Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-07-25T16:21:35.487Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-07-25T16:21:35.859Z] <<< HTTP RESPONSE 200
-[debug] [2019-07-25T16:21:35.868Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/rodaditaapp:testIamPermissions  
+[debug] [2019-09-16T20:14:31.198Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-09-16T20:14:31.198Z] > authorizing via signed-in user
+[debug] [2019-09-16T20:14:31.198Z] [iam] checking project rodaditaapp for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2019-09-16T20:14:31.200Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/rodaditaapp:testIamPermissions  
 
-[debug] [2019-07-25T16:21:36.774Z] <<< HTTP RESPONSE 200
-[debug] [2019-07-25T16:21:36.777Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/rodaditaapp  
- 
-[debug] [2019-07-25T16:21:37.236Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-16T20:14:31.968Z] <<< HTTP RESPONSE 200
 [warn] ⚠  functions: package.json indicates an outdated version of firebase-functions.
  Please upgrade using npm install --save firebase-functions@latest in your functions directory.
 [info] 
 [info] === Deploying to 'rodaditaapp'...
 [info] 
-[info] i  deploying storage, firestore, functions, hosting
+[info] i  deploying functions
 [info] Running command: npm --prefix "$RESOURCE_DIR" run lint
 [info] ✔  functions: Finished running predeploy script.
-[debug] [2019-07-25T16:21:41.857Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/rodaditaapp  
- 
-[debug] [2019-07-25T16:21:42.919Z] <<< HTTP RESPONSE 200
-[info] i  storage: checking storage.rules for compilation errors...
-[debug] [2019-07-25T16:21:42.924Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/rodaditaapp:test  
-
-[debug] [2019-07-25T16:21:43.431Z] <<< HTTP RESPONSE 200
-[info] ✔  storage: rules file storage.rules compiled successfully
-[info] i  firestore: checking firestore.rules for compilation errors...
-[info] i  firestore: reading indexes from firestore.indexes.json...
-[debug] [2019-07-25T16:21:43.437Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/rodaditaapp:test  
-
-[debug] [2019-07-25T16:21:43.752Z] <<< HTTP RESPONSE 200
-[info] ✔  firestore: rules file firestore.rules compiled successfully
-[debug] [2019-07-25T16:21:43.755Z] > [functions] package.json contents: {
+[debug] [2019-09-16T20:14:35.793Z] > [functions] package.json contents: {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
@@ -70,61 +49,38 @@
   "private": true
 }
 [info] i  functions: ensuring necessary APIs are enabled...
-[debug] [2019-07-25T16:21:43.756Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/cloudfunctions.googleapis.com  
+[debug] [2019-09-16T20:14:35.795Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/cloudfunctions.googleapis.com  
  
-[debug] [2019-07-25T16:21:43.757Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/runtimeconfig.googleapis.com  
+[debug] [2019-09-16T20:14:35.800Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/runtimeconfig.googleapis.com  
  
-[debug] [2019-07-25T16:21:44.645Z] <<< HTTP RESPONSE 200
-[debug] [2019-07-25T16:22:04.628Z] <<< HTTP RESPONSE 503
-[debug] [2019-07-25T16:22:04.628Z] <<< HTTP RESPONSE BODY
-[error] 
-[error] Error: HTTP Error: 503, The service is currently unavailable.
-[debug] [2019-07-25T16:22:05.079Z] Error Context: {
-  "body": {
-    "error": {
-      "code": 503,
-      "message": "The service is currently unavailable.",
-      "status": "UNAVAILABLE"
-    }
-  },
-  "response": {
-    "statusCode": 503,
-    "body": {
-      "error": {
-        "code": 503,
-        "message": "The service is currently unavailable.",
-        "status": "UNAVAILABLE"
-      }
-    },
-    "headers": {
-      "vary": "X-Origin, Referer, Origin,Accept-Encoding",
-      "content-type": "application/json; charset=UTF-8",
-      "date": "Thu, 25 Jul 2019 16:22:04 GMT",
-      "server": "ESF",
-      "cache-control": "private",
-      "x-xss-protection": "0",
-      "x-frame-options": "SAMEORIGIN",
-      "x-content-type-options": "nosniff",
-      "alt-svc": "quic=\":443\"; ma=2592000; v=\"46,43,39\"",
-      "accept-ranges": "none",
-      "transfer-encoding": "chunked"
-    },
-    "request": {
-      "uri": {
-        "protocol": "https:",
-        "slashes": true,
-        "auth": null,
-        "host": "serviceusage.googleapis.com",
-        "port": 443,
-        "hostname": "serviceusage.googleapis.com",
-        "hash": null,
-        "search": null,
-        "query": null,
-        "pathname": "/v1/projects/rodaditaapp/services/cloudfunctions.googleapis.com",
-        "path": "/v1/projects/rodaditaapp/services/cloudfunctions.googleapis.com",
-        "href": "https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/cloudfunctions.googleapis.com"
-      },
-      "method": "GET"
-    }
-  }
-}
+[debug] [2019-09-16T20:14:36.690Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-16T20:14:36.800Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-09-16T20:14:36.801Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/rodaditaapp/adminSdkConfig  
+ 
+[debug] [2019-09-16T20:14:37.278Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2019-09-16T20:14:37.281Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/rodaditaapp/configs  
+ 
+[debug] [2019-09-16T20:14:37.634Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (45.23 KB) for uploading
+[debug] [2019-09-16T20:14:38.173Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/rodaditaapp/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2019-09-16T20:14:39.187Z] <<< HTTP RESPONSE 200
+[debug] [2019-09-16T20:14:39.189Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-95c91099-367c-444c-b454-468dc5f03115/d4d98d22-6523-4707-8f4d-95ef65c352ad.zip?GoogleAccessId=service-550096953187@gcf-admin-robot.iam.gserviceaccount.com&Expires=1568666679&Signature=dBLEnClKleM0ehubuEmlqLNFVCPfwMaDRmWxS3Z02ddacbH9XtW2mPcDj0D2F%2Fd8aqSIT8P4IPXspBIEbWSWQkMHFUFUdWyE0wOdmaNKNM%2BEBNvezU21b9qQUQwMaYVrZZ58YWU%2F%2B0VW7fZatlr6MI%2F06vTDZLsO2zQcyd%2FWXcm2Mv9dvexMZyrv796ljVA3LAIewI43tElcuxiDt%2F8logQ28c23xyqNLwZbA8KXU%2FVJp9516Jld27t94LaWRErjMlkm6c8UUxvvQOUQxOi3KVeXvDxP08VK3SQT4oOoV0OxSRolUSyjTy%2F4LCSRJEQln%2FUvPPWU9LBOsmt%2BoLC7PA%3D%3D  
+ <request body omitted>
+[debug] [2019-09-16T20:14:39.978Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2019-09-16T20:14:39.984Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/rodaditaapp/locations/-/functions  
+ 
+[debug] [2019-09-16T20:14:40.696Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function sendMail(us-central1)...
+[debug] [2019-09-16T20:14:40.699Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function tripCreated(us-central1)...
+[debug] [2019-09-16T20:14:40.700Z] Trigger is:  {"eventTrigger":{"resource":"projects/rodaditaapp/databases/(default)/documents/trips/{tripId}","eventType":"providers/cloud.firestore/eventTypes/document.create","service":"firestore.googleapis.com"}}
+[info] i  functions: updating Node.js 8 function userJoined(us-central1)...
+[debug] [2019-09-16T20:14:40.700Z] Trigger is:  {"eventTrigger":{"resource":"projects/rodaditaapp","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
+[info] i  functions: updating Node.js 8 function userProfiled(us-central1)...
+[debug] [2019-09-16T20:14:40.701Z] Trigger is:  {"eventTrigger":{"resource":"projects/rodaditaapp","eventType":"providers/firebase.auth/eventTypes/user.create","service":"firebaseauth.googleapis.com"}}
+[debug] [2019-09-16T20:14:40.703Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/rodaditaapp/services/cloudscheduler.googleapis.com  
+ 

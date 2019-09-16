@@ -6,6 +6,7 @@ import { Link, Redirect } from 'react-router-dom'
 import TripList from '../trips/TripList'
 import SearchResults from './SearchResults';
 import Spinner from '../layout/Spinner'
+import ReactPaginate from 'react-paginate';
 
 class SearchList extends Component {
   state = {
@@ -13,8 +14,18 @@ class SearchList extends Component {
     searchValue: '',
     tripType: '',
     destiny: '',
+    offset: 0,
     all: true
   }
+
+  handlePageClick = data => {
+    let selected = data.selected;
+    let offset = Math.ceil(selected * this.props.perPage);
+
+    this.setState({ offset: offset }, () => {
+      this.props.trips;
+    });
+  };
 
 
   renderTrip = trip => {
@@ -65,7 +76,6 @@ class SearchList extends Component {
     });
 
     const concatTrips = pushedTrips.concat(filteredTrip);
-    console.log(concatTrips, trips)
 
     if (!auth.uid) return <Redirect to='/signin' />
 
@@ -122,11 +132,24 @@ class SearchList extends Component {
                           : <Spinner />
                       }
                       {
-                        (trips && all) && trips.map(trip => { return this.renderTrip(trip); })
-                         
+                        (trips)
+                          ? (trips && all) && trips.map(trip => { return this.renderTrip(trip); })
+                          : <Spinner />
                       }
                     </div>
-
+                    <ReactPaginate
+                      previousLabel={'previous'}
+                      nextLabel={'next'}
+                      breakLabel={'...'}
+                      breakClassName={'break-me'}
+                      pageCount={this.props.pageCount}
+                      marginPagesDisplayed={1}
+                      pageRangeDisplayed={3}
+                      onPageChange={this.handlePageClick}
+                      containerClassName={'pagination'}
+                      subContainerClassName={'pages pagination'}
+                      activeClassName={'active'}
+                    />
                   </div>
                 </div>
               </div>
@@ -139,12 +162,12 @@ class SearchList extends Component {
 }
 
 const mapStateToProps = (state) => {
-
+  let di = state.firestore.ordered.trips;
   return {
     trips: state.firestore.ordered.trips,
     auth: state.firebase.auth,
-    search: [],
-    searchValue: ''
+    pageCount: (di !== undefined) ? Math.ceil(di.length / 5) : 0,
+    perPage: 5
   }
 }
 

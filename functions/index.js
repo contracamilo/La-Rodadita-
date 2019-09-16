@@ -1,149 +1,119 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const nodemailer = require('nodemailer');
-const cors = require('cors')({ origin: true });
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const nodemailer = require("nodemailer");
+const cors = require("cors")({ origin: true });
 
 admin.initializeApp(functions.config().firebase);
 
-
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'rodaditapp@gmail.com',
-        pass: 'Work.1986'
-    }
+	service: "gmail",
+	auth: {
+		user: "rodaditapp@gmail.com",
+		pass: "Work.1986"
+	}
 });
 
-const createNotification = ((notification) => {
-    return admin.firestore().collection('notifications')
-        .add(notification)
-        .then(doc => console.log('notification added', doc));
-});
+const createNotification = notification => {
+	return admin
+		.firestore()
+		.collection("notifications")
+		.add(notification)
+		.then(doc => console.log("notification added", doc));
+};
 
-const createProfile = ((profile) => {
-    return admin.firestore().collection('profiles')
-        .add(profile)
-        .then(doc => console.log('profile added', doc));
-});
-
-
+const createProfile = profile => {
+	return admin
+		.firestore()
+		.collection("profiles")
+		.add(profile)
+		.then(doc => console.log("profile added", doc));
+};
 
 exports.sendMail = functions.https.onRequest((req, res) => {
-    cors(req, res, () => {
+	cors(req, res, () => {
+		// getting dest email by query string
+		const dest = req.query.dest;
+		const usr = req.query.usr;
+		const nom = req.query.nom;
 
-        // getting dest email by query string
-        const dest = req.query.dest;
-
-        const mailOptions = {
-            from: 'LA RODADITA <rodaditapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
-            to: dest,
-            subject: 'ALGUIEN QUIERE VIAJAR CONTIGO', // email subject
-            html: `<p style="font-size: 16px;">Un usuario de <a href="https://larodadita.com/" target="_blank">www.larodadita.com</a> quiere viajar contigo. ¡Revisa tu cuenta y ponte en contacto!</p>
-                <br />
+		const mailOptions = {
+			from: "LA RODADITA <rodaditapp@gmail.com>", // Something like: Jane Doe <janedoe@gmail.com>
+			to: dest,
+			subject: `${nom} quiere viajar contigo`, // email subject
+			html: `<p style="font-size: 16px;">Hola! Amigo de la Rodadita. ${nom}, Un usuario de <a href="https://larodadita.com/" target="_blank">www.larodadita.com</a> 
+                    quiere viajar contigo. ¡Revisa tu cuenta y ponte en contacto! él nos dejo su dirección de correo electrónico ${usr}, escríbele.
+                </p><br/>
+                
+                <p>
+                    Atentamente:<br/>
+                    <strong>EL EQUIPO DE LA RODADITA<strong>
+                </p>
                 <img width="500" src="https://images.pexels.com/photos/825890/pexels-photo-825890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
             ` // email content in HTML
-        };
+		};
 
-        // returning result
-        return transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-                return res.send(err.toString());
-            }
-            return res.send({
-                payload: {
-                    status: 'sended',
-                    sended: true,
-                    info: info
-                }
-            });
-        });
-    });
+		// returning result
+		return transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				return res.send(err.toString());
+			}
+			return res.send({
+				payload: {
+					status: "sended",
+					sended: true,
+					info: info
+				}
+			});
+		});
+	});
 });
-
-
-exports.sendMailReg = functions.https.onRequest((req, res) => {
-    cors(req, res, () => {
-
-        // getting dest email by query string
-        const dest = req.query.dest;
-
-        const mailOptions = {
-            from: 'LA RODADITA <rodaditapp@gmail.com>', // Something like: Jane Doe <janedoe@gmail.com>
-            to: dest,
-            subject: 'Te Registraste en La Rodadita', // email subject
-            html: `<p style="font-size: 16px;">Te Registraste para recibir Información de La Rodadita. Te invitamos a crear tu cuenta, o usar activamente nuestra iniciativa <a href="https://larodadita.com/" target="_blank">www.larodadita.com</a></p>
-                <br />
-                <img width="500" src="https://images.pexels.com/photos/825890/pexels-photo-825890.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-            ` // email content in HTML
-        };
-
-        // returning result
-        return transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-                return res.send(err.toString());
-            }
-            return res.send({
-                payload: {
-                    status: 'sended',
-                    sended: true,
-                    info: info
-                }
-            });
-        });
-    });
-});
-
-
 
 exports.tripCreated = functions.firestore
-    .document('trips/{tripId}')
-    .onCreate(doc => {
+	.document("trips/{tripId}")
+	.onCreate(doc => {
+		const trip = doc.data();
+		const notification = {
+			content: "- Añadió un nuevo viaje",
+			user: `${trip.authorFirstName} ${trip.authorLastName}`,
+			time: admin.firestore.FieldValue.serverTimestamp()
+		};
 
-        const trip = doc.data();
-        const notification = {
-            content: '- Añadió un nuevo viaje',
-            user: `${trip.authorFirstName} ${trip.authorLastName}`,
-            time: admin.firestore.FieldValue.serverTimestamp()
-        }
+		return createNotification(notification);
+	});
 
-        return createNotification(notification);
+exports.userJoined = functions.auth.user().onCreate(user => {
+	return admin
+		.firestore()
+		.collection("users")
+		.doc(user.uid)
+		.get()
+		.then(doc => {
+			const newUser = doc.data();
+			const notification = {
+				content: "- Se unio a la rodadita",
+				user: `${newUser.firstName} ${newUser.lastName}`,
+				time: admin.firestore.FieldValue.serverTimestamp()
+			};
 
-    });
+			return createNotification(notification);
+		});
+});
 
-exports.userJoined = functions.auth.user()
-    .onCreate(user => {
+exports.userProfiled = functions.auth.user().onCreate(user => {
+	return admin
+		.firestore()
+		.collection("profiles")
+		.doc(user.uid)
+		.get()
+		.then(doc => {
+			const newUser = doc.data();
+			const profile = {
+				content: "Perfil",
+				userName: `${newUser.firstName}`,
+				userLastName: `${newUser.lastName}`,
+				creationDate: admin.firestore.FieldValue.serverTimestamp()
+			};
 
-        return admin.firestore().collection('users')
-            .doc(user.uid).get().then(doc => {
-
-                const newUser = doc.data();
-                const notification = {
-                    content: '- Se unio a la rodadita',
-                    user: `${newUser.firstName} ${newUser.lastName}`,
-                    time: admin.firestore.FieldValue.serverTimestamp()
-                };
-
-                return createNotification(notification);
-
-            });
-    });
-
-
-exports.userProfiled = functions.auth.user()
-    .onCreate(user => {
-
-        return admin.firestore().collection('profiles')
-            .doc(user.uid).get().then(doc => {
-
-                const newUser = doc.data();
-                const profile = {
-                    content: 'Perfil',
-                    userName: `${newUser.firstName}`,
-                    userLastName: `${newUser.lastName}`,
-                    creationDate: admin.firestore.FieldValue.serverTimestamp()
-                };
-
-                return createNotification(profile);
-
-            });
-    });
+			return createNotification(profile);
+		});
+});
