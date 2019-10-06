@@ -70,7 +70,8 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: devMode ? "[name].css" : "[name].[hash].css",
 			chunkFilename: devMode ? "[id].css" : "[id].[hash].css"
-		}),
+		})
+		/*
 		new WebpackPwaManifestPlugin({
 			name: "La Rodadita - viaja entre Bogota y Neiva facil",
 			shortname: "La Rodadita 🚗",
@@ -84,7 +85,8 @@ module.exports = {
 					sizes: [96, 128, 180, 256, 384, 512]
 				}
 			]
-		}),
+		})
+		
 		new WorkboxWebpackPlugin.GenerateSW({
 			runtimeCaching: [
 				{
@@ -104,11 +106,11 @@ module.exports = {
 					}
 				}
 			]
-		})
+		})*/
 	],
 	devServer: {
 		contentBase: DIST_DIR,
 		hot: true,
-		port: 9010
+		port: 9012
 	}
 };
