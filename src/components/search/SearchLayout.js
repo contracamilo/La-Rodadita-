@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import {
 	actualDate,
 	dateFieldChange,
@@ -29,7 +30,6 @@ class SearchLayout extends Component {
 
 	changeType = e => {
 		const change = this.props.dateFieldChange();
-		console.log(change.dateField);
 		this.setState({
 			dateField: change.dateField
 		});
@@ -43,10 +43,10 @@ class SearchLayout extends Component {
 	};
 
 	render() {
-		const { dateField } = this.state;
-		const { actualDate, dateFieldChange } = this.props;
+		const { dateField, firstDate, lastDate } = this.state;
+		const { actualDate, dateFieldChange, selectedDates } = this.props;
 		const todayDate = actualDate();
-
+		console.log(this.props);
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<div className="main-search">
@@ -87,12 +87,21 @@ class SearchLayout extends Component {
 							<div className="col s12 m2 l2">
 								<div className="select-field">
 									<label htmlFor="btn-search">Buscar</label>
-									<button
-										id="btn-search"
-										className="btn yellow"
-									>
-										Buscar
-									</button>
+									<NavLink to="/viajes">
+										<button
+											id="btn-search"
+											className="btn yellow"
+											onClick={() =>
+												selectedDates(
+													todayDate.actualDate ||
+														firstDate,
+													lastDate
+												)
+											}
+										>
+											Buscar
+										</button>
+									</NavLink>
 								</div>
 							</div>
 						</div>
@@ -105,5 +114,5 @@ class SearchLayout extends Component {
 
 export default connect(
 	null,
-	{ actualDate, dateFieldChange, selectedDates }
+	{ actualDate, dateFieldChange }
 )(SearchLayout);

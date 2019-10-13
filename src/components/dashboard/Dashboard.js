@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import { selectedDates } from "../../store/actions/filterActions";
 import QuadComments from "../layout/blogs/QuadComments";
 import ReasonList from "../layout/reasons/reasonList";
 import SearchLayout from "../search/SearchLayout";
@@ -12,9 +13,15 @@ import SliderGAllery from "../layout/Slider";
 
 class Dashboard extends Component {
 	render() {
-		const { trips, auth, reasons, blog, notifications } = this.props;
+		const {
+			trips,
+			auth,
+			reasons,
+			blog,
+			notifications,
+			selectedDates
+		} = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
-
 		return (
 			<div className="dashboard wrapper">
 				<div className="wrapper sliderTr">
@@ -23,7 +30,7 @@ class Dashboard extends Component {
 						<h2>Viaja cómodo y seguro a tu destino.</h2>
 					</div>
 				</div>
-				<SearchLayout />
+				<SearchLayout selectedDates={selectedDates} />
 				<div className="container">
 					<div className="main-quad">
 						<div className="main-quad__trips">
@@ -61,7 +68,10 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-	connect(mapStateToProps),
+	connect(
+		mapStateToProps,
+		{ selectedDates }
+	),
 	firestoreConnect([
 		{ collection: "trips", limit: 4, orderBy: ["createdAt", "desc"] },
 		{ collection: "notifications", limit: 3, orderBy: ["time", "desc"] },

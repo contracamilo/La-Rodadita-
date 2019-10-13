@@ -3,7 +3,7 @@ export const actualDate = () => dispatch => {
 	const dd = String(today.getDate()).padStart(2, "0");
 	const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 	const yyyy = today.getFullYear();
-	const actualDate = `${mm}-${dd}-${yyyy}`;
+	const actualDate = `${yyyy}-${mm}-${dd}`;
 
 	return dispatch({
 		type: "GET_DATE",
@@ -19,12 +19,21 @@ export const dateFieldChange = () => dispatch => {
 	});
 };
 
-export const selectedDates = (firstDate, lastDate) => dispatch => {
-	console.log(firstDate, lastDate);
-	return dispatch({
-		type: "GET_DATES",
-		actualDate: "",
-		dates: [firstDate, lastDate],
-		dateField: true
-	});
+export const selectedDates = (firstDate, lastDate) => {
+	const dates = { firstDate, lastDate };
+	window.localStorage.setItem("first date", `${firstDate}`);
+	window.localStorage.setItem("last date", `${lastDate}`);
+	return dispatch => {
+		try {
+			return dispatch({
+				type: "GET_DATE",
+				payload: dates
+			});
+		} catch (error) {
+			return dispatch({
+				type: "ERROR",
+				payload: "Hay un error con las fechas"
+			});
+		}
+	};
 };

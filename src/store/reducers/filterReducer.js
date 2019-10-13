@@ -23,7 +23,7 @@ const filterReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				dateField: true
 			};
-		case "GET_DATES":
+		case "	":
 			return {
 				...state,
 				dates: action.payload,
