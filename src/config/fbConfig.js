@@ -12,12 +12,7 @@ export const actionCodeSettings = {
 };
 
 var config = {
-    apiKey: "AIzaSyC6ek0wQize9j3rBcj5ePrJqd0vBi_FC1w",
-    authDomain: "rodaditaapp.firebaseapp.com",
-    databaseURL: "https://rodaditaapp.firebaseio.com",
-    projectId: "rodaditaapp",
-    storageBucket: "rodaditaapp.appspot.com",
-    messagingSenderId: "550096953187"
+ // paste here the config info
 };
 
 
